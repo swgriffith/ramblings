@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Steve Griffith - Ramblings</title>
-    <link>https://griffithcontent.z13.web.core.windows.net/</link>
+    <link>https://blog.stevegriffith.nyc/</link>
     <description>Recent content on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate>
     
-	<atom:link href="https://griffithcontent.z13.web.core.windows.net/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.stevegriffith.nyc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>New Blog</title>
-      <link>https://griffithcontent.z13.web.core.windows.net/posts/newblog/</link>
+      <link>https://blog.stevegriffith.nyc/posts/newblog/</link>
       <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
       
-      <guid>https://griffithcontent.z13.web.core.windows.net/posts/newblog/</guid>
+      <guid>https://blog.stevegriffith.nyc/posts/newblog/</guid>
       <description>Here&amp;rsquo;s some text</description>
     </item>
     
     <item>
       <title>New Blog</title>
-      <link>https://griffithcontent.z13.web.core.windows.net/cards/newblog/</link>
+      <link>https://blog.stevegriffith.nyc/cards/newblog/</link>
       <pubDate>Mon, 29 Oct 2018 14:11:42 -0400</pubDate>
       
-      <guid>https://griffithcontent.z13.web.core.windows.net/cards/newblog/</guid>
+      <guid>https://blog.stevegriffith.nyc/cards/newblog/</guid>
       <description></description>
     </item>
     
     <item>
       <title></title>
-      <link>https://griffithcontent.z13.web.core.windows.net/about/</link>
+      <link>https://blog.stevegriffith.nyc/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://griffithcontent.z13.web.core.windows.net/about/</guid>
+      <guid>https://blog.stevegriffith.nyc/about/</guid>
       <description>So, Who Am I? 
 I’m just another teenager who likes writing, programming and making stuff. Even setting the title as Who Am I for this article is reminding me of whoami in Linux. I feel the inner urge to contribute something to the Internet because I love writing and I believe posting something online enables users all around the globe to see your work and suggest improvements.
 Recently I&amp;rsquo;ve also started taking interest in web designing and hosting the fruitful results of which these site and blogs are!</description>
