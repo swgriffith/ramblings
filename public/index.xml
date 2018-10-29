@@ -6,9 +6,28 @@
     <description>Recent content on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate>
     
 	<atom:link href="https://stevegriffith.nyc/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New Blog</title>
+      <link>https://stevegriffith.nyc/posts/newblog/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
+      
+      <guid>https://stevegriffith.nyc/posts/newblog/</guid>
+      <description>Here&amp;rsquo;s some text</description>
+    </item>
+    
+    <item>
+      <title>New Blog</title>
+      <link>https://stevegriffith.nyc/cards/newblog/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:42 -0400</pubDate>
+      
+      <guid>https://stevegriffith.nyc/cards/newblog/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title></title>
