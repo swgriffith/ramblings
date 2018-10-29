@@ -1,0 +1,39 @@
+baseURL = "https://stevegriffith.nyc"
+languageCode = "en-us"
+defaultContentLanguage = "en"
+title = "Steve Griffith - Ramblings"
+theme = "dream-plus"
+
+#googleAnalytics = "UA-112332904-3"
+
+enableRobotsTXT = true
+
+#Enable Hugo Emoji Conversion
+enableEmoji=true
+
+[params]
+  author = "Steve Griffth"
+  description = "Ramblings of an Azure nerd."
+  avatar = "/images/me.jpg"
+  motto = "Maker, Programmer and Solution Architect."
+
+  favicon = "/img/defaultFav.ico"
+
+  #Background Settings
+  enableColorBG = false
+  bgImage = "/images/background.jpg"
+
+  #Cards shown per page
+  itemsPerPage = 4
+
+  #Enable card view
+  contentType = "cards"
+
+  #Enable Twitter Emoji
+  twitterEmoji=true
+
+[social]
+  email = "steve.griffith@microsoft.com"
+  github = "swgriffith"
+  twitter = "SteveGriffith"
+  siteStartYear = 2018
