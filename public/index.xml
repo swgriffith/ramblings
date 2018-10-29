@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Steve Griffith - Ramblings</title>
+    <link>https://stevegriffith.nyc/</link>
+    <description>Recent content on Steve Griffith - Ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://stevegriffith.nyc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://stevegriffith.nyc/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://stevegriffith.nyc/about/</guid>
+      <description>So, Who Am I? 
+I’m just another teenager who likes writing, programming and making stuff. Even setting the title as Who Am I for this article is reminding me of whoami in Linux. I feel the inner urge to contribute something to the Internet because I love writing and I believe posting something online enables users all around the globe to see your work and suggest improvements.
+Recently I&amp;rsquo;ve also started taking interest in web designing and hosting the fruitful results of which these site and blogs are!</description>
+    </item>
+    
+  </channel>
+</rss>
