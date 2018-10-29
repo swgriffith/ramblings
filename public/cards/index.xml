@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cards on Steve Griffith - Ramblings</title>
-    <link>https://stevegriffith.nyc/cards/</link>
+    <link>https://blog.stevegriffith.nyc/cards/</link>
     <description>Recent content in Cards on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Oct 2018 14:11:42 -0400</lastBuildDate>
     
-	<atom:link href="https://stevegriffith.nyc/cards/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.stevegriffith.nyc/cards/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>New Blog</title>
-      <link>https://stevegriffith.nyc/cards/newblog/</link>
+      <link>https://blog.stevegriffith.nyc/cards/newblog/</link>
       <pubDate>Mon, 29 Oct 2018 14:11:42 -0400</pubDate>
       
-      <guid>https://stevegriffith.nyc/cards/newblog/</guid>
+      <guid>https://blog.stevegriffith.nyc/cards/newblog/</guid>
       <description></description>
     </item>
     
