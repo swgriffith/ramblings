@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Steve Griffith - Ramblings</title>
-    <link>https://blog.stevegriffith.nyc/posts/</link>
+    <link>https://griffithcontent.z13.web.core.windows.net/posts/</link>
     <description>Recent content in Posts on Steve Griffith - Ramblings</description>
     <meta name="generator" content="Hugo 0.49.2" />
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate>
     
-        <atom:link href="https://blog.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://griffithcontent.z13.web.core.windows.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>New Blog</title>
-      <link>https://blog.stevegriffith.nyc/posts/newblog/</link>
+      <link>https://griffithcontent.z13.web.core.windows.net/posts/newblog/</link>
       <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/newblog/</guid>
+      <guid>https://griffithcontent.z13.web.core.windows.net/posts/newblog/</guid>
       <description>Building out an example of static hosting using Hugo, ACI and Azure Storage</description>
     </item>
     
