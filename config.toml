@@ -27,7 +27,7 @@ enableEmoji=true
   itemsPerPage = 4
 
   #Enable card view
-  contentType = "cards"
+  contentType = "posts"
 
   #Enable Twitter Emoji
   twitterEmoji=true

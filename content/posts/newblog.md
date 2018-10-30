@@ -2,7 +2,7 @@
 title: New Blog
 date: 2018-10-29T14:11:52-04:00
 lastmod: 2018-10-29T14:11:52-04:00
-cover: "/images/default1.jpg"
+cover: /images/hugo.jpg
 draft: false
 categories: ["Web Hosting"]
 tags: ["static content", "Azure Storage"]
