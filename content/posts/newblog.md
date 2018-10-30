@@ -6,6 +6,6 @@ cover: /images/hugo.jpg
 draft: false
 categories: ["Web Hosting"]
 tags: ["static content", "Azure Storage"]
-description: Building out an example of static hosting using Hugo, ACI and Azure Storage
+description: Building out an example of static hosting using Hugo, ACI and Azure Storage.
 ---
 Here's some text
