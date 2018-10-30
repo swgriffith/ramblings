@@ -8,4 +8,4 @@ categories: ["Web Hosting"]
 tags: ["static content", "Azure Storage"]
 description: Building out an example of static hosting using Hugo, ACI and Azure Storage.
 ---
-Here's some text
+Heres a test from docker
