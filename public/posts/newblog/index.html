@@ -154,20 +154,142 @@ var bodyBgSwitchIndex = 0;
 			</h1>
 			<div class="sub header">
 					<div><span><i class="calendar outline icon"></i>Oct 29, 2018</span></div>
-					<div><span><i class="clock outline icon"></i>1 min read</span></div>
+					<div><span><i class="clock outline icon"></i>7 min read</span></div>
 					<div><span><i class="angle double up icon"></i>Last updated on Oct 29, 2018</span></div>
 			</div>
 			<hr>
 			<article class="post-content twemoji">
-				<p>Heres a test from docker</p>
+				
+
+<h1 id="overview">Overview&nbsp;<a class="anchor" href="#overview"><i class="small linkify icon"></i></a> </h1>
+
+<p>Over the last few years at Microsoft I&rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&rsquo;ve solved a problem I&rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.</p>
+
+<p>The issue with setting up a blog, however, is that I had a lot of requirements.</p>
+
+<p>Must&hellip;.
+* be a static content only side (I dont want to deal with a lot of complexity)
+* be CHEEEEAAAP (I dont have a lot of cash to throw around here)
+* support custom domain (So I can run under blog.stevegriffith.nyc)
+* support custom domain TLS (gotta keep my visitors safe)
+* be maintained in GitHub public
+* auto sync on git push</p>
+
+<p>Seems like a pretty reasonable list. So lets get into it.</p>
+
+<h2 id="static-content">Static Content&nbsp;<a class="anchor" href="#static-content"><i class="small linkify icon"></i></a> </h2>
+
+<p>In order to minimize hosting complexity and cost I decided to go with a static site. I could have gone the WordPress route instead, but there are too many things that can break, and generally hosting cost for the web side and the DB side are too high. I want this thing to run for pennies a day&hellip;not dollars.</p>
+
+<p>I&rsquo;m not a web developer by heart, so I&rsquo;m not about to build from scratch, so that leaves me looking for a static content generator. I&rsquo;ve seen a few in the wild, but the two main that I&rsquo;ve come across are <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a>. After some basic research, and after reading <a href="https://opensource.com/article/17/5/hugo-vs-jekyll">this</a> interesting quick compare, I decided to use Hugo.</p>
+
+<p>Setup is really quick. I&rsquo;m an Ubuntu and Arch linux user on the personal side, so I just had to run the following:</p>
+
+<pre><code class="language-bash">#Ubuntu
+sudo apt install hugo
+
+#Arch
+pacman -S hugo
+</code></pre>
+
+<p>from there I just followed the quick start from the Hugo site <a href="https://gohugo.io/getting-started/quick-start/">here</a> to get started. I also browsed the themes and landed on this <a href="https://github.com/UtkarshVerma/hugo-dream-plus">Dream Plus</a> theme, which I found pretty nice. I may swap later.</p>
+
+<p>Honstly&hellip;.still getting comfortable with Hugo and this theme, so may chance out later, but its a solid start.</p>
+
+<h2 id="hosting">Hosting&nbsp;<a class="anchor" href="#hosting"><i class="small linkify icon"></i></a> </h2>
+
+<p>Ok, so I work for Microsoft. I have access to Azure subscriptions for work, but this isnt a work blog, so I can&rsquo;t use that. I do have an MSDN subscription, which I can use, but that has a pretty low spending cap, so cost efficiency is key.</p>
+
+<p>I thought about Azure Web Apps, because it&rsquo;s an awesome platform for hosting a web application, but once I added the need for custom domain and SSL I was looking at about $10/month&hellip;which is very low, but still dollars not cents. It also seems like overkill for a static site. Fortunately Azure Storage now supports <a href="https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/">static website hosting</a>. This seems like a perfect fit.</p>
+
+<p>Setup is pretty easy. You create a new Azure Storage Account (needs to be v2). I wont get into all the setup steps here, because the Azure docs are awesome. You can see the setup instructions <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website">here</a>.</p>
+
+<p>After you&rsquo;re done you should have something that looks like this:
+<img src="../images/newblog/storageacct.png" alt="Storage Account" />
+<img src="../images/newblog/staticwebsite.png" alt="Static Website" /></p>
+
+<p>There are a few key points to note. First, after setting up static web hosting you will have a new $web container in your blob storage. No big deal, except that older versions of some storage tools you may find that non-alphanumberic characters are not supported. For example, my Azure DevOps pipeline, which I&rsquo;ll cover later threw this error until I changed the file copy tool version:</p>
+
+<pre><code>[error]Upload to container: '$web' in storage account: 'griffithcontent' with blob prefix: '' failed with error: 'Azure Storage container names can only contain lowercase alpha-numeric characters or hyphens
+</code></pre>
+
+<p>The second point to note is that Azure Storage static content, at the time I&rsquo;m writing this, does support custom domain but does not support TLS on those custom domains. As a responsible person I cannot compromise on HTTPS. If you&rsquo;re thinking &lsquo;its just static content&hellip;what could go wrong&rsquo; you should check out the <a href="https://www.troyhunt.com/heres-why-your-static-website-needs-https/">&lsquo;Here&rsquo;s Why Your Static Website Needs HTTPS&rsquo;</a> from Troy Hunt. Fortunately the Microsoft Azure CDN does <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-custom-ssl?tabs=option-1-default-enable-https-with-a-cdn-managed-certificate">support TLS</a> and will create, deploy and maintain certificates for you. Again, I won&rsquo;t run through the full setup here, as the Azure Docs are great, but here&rsquo;s the rough steps you follow:</p>
+
+<ol>
+<li><p>Setup the profile and endpoint following the guide <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-create-new-endpoint">here</a>.</p>
+
+<p><strong>Note:</strong> Don&rsquo;t use the &lsquo;Storage&rsquo; orign type, as it wont let you point at the static website URL. Instead it will try to point at the blog storage URL, which is different. Use the &lsquo;Custom&rsquo; origin type instead.</p></li>
+
+<li><p>Create the CName record in your DNS provider to resolve to your CDN endpoint.</p></li>
+
+<li><p>Configure the custom domain and SSL following the guide <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-custom-ssl?tabs=option-1-default-enable-https-with-a-cdn-managed-certificate">here</a>. Once you&rsquo;re done you&rsquo;ll need to wait for the domain validation and certificate provisioning, shown below.</p></li>
+</ol>
+
+<p><img src="../images/newblog/customdomainssl.png" alt="Custom Domain SSL" /></p>
+
+<h2 id="it-s-alive">It&rsquo;s ALIVE!!!&nbsp;<a class="anchor" href="#it-s-alive"><i class="small linkify icon"></i></a> </h2>
+
+<p>And that&rsquo;s it! Now I have a super cheap static content blog running in Azure Storage (<strong>$0.002/GB per month and $0.01 per 10,000 read operations</strong>). The Azure CDN is giving me global CDN access and SSL (<strong>$0.081/GB egress per month for traffic to North America and Europe</strong>). I&rsquo;ll have to monitor it for a few months to see if that cost break down holds up, but it looks good on paper. :-D</p>
+
+<h2 id="git-push-automation">Git Push Automation&nbsp;<a class="anchor" href="#git-push-automation"><i class="small linkify icon"></i></a> </h2>
+
+<p>So the site is up and running, but I still need to make changes, run hugo to regen the site and then get updates deployed. I really wanted to do this via GitHub. I explored a few options:</p>
+
+<ol>
+<li>Initially I looked at <a href="https://github.com/features/actions">GitHub Actions</a>, and I may revisit, but I didn&rsquo;t have much time to mess around.</li>
+<li>I thought about setting up a GitHub webhook into an Azure Logic App. After digging in I couldnt help but think it seemed way overcomplicated.</li>
+<li>Next I tried out Azure DevOps pipelines, and I had the thing up and running in 10 minutes (Hooray!).</li>
+</ol>
+
+<p>Many people don&rsquo;t realize that Azure DevOps has a free tier, which gives you unlimited public Git repos as well as the ability to have up to 10 parallel CI/CD pipelines running. It also doesnt require you to use Azure DevOps as the source repo. You can actually link a CI/CD pipeline directly to your GitHub or GitHub Enterprise accounts.</p>
+
+<p>So here we go&hellip;</p>
+
+<h3 id="step-1">Step 1&nbsp;<a class="anchor" href="#step-1"><i class="small linkify icon"></i></a> </h3>
+
+<p>I already had an Azure DevOps account, so nothing to do there. I just went in and created a new project for my blog.</p>
+
+<p><img src="../images/newblog/azuredevops.png" alt="Azure DevOps" /></p>
+
+<h3 id="step-2">Step 2&nbsp;<a class="anchor" href="#step-2"><i class="small linkify icon"></i></a> </h3>
+
+<p>I needed to create a new Azure DevOps Build Pipeline.</p>
+
+<p><img src="../images/newblog/newpipeline.png" alt="Azure DevOps" /></p>
+
+<h3 id="step-3">Step 3&nbsp;<a class="anchor" href="#step-3"><i class="small linkify icon"></i></a> </h3>
+
+<p>Select your source repo and if necessary go through the OAuth workflow, or provide an access token. I&rsquo;m using GitHub and just followed the OAuth flow.</p>
+
+<p><img src="../images/newblog/selectsource.png" alt="Azure DevOps" /></p>
+
+<h3 id="step-4">Step 4&nbsp;<a class="anchor" href="#step-4"><i class="small linkify icon"></i></a> </h3>
+
+<p>You&rsquo;ll be brought to the screen to choose a build template. This is great for common scenarios, as it will assemble the pieces you need and then you can tweak. For this scenario there is no template, so we&rsquo;ll start with an &lsquo;Empty Job&rsquo;.</p>
+
+<h3 id="step-5">Step 5&nbsp;<a class="anchor" href="#step-5"><i class="small linkify icon"></i></a> </h3>
+
+<p>I want this to trigger automatically on a push, so I&rsquo;m going straight to the &lsquo;Trigger&rsquo; tab and enablign continuous integration. I&rsquo;m also going to enable batching of changes during a build.</p>
+
+<p><img src="../images/newblog/trigger.png" alt="Azure DevOps" /></p>
+
+<h3 id="step-6">Step 6&nbsp;<a class="anchor" href="#step-6"><i class="small linkify icon"></i></a> </h3>
+
+<p>If you want you can rename &lsquo;Agent Job 1&rsquo;. You can then click the &lsquo;+&rsquo; from the Agent Job and add the &lsquo;Azure File Copy&rsquo; task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumberic character in the container name, but you can just change the version to &lsquo;2.* preview&rsquo;. Then you just need to fill in the remaining details, like I have below, and you&rsquo;re ready to &lsquo;Save &amp; Queue&rsquo;.</p>
+
+<p><img src="../images/newblog/filecopy.png" alt="Azure DevOps" /></p>
+
+<h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
+
+<p>So far so good. Like I said, I&rsquo;ll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I&rsquo;d like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I&rsquo;ll share it as well.</p>
 
 			</article>
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label pink " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+	<a class="ui label teal " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
 
-	<a class="ui label olive " href="/tags/static-content" title="static-content">static-content</a>
+	<a class="ui label brown " href="/tags/static-content" title="static-content">static-content</a>
 
 
 		</section>
