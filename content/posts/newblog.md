@@ -102,12 +102,12 @@ You'll be brought to the screen to choose a build template. This is great for co
 
 
 ### Step 5
-I want this to trigger automatically on a push, so I'm going straight to the 'Trigger' tab and enablign continuous integration. I'm also going to enable batching of changes during a build.
+I want this to trigger automatically on a push, so I'm going straight to the 'Trigger' tab and enabling continuous integration. I'm also going to enable batching of changes during a build.
 
 ![Azure DevOps](/static/newblog/trigger.png)
 
 ### Step 6
-If you want you can rename 'Agent Job 1'. You can then click the '+' from the Agent Job and add the 'Azure File Copy' task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumberic character in the container name, but you can just change the version to '2.* preview'. Then you just need to fill in the remaining details, like I have below, and you're ready to 'Save & Queue'.
+If you want you can rename 'Agent Job 1'. You can then click the '+' from the Agent Job and add the 'Azure File Copy' task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumeric character in the container name, but you can just change the version to '2.* preview'. Then you just need to fill in the remaining details, like I have below, and you're ready to 'Save & Queue'.
 
 ![Azure DevOps](/static/newblog/filecopy.png)
 
