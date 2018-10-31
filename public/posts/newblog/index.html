@@ -205,8 +205,8 @@ pacman -S hugo
 <p>Setup is pretty easy. You create a new Azure Storage Account (needs to be v2). I wont get into all the setup steps here, because the Azure docs are awesome. You can see the setup instructions <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website">here</a>.</p>
 
 <p>After you&rsquo;re done you should have something that looks like this:
-<img src="../../images/newblog/storageacct.png" alt="Storage Account" />
-<img src="../../images/newblog/staticwebsite.png" alt="Static Website" /></p>
+<img src="/static/newblog/storageacct.png" alt="Storage Account" />
+<img src="/static/newblog/staticwebsite.png" alt="Static Website" /></p>
 
 <p>There are a few key points to note. First, after setting up static web hosting you will have a new $web container in your blob storage. No big deal, except that older versions of some storage tools you may find that non-alphanumberic characters are not supported. For example, my Azure DevOps pipeline, which I&rsquo;ll cover later threw this error until I changed the file copy tool version:</p>
 
@@ -225,7 +225,7 @@ pacman -S hugo
 <li><p>Configure the custom domain and SSL following the guide <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-custom-ssl?tabs=option-1-default-enable-https-with-a-cdn-managed-certificate">here</a>. Once you&rsquo;re done you&rsquo;ll need to wait for the domain validation and certificate provisioning, shown below.</p></li>
 </ol>
 
-<p><img src="../../images/newblog/customdomainssl.png" alt="Custom Domain SSL" /></p>
+<p><img src="/static/newblog/customdomainssl.png" alt="Custom Domain SSL" /></p>
 
 <h2 id="it-s-alive">It&rsquo;s ALIVE!!!&nbsp;<a class="anchor" href="#it-s-alive"><i class="small linkify icon"></i></a> </h2>
 
@@ -249,19 +249,19 @@ pacman -S hugo
 
 <p>I already had an Azure DevOps account, so nothing to do there. I just went in and created a new project for my blog.</p>
 
-<p><img src="../../images/newblog/azuredevops.png" alt="Azure DevOps" /></p>
+<p><img src="/static/newblog/azuredevops.png" alt="Azure DevOps" /></p>
 
 <h3 id="step-2">Step 2&nbsp;<a class="anchor" href="#step-2"><i class="small linkify icon"></i></a> </h3>
 
 <p>I needed to create a new Azure DevOps Build Pipeline.</p>
 
-<p><img src="../../images/newblog/newpipeline.png" alt="Azure DevOps" /></p>
+<p><img src="/static/newblog/newpipeline.png" alt="Azure DevOps" /></p>
 
 <h3 id="step-3">Step 3&nbsp;<a class="anchor" href="#step-3"><i class="small linkify icon"></i></a> </h3>
 
 <p>Select your source repo and if necessary go through the OAuth workflow, or provide an access token. I&rsquo;m using GitHub and just followed the OAuth flow.</p>
 
-<p><img src="../../images/newblog/selectsource.png" alt="Azure DevOps" /></p>
+<p><img src="/static/newblog/selectsource.png" alt="Azure DevOps" /></p>
 
 <h3 id="step-4">Step 4&nbsp;<a class="anchor" href="#step-4"><i class="small linkify icon"></i></a> </h3>
 
@@ -271,13 +271,13 @@ pacman -S hugo
 
 <p>I want this to trigger automatically on a push, so I&rsquo;m going straight to the &lsquo;Trigger&rsquo; tab and enablign continuous integration. I&rsquo;m also going to enable batching of changes during a build.</p>
 
-<p><img src="../../images/newblog/trigger.png" alt="Azure DevOps" /></p>
+<p><img src="/static/newblog/trigger.png" alt="Azure DevOps" /></p>
 
 <h3 id="step-6">Step 6&nbsp;<a class="anchor" href="#step-6"><i class="small linkify icon"></i></a> </h3>
 
 <p>If you want you can rename &lsquo;Agent Job 1&rsquo;. You can then click the &lsquo;+&rsquo; from the Agent Job and add the &lsquo;Azure File Copy&rsquo; task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumberic character in the container name, but you can just change the version to &lsquo;2.* preview&rsquo;. Then you just need to fill in the remaining details, like I have below, and you&rsquo;re ready to &lsquo;Save &amp; Queue&rsquo;.</p>
 
-<p><img src="../../images/newblog/filecopy.png" alt="Azure DevOps" /></p>
+<p><img src="/static/newblog/filecopy.png" alt="Azure DevOps" /></p>
 
 <h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
 
@@ -287,9 +287,9 @@ pacman -S hugo
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label brown " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+	<a class="ui label blue " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
 
-	<a class="ui label orange " href="/tags/static-content" title="static-content">static-content</a>
+	<a class="ui label pink " href="/tags/static-content" title="static-content">static-content</a>
 
 
 		</section>
