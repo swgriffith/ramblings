@@ -117,5 +117,6 @@ Once I had this up and running I realized that the CDN cache can take a while to
 ![Azure DevOps](/newblog/purgecdn.png)
 
 ## Conclusion
-So far so good. Like I said, I'll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I'd like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I'll share it as well.
+So far so good. Like I said, I'll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I'd like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I'll share it as well. 
+
 
