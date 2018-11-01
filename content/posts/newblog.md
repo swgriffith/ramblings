@@ -111,6 +111,11 @@ If you want you can rename 'Agent Job 1'. You can then click the '+' from the Ag
 
 ![Azure DevOps](/newblog/filecopy.png)
 
+### Step 7
+Once I had this up and running I realized that the CDN cache can take a while to refresh, so after a new post or site update I might want to purge the cache. You can do this manually through the Azure portal, but I also found that there's already a build task you can leverage for Azure CDN Purge (Hooray!). Just add the task and fill in the details about your CDN. **Note:** This task does take a little while to execute. I've seen it take 8-14min.
+
+![Azure DevOps](/newblog/purgecdn.png)
+
 ## Conclusion
 So far so good. Like I said, I'll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I'd like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I'll share it as well.
 
