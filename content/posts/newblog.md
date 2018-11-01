@@ -50,8 +50,8 @@ I thought about Azure Web Apps, because it's an awesome platform for hosting a w
 Setup is pretty easy. You create a new Azure Storage Account (needs to be v2). I wont get into all the setup steps here, because the Azure docs are awesome. You can see the setup instructions [here](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website). 
 
 After you're done you should have something that looks like this:
-![Storage Account](/static/newblog/storageacct.png)
-![Static Website](/static/newblog/staticwebsite.png)
+![Storage Account](/newblog/storageacct.png)
+![Static Website](/newblog/staticwebsite.png)
 
 There are a few key points to note. First, after setting up static web hosting you will have a new $web container in your blob storage. No big deal, except that older versions of some storage tools you may find that non-alphanumberic characters are not supported. For example, my Azure DevOps pipeline, which I'll cover later threw this error until I changed the file copy tool version:
 
@@ -66,7 +66,7 @@ The second point to note is that Azure Storage static content, at the time I'm w
 2. Create the CName record in your DNS provider to resolve to your CDN endpoint. 
 3. Configure the custom domain and SSL following the guide [here](https://docs.microsoft.com/en-us/azure/cdn/cdn-custom-ssl?tabs=option-1-default-enable-https-with-a-cdn-managed-certificate). Once you're done you'll need to wait for the domain validation and certificate provisioning, shown below.
 
-![Custom Domain SSL](/static/newblog/customdomainssl.png)
+![Custom Domain SSL](/newblog/customdomainssl.png)
 
 ## It's ALIVE!!!
 And that's it! Now I have a super cheap static content blog running in Azure Storage (**$0.002/GB per month and $0.01 per 10,000 read operations**). The Azure CDN is giving me global CDN access and SSL (**$0.081/GB egress per month for traffic to North America and Europe**). I'll have to monitor it for a few months to see if that cost break down holds up, but it looks good on paper. :-D 
@@ -85,17 +85,17 @@ So here we go...
 ### Step 1
 I already had an Azure DevOps account, so nothing to do there. I just went in and created a new project for my blog.
 
-![Azure DevOps](/static/newblog/azuredevops.png)
+![Azure DevOps](/newblog/azuredevops.png)
 
 ### Step 2
 I needed to create a new Azure DevOps Build Pipeline. 
 
-![Azure DevOps](/static/newblog/newpipeline.png)
+![Azure DevOps](/newblog/newpipeline.png)
 
 ### Step 3
 Select your source repo and if necessary go through the OAuth workflow, or provide an access token. I'm using GitHub and just followed the OAuth flow.
 
-![Azure DevOps](/static/newblog/selectsource.png)
+![Azure DevOps](/newblog/selectsource.png)
 
 ### Step 4
 You'll be brought to the screen to choose a build template. This is great for common scenarios, as it will assemble the pieces you need and then you can tweak. For this scenario there is no template, so we'll start with an 'Empty Job'.
@@ -104,12 +104,12 @@ You'll be brought to the screen to choose a build template. This is great for co
 ### Step 5
 I want this to trigger automatically on a push, so I'm going straight to the 'Trigger' tab and enabling continuous integration. I'm also going to enable batching of changes during a build.
 
-![Azure DevOps](/static/newblog/trigger.png)
+![Azure DevOps](/newblog/trigger.png)
 
 ### Step 6
 If you want you can rename 'Agent Job 1'. You can then click the '+' from the Agent Job and add the 'Azure File Copy' task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumeric character in the container name, but you can just change the version to '2.* preview'. Then you just need to fill in the remaining details, like I have below, and you're ready to 'Save & Queue'.
 
-![Azure DevOps](/static/newblog/filecopy.png)
+![Azure DevOps](/newblog/filecopy.png)
 
 ## Conclusion
 So far so good. Like I said, I'll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I'd like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I'll share it as well.
