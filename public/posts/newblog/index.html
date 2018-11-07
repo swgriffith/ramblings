@@ -22,7 +22,7 @@ body, body.pushable {
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="Steve Griffth" />
 	<meta name="description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage." />
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.40.1" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
 
@@ -48,7 +48,7 @@ var bodyBgSwitchIndex = 0;
 		var bgImage = "url(" + "/images/background.jpg" + ")";
 	
 	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff', null );
+	document.body.style.setProperty('--blurEff',"");
 	document.body.style.setProperty('--bgImage', bgImage);
 
 	function getRandomInt(min, max) {
@@ -279,6 +279,12 @@ pacman -S hugo
 
 <p><img src="/newblog/filecopy.png" alt="Azure DevOps" /></p>
 
+<h3 id="step-7">Step 7&nbsp;<a class="anchor" href="#step-7"><i class="small linkify icon"></i></a> </h3>
+
+<p>Once I had this up and running I realized that the CDN cache can take a while to refresh, so after a new post or site update I might want to purge the cache. You can do this manually through the Azure portal, but I also found that there&rsquo;s already a build task you can leverage for Azure CDN Purge (Hooray!). Just add the task and fill in the details about your CDN. <strong>Note:</strong> This task does take a little while to execute. I&rsquo;ve seen it take 8-14min.</p>
+
+<p><img src="/newblog/purgecdn.png" alt="Azure DevOps" /></p>
+
 <h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
 
 <p>So far so good. Like I said, I&rsquo;ll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I&rsquo;d like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I&rsquo;ll share it as well.</p>
@@ -287,9 +293,9 @@ pacman -S hugo
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label pink " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+	<a class="ui label red " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
 
-	<a class="ui label pink " href="/tags/static-content" title="static-content">static-content</a>
+	<a class="ui label blue " href="/tags/static-content" title="static-content">static-content</a>
 
 
 		</section>
@@ -383,6 +389,8 @@ pacman -S hugo
 After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</p>
 
 <p>On the personal side, I&rsquo;m a father of 2 and husband of 1. I have 28years of guitar experience behind me&hellip;but still sound like I only have 7. I also love microcontrollers and electronics projects.</p>
+
+<p><strong>Note:</strong> I am a Microsoft employee, but this IS NOT a Microsoft blog. These are my personal thoughts and inputs.</p>
 </article>
 			</div>
 		</section>
