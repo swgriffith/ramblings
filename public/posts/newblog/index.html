@@ -168,12 +168,12 @@ var bodyBgSwitchIndex = 0;
 <p>The issue with setting up a blog, however, is that I had a lot of requirements.</p>
 
 <p>Must&hellip;.
-* be a static content only side (I dont want to deal with a lot of complexity)
-* be CHEEEEAAAP (I dont have a lot of cash to throw around here)
-* support custom domain (So I can run under blog.stevegriffith.nyc)
-* support custom domain TLS (gotta keep my visitors safe)
-* be maintained in GitHub public
-* auto sync on git push</p>
+- be a static content only side (I dont want to deal with a lot of complexity)
+- be CHEEEEAAAP (I dont have a lot of cash to throw around here)
+- support custom domain (So I can run under blog.stevegriffith.nyc)
+- support custom domain TLS (gotta keep my visitors safe)
+- be maintained in GitHub public
+- auto sync on git push</p>
 
 <p>Seems like a pretty reasonable list. So lets get into it.</p>
 
@@ -183,7 +183,7 @@ var bodyBgSwitchIndex = 0;
 
 <p>I&rsquo;m not a web developer by heart, so I&rsquo;m not about to build from scratch, so that leaves me looking for a static content generator. I&rsquo;ve seen a few in the wild, but the two main that I&rsquo;ve come across are <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a>. After some basic research, and after reading <a href="https://opensource.com/article/17/5/hugo-vs-jekyll">this</a> interesting quick compare, I decided to use Hugo.</p>
 
-<p>Setup is really quick. I&rsquo;m an Ubuntu and Arch linux user on the personal side, so I just had to run the following:</p>
+<p>Setup is really quick. I&rsquo;m an Ubuntu and Arch linux user on the personal side, so I just had to run the following&hellip;</p>
 
 <pre><code class="language-bash">#Ubuntu
 sudo apt install hugo
@@ -192,7 +192,7 @@ sudo apt install hugo
 pacman -S hugo
 </code></pre>
 
-<p>from there I just followed the quick start from the Hugo site <a href="https://gohugo.io/getting-started/quick-start/">here</a> to get started. I also browsed the themes and landed on this <a href="https://github.com/UtkarshVerma/hugo-dream-plus">Dream Plus</a> theme, which I found pretty nice. I may swap later.</p>
+<p>&hellip;and from there I just followed the quick start from the Hugo site <a href="https://gohugo.io/getting-started/quick-start/">here</a> to get started. I also browsed the themes and landed on this <a href="https://github.com/UtkarshVerma/hugo-dream-plus">Dream Plus</a> theme, which I found pretty nice. I may swap later.</p>
 
 <p>Honstly&hellip;.still getting comfortable with Hugo and this theme, so may chance out later, but its a solid start.</p>
 
@@ -218,7 +218,7 @@ pacman -S hugo
 <ol>
 <li><p>Setup the profile and endpoint following the guide <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-create-new-endpoint">here</a>.</p>
 
-<p><strong>Note:</strong> Don&rsquo;t use the &lsquo;Storage&rsquo; orign type, as it wont let you point at the static website URL. Instead it will try to point at the blog storage URL, which is different. Use the &lsquo;Custom&rsquo; origin type instead.</p></li>
+<p><strong>Note:</strong> Don&rsquo;t use the &lsquo;Storage&rsquo; orign type, as it wont let you point at the static website URL. Instead it will try to point at the blob storage URL, which is different. Use the &lsquo;Custom&rsquo; origin type instead.</p></li>
 
 <li><p>Create the CName record in your DNS provider to resolve to your CDN endpoint.</p></li>
 
@@ -275,7 +275,7 @@ pacman -S hugo
 
 <h3 id="step-6">Step 6&nbsp;<a class="anchor" href="#step-6"><i class="small linkify icon"></i></a> </h3>
 
-<p>If you want you can rename &lsquo;Agent Job 1&rsquo;. You can then click the &lsquo;+&rsquo; from the Agent Job and add the &lsquo;Azure File Copy&rsquo; task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumeric character in the container name, but you can just change the version to &lsquo;2.* preview&rsquo;. Then you just need to fill in the remaining details, like I have below, and you&rsquo;re ready to &lsquo;Save &amp; Queue&rsquo;.</p>
+<p>If you want you can rename &lsquo;Agent Job 1&rsquo;. Next you can click the &lsquo;+&rsquo; from the Agent Job and add the &lsquo;Azure File Copy&rsquo; task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumeric character in the container name, but you can just change the version to &lsquo;2.* preview&rsquo;. Then you just need to fill in the remaining details, like I have below, and you&rsquo;re ready to &lsquo;Save &amp; Queue&rsquo;.</p>
 
 <p><img src="/newblog/filecopy.png" alt="Azure DevOps" /></p>
 
@@ -293,9 +293,9 @@ pacman -S hugo
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label red " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+	<a class="ui label green " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
 
-	<a class="ui label blue " href="/tags/static-content" title="static-content">static-content</a>
+	<a class="ui label purple " href="/tags/static-content" title="static-content">static-content</a>
 
 
 		</section>
