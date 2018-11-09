@@ -4,7 +4,7 @@ defaultContentLanguage = "en"
 title = "Steve Griffith - Ramblings"
 theme = "dream-plus"
 
-#googleAnalytics = "UA-112332904-3"
+googleAnalytics = "UA-129005800-1"
 
 enableRobotsTXT = true
 
