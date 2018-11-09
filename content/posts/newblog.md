@@ -14,12 +14,13 @@ Over the last few years at Microsoft I've worked with a lot of people to help th
 The issue with setting up a blog, however, is that I had a lot of requirements.
 
 Must....
-- be a static content only side (I dont want to deal with a lot of complexity)
-- be CHEEEEAAAP (I dont have a lot of cash to throw around here)
-- support custom domain (So I can run under blog.stevegriffith.nyc)
-- support custom domain TLS (gotta keep my visitors safe)
-- be maintained in GitHub public
-- auto sync on git push
+
+* be a static content only side (I dont want to deal with a lot of complexity)
+* be CHEEEEAAAP (I dont have a lot of cash to throw around here)
+* support custom domain (So I can run under blog.stevegriffith.nyc)
+* support custom domain TLS (gotta keep my visitors safe)
+* be maintained in GitHub public
+* auto sync on git push
 
 Seems like a pretty reasonable list. So lets get into it.
 
