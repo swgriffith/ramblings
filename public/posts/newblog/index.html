@@ -22,7 +22,7 @@ body, body.pushable {
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="Steve Griffth" />
 	<meta name="description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage." />
-<meta name="generator" content="Hugo 0.40.1" />
+<meta name="generator" content="Hugo 0.51" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
 
@@ -48,7 +48,7 @@ var bodyBgSwitchIndex = 0;
 		var bgImage = "url(" + "/images/background.jpg" + ")";
 	
 	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff',"");
+	document.body.style.setProperty('--blurEff', null );
 	document.body.style.setProperty('--bgImage', bgImage);
 
 	function getRandomInt(min, max) {
@@ -296,9 +296,9 @@ pacman -S hugo
 		</section>
 		<section class="ui secondary attached segment dream-tags">
 
-	<a class="ui label pink " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+	<a class="ui label olive " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
 
-	<a class="ui label purple " href="/tags/static-content" title="static-content">static-content</a>
+	<a class="ui label pink " href="/tags/static-content" title="static-content">static-content</a>
 
 
 		</section>

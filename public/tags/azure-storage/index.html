@@ -24,11 +24,11 @@ body, body.pushable {
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="Steve Griffth" />
 	<meta name="description" content="Ramblings of an Azure nerd." />
-<meta name="generator" content="Hugo 0.40.1" />
+<meta name="generator" content="Hugo 0.51" />
 
 <link rel="shortcut icon" href="/img/defaultFav.ico">
 
-<link rel="alternate" type="application/rss" href="https://blog.stevegriffith.nyc/tags/azure-storage/index.xml" title="Steve Griffith - Ramblings" />
+<link rel="alternate" type="application/rss+xml" href="https://blog.stevegriffith.nyc/tags/azure-storage/index.xml" title="Steve Griffith - Ramblings" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
 <style>
 body.pushable {
@@ -51,7 +51,7 @@ var bodyBgSwitchIndex = 0;
 		var bgImage = "url(" + "/images/background.jpg" + ")";
 	
 	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff',"");
+	document.body.style.setProperty('--blurEff', null );
 	document.body.style.setProperty('--bgImage', bgImage);
 
 	function getRandomInt(min, max) {
