@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/posts/titan-key-arch/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/posts/newblog/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
   </url>
@@ -14,6 +19,12 @@
   
   <url>
     <loc>https://blog.stevegriffith.nyc/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/arch/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -34,8 +45,38 @@
   </url>
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/tags/fido/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/google/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/linux/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/posts/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/security/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/security-key/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -47,13 +88,25 @@
   
   <url>
     <loc>https://blog.stevegriffith.nyc/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/titan/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/u2f/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
     <priority>0</priority>
   </url>
   
