@@ -3,7 +3,7 @@ title: Setting up Google Titan Security Keys on Arch Linux
 date: 2018-12-19T10:42:47-05:00
 lastmod: 2018-12-19T10:42:47-05:00
 cover: "/titan-key-arch/githuberror.png"
-draft: true
+draft: false
 categories: ["security"]
 tags: ["google", "arch", "linux", "linux", "u2f", "FIDO", "titan", "security key"]
 description:
