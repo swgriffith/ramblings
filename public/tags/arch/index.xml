@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Arch on Steve Griffith - Ramblings</title>
+    <link>https://blog.stevegriffith.nyc/tags/arch/</link>
+    <description>Recent content in Arch on Steve Griffith - Ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Dec 2018 10:42:47 -0500</lastBuildDate>
+    
+	<atom:link href="https://blog.stevegriffith.nyc/tags/arch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up Google Titan Security Keys on Arch Linux</title>
+      <link>https://blog.stevegriffith.nyc/posts/titan-key-arch/</link>
+      <pubDate>Wed, 19 Dec 2018 10:42:47 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/titan-key-arch/</guid>
+      <description>Overview I recently decided to give Google Advanced Protection a shot. For those not aware, Advanced protection is Google&amp;rsquo;s first party U2F authentication system. In short, you purchase the Titan Security Bundle from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively.</description>
+    </item>
+    
+  </channel>
+</rss>

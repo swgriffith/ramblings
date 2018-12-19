@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>
+	Setting up Google Titan Security Keys on Arch Linux
+</title><style>
+body {
+	display: block;
+	--colorBG: "#40e0d0, #ff8c00, #ff0080";
+		background-image: var(--bgImage) !important;
+	
+}
+
+body, body.pushable {
+	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: cover !important;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="author" content="Steve Griffth" />
+	<meta name="description" content="" />
+<meta name="generator" content="Hugo 0.52" />
+
+<link rel="shortcut icon" href="/img/defaultFav.ico">
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+<style>
+body.pushable {
+	display: block;
+		background-image: var(--bgImage) !important;
+	 ;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="/css/site.css">
+<script>
+	var colorBG =  false 
+	var enabledPost =  false 
+	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
+</script>
+</head>
+<body><script>
+var prevBgIndex = 0;
+var bodyBgSwitchIndex = 0;
+		var bgImage = "url(" + "/images/background.jpg" + ")";
+	
+	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
+	document.body.style.setProperty('--blurEff', null );
+	document.body.style.setProperty('--bgImage', bgImage);
+
+	function getRandomInt(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  var random;
+	  while (1) {
+	    random = Math.floor(Math.random() * (max - min)) + min;
+	    if (random !== prevBgIndex) {
+	      prevBgIndex = random;
+	      break;
+	    }
+	  }
+	  return random;
+	}
+
+	function connect(arr) {
+	  var str = '';
+	  for (var i = 0; i < arr.length; i++) {
+	    if (i !== arr.length - 1) {
+	      str += arr[i] + ', ';
+	    } else {
+	      str += arr[i];
+	    }
+	  }
+	  return str;
+	}
+</script><div class="blur-overlay"></div><div id="sidebar" class="ui sidebar inverted vertical menu">
+	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="/images/me.jpg">
+</div>
+<h3 class="ui header">Steve Griffth
+	<div class="sub header">Maker, Programmer and Solution Architect.</div>
+</h3>
+</section>
+	<section id="footer" class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 Steve Griffith - Ramblings</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</section>
+</div>
+<div class="pusher">
+		<div class="flipper">
+			<div class="front">
+	
+	<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
+	</div>
+<div class="item">
+			<a href="/">
+				<i class="inverted big link home icon" title="Home"></i>
+			</a>
+		</div>
+	<div class="item">
+			<a href="/posts">
+				<i class="inverted big link archive icon" title="Archive"></i>
+			</a>
+		</div>
+	
+	
+	<div class="ui container tablet computer only grid">
+		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
+			<i class="inverted big link sidebar icon" title="Show Sidebar"></i>
+		</div>
+	</div>
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title="RSS Feed"></i>
+		</a>
+	</div>
+	
+</nav>
+
+
+<div class="ui centered grid">
+	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
+	<div id="header" class="ui inverted segment column box">
+		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
+		<img src="/images/me.jpg">
+</div>
+<h3 class="ui header">Steve Griffth
+	<div class="sub header">Maker, Programmer and Solution Architect.</div>
+</h3>
+</header>
+		<div class=" title header-title"></div>
+		<div id="tag-category" class=" content"></div>
+		<footer class="ui bottom attached center aligned inverted segment">
+	<p>© 2018 Steve Griffith - Ramblings</p>
+
+<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
+</footer>
+	</div>
+</div>
+</div>
+	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
+		<section class="ui secondary top attached black segment post-head">
+			<h1 class="post-title">
+				Setting up Google Titan Security Keys on Arch Linux
+			</h1>
+			<div class="sub header">
+					<div><span><i class="calendar outline icon"></i>Dec 19, 2018</span></div>
+					<div><span><i class="clock outline icon"></i>2 min read</span></div>
+					<div><span><i class="angle double up icon"></i>Last updated on Dec 19, 2018</span></div>
+			</div>
+			<hr>
+			<article class="post-content twemoji">
+				
+
+<h1 id="overview">Overview&nbsp;<a class="anchor" href="#overview"><i class="small linkify icon"></i></a> </h1>
+
+<p>I recently decided to give <a href="https://landing.google.com/advancedprotection/">Google Advanced Protection</a> a shot. For those not aware, Advanced protection is Google&rsquo;s first party U2F authentication system. In short, you purchase the <a href="https://store.google.com/us/product/titan_security_key_kit?hl=en-US">Titan Security Bundle</a> from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively. In hindsight, the ecosystem and support around YubiKey is more advanced. For example, my password manager still <a href="https://lastpass.com/support.php?cmd=showfaq&amp;id=8126">does not support</a> FIDO/U2F. Hopefully it will in the future, but we&rsquo;ll see. I may end up buying a yubikey as well.</p>
+
+<h2 id="problem">Problem!&nbsp;<a class="anchor" href="#problem"><i class="small linkify icon"></i></a> </h2>
+
+<p>So on my windows side the Titan keys worked right away without any issue. However, on my Arch Linux box I immediately ran into issues where the browser seemed to not see the key and raise an error that either &ldquo;Something went really wrong&rdquo; (GitHub) or &ldquo;Incorrect response. Please try again.&rdquo; (Twitter).</p>
+
+<p><img src="/titan-key-arch/githuberror.png" alt="GitHub Error" />
+<img src="/titan-key-arch/twittererror.png" alt="Twitter Error" /></p>
+
+<p>A quick search returned the <a href="https://support.google.com/titansecuritykey/answer/9148044?hl=en">this</a> article from Google on linux setup, however thse steps did not work. When I checked dmesg after plugging in my key I could see that the vendor and product id&rsquo;s did not match what google provided, as you can see below.</p>
+
+<pre><code>#Google Provided udev rule
+KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, ATTRS{idVendor}==&quot;18d1&quot;, ATTRS{idProduct}==&quot;5026&quot;, TAG+=&quot;uaccess&quot;
+</code></pre>
+
+<pre><code>#Actual from dmesg
+usb 2-6.4: new full-speed USB device number 14 using xhci_hcd
+usb 2-6.4: New USB device found, idVendor=096e, idProduct=085b, bcdDevice=32.10
+usb 2-6.4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+usb 2-6.4: Product: ePass FIDO
+usb 2-6.4: Manufacturer: FS
+hid-generic 0003:096E:085B.000F: hiddev2,hidraw4: USB HID v1.10 Device [FS ePass FIDO] on usb-0000:00:14.0-6.4/input0
+</code></pre>
+
+<h2 id="the-fix">The fix&nbsp;<a class="anchor" href="#the-fix"><i class="small linkify icon"></i></a> </h2>
+
+<p>So initially I set up my own udev rules and that seemed to work for one device, but I had an issue with my second key. In searching for that fix I came across <a href="https://support.yubico.com/support/solutions/articles/15000006449-using-your-u2f-yubikey-with-linux">this</a> document from YubiKey&hellip;and when I checked the udev rules file they provided it actually included the Feitian FIDO/U2F product id and codes. A few commands later, I was up and running with both keys.</p>
+
+<pre><code>#Go to the udev rules folder
+cd /etc/udev/rules.d
+
+#Pull down the file from the yubikey github
+sudo wget https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
+
+#Reboot, or run the following to reload your rules
+sudo udevadm control --reload
+</code></pre>
+
+<h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
+
+<p>So far this seems to have address all of my issues. I presume this will resolve across most linux distros. Hopefully this helps others!</p>
+
+			</article>
+		</section>
+		<section class="ui secondary attached segment dream-tags">
+
+	<a class="ui label purple " href="/tags/arch" title="arch">arch</a>
+
+	<a class="ui label green " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
+
+	<a class="ui label brown " href="/tags/fido" title="fido">fido</a>
+
+	<a class="ui label orange " href="/tags/google" title="google">google</a>
+
+	<a class="ui label orange " href="/tags/linux" title="linux">linux</a>
+
+	<a class="ui label orange " href="/tags/security-key" title="security-key">security-key</a>
+
+	<a class="ui label green " href="/tags/static-content" title="static-content">static-content</a>
+
+	<a class="ui label purple " href="/tags/titan" title="titan">titan</a>
+
+	<a class="ui label purple " href="/tags/u2f" title="u2f">u2f</a>
+
+
+		</section>
+	</div>
+</div>
+
+			</div>
+			<div class="back">
+<nav class="ui top secondary menu bar">
+	<div class="item">
+		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
+	</div>
+
+	
+		
+	
+		
+	
+		
+	
+		
+	
+	
+	
+	
+	
+		
+		
+		<div class="item">
+			<a href="https://github.com/swgriffith" target="	_blank">
+				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="mailto:steve.griffith@microsoft.com" target="	_blank">
+				<i id="ico" class="inverted big link mail icon" title="Email"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+		<div class="item">
+			<a href="https://twitter.com/SteveGriffith" target="	_blank">
+				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
+			</a>
+		</div>
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+		
+		
+	
+
+	
+	<div class="item right">
+		<a href="/posts/index.xml">
+			<i class="inverted big link rss icon" title="RSS Feed"></i>
+		</a>
+	</div>
+	
+</nav>
+
+<div class="ui centered grid about">
+	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
+		<section class="ui stacked segments">
+			<div class="ui inverted segment">
+				<article class="twemoji"><h1>About me</h1>
+
+<hr />
+
+<p><br>
+After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</p>
+
+<p>On the personal side, I&rsquo;m a father of 2 and husband of 1. I have 28years of guitar experience behind me&hellip;but still sound like I only have 7. I also love microcontrollers and electronics projects.</p>
+
+<p><strong>Note:</strong> I am a Microsoft employee, but this IS NOT a Microsoft blog. These are my personal thoughts and inputs.</p>
+</article>
+			</div>
+		</section>
+	</div>
+</div>
+</div>
+		</div>
+	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
+
+
+	<script>
+		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+		ga('create', 'UA-129005800-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
+
+
+<script>
+	(function () {
+	  console.log("Twemoji up and making stuff colourful!");
+	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
+		twemoji.parse(b[a]);
+	  }
+	})();
+</script>
+
+</body>
+</html>
