@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Steve Griffith - Ramblings</title>
+    <link>https://blog.stevegriffith.nyc/tags/</link>
+    <description>Recent content in Tags on Steve Griffith - Ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.stevegriffith.nyc/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Azure Storage</title>
+      <link>https://blog.stevegriffith.nyc/tags/azure-storage/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/azure-storage/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Static Content</title>
+      <link>https://blog.stevegriffith.nyc/tags/static-content/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/static-content/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

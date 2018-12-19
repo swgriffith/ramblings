@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Steve Griffith - Ramblings</title>
+    <link>https://blog.stevegriffith.nyc/</link>
+    <description>Recent content on Steve Griffith - Ramblings</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate>
+    
+	<atom:link href="https://blog.stevegriffith.nyc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>New Blog</title>
+      <link>https://blog.stevegriffith.nyc/posts/newblog/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/newblog/</guid>
+      <description>Overview Over the last few years at Microsoft I&amp;rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&amp;rsquo;ve solved a problem I&amp;rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.
+The issue with setting up a blog, however, is that I had a lot of requirements.</description>
+    </item>
+    
+    <item>
+      <title>New Blog</title>
+      <link>https://blog.stevegriffith.nyc/cards/newblog/</link>
+      <pubDate>Mon, 29 Oct 2018 14:11:42 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/cards/newblog/</guid>
+      <description>Overview Over the last few years at Microsoft I&amp;rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&amp;rsquo;ve solved a problem I&amp;rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.
+The issue with setting up a blog, however, is that I had a lot of requirements.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.stevegriffith.nyc/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/about/</guid>
+      <description>About me 
+After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&amp;rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</description>
+    </item>
+    
+  </channel>
+</rss>
