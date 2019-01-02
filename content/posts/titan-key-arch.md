@@ -14,8 +14,7 @@ I recently decided to give [Google Advanced Protection](https://landing.google.c
 ## Problem!
 So on my windows side the Titan keys worked right away without any issue. However, on my Arch Linux box I immediately ran into issues where the browser seemed to not see the key and raise an error that either "Something went really wrong" (GitHub) or "Incorrect response. Please try again." (Twitter). 
 
-![GitHub Error](/titan-key-arch/githuberror.png)
-![Twitter Error](/titan-key-arch/twittererror.png)
+![GitHub Error](/titan-key-arch/githuberror.png) ![Twitter Error](/titan-key-arch/twittererror.png)
 
 A quick search returned the [this](https://support.google.com/titansecuritykey/answer/9148044?hl=en) article from Google on linux setup, however thse steps did not work. When I checked dmesg after plugging in my key I could see that the vendor and product id's did not match what google provided, as you can see below. 
 
