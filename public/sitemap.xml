@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/posts/git-learnin/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/posts/titan-key-arch/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
   </url>
@@ -45,14 +50,38 @@
   </url>
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/tags/devops/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/devops/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/tags/fido/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/tags/git/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/tags/google/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/introduction/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -64,7 +93,7 @@
   
   <url>
     <loc>https://blog.stevegriffith.nyc/posts/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -88,7 +117,7 @@
   
   <url>
     <loc>https://blog.stevegriffith.nyc/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
     <priority>0</priority>
   </url>
   

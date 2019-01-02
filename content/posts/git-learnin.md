@@ -2,10 +2,10 @@
 title: Git Learnin
 date: 2019-01-02T11:37:50-05:00
 lastmod: 2019-01-02T11:37:50-05:00
-cover: "/images/default1.jpg"
-draft: true
-categories: ["category1"]
-tags: ["tag1", "tag2"]
+cover: "/images/Git-Logo-2Color.png"
+draft: false
+categories: ["DevOps"]
+tags: ["git", "devops", "introduction"]
 description:
 ---
 # gitlearnin
