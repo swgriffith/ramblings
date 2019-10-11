@@ -4,12 +4,21 @@
     <title>Posts on Steve Griffith - Ramblings</title>
     <link>https://blog.stevegriffith.nyc/posts/</link>
     <description>Recent content in Posts on Steve Griffith - Ramblings</description>
-    <meta name="generator" content="Hugo 0.52" />
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jan 2019 11:37:50 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate>
     
-        <atom:link href="https://blog.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Aks Minimum Permissions</title>
+      <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
+      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
+      <description>Cluster Management Roles When working with Azure Kubernetes Service there can be a lot of confusion about the access needed by the individuals managing the cluster as well as the roles required by the Service Principal used by the cluster itself to execute Azure operations (ex. Creating an Azure Public IP on a Service type=LoadBalancer). The following tries to break it down and demonstrate the minimal roles required for Cluster Administration.</description>
+    </item>
     
     <item>
       <title>Git Learnin</title>
@@ -38,7 +47,8 @@ git config --global --list  Note: You can also use &amp;ndash;local to see the s
       <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
       
       <guid>https://blog.stevegriffith.nyc/posts/newblog/</guid>
-      <description>Building out an example of static hosting using Hugo, ACI and Azure Storage.</description>
+      <description>Overview Over the last few years at Microsoft I&amp;rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&amp;rsquo;ve solved a problem I&amp;rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.
+The issue with setting up a blog, however, is that I had a lot of requirements.</description>
     </item>
     
   </channel>

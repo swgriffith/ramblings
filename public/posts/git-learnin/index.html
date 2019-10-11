@@ -1,171 +1,91 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-us">
-<head>
-	<title>
-	Git Learnin
-</title><style>
-body {
-	display: block;
-	--colorBG: "#40e0d0, #ff8c00, #ff0080";
-		background-image: var(--bgImage) !important;
+  <head>
+    <title>Git Learnin // Steve Griffith - Ramblings</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
 	
+	ga('send', 'pageview');
 }
-
-body, body.pushable {
-	background-repeat: no-repeat;
-  	background-attachment: fixed;
-  	background-size: cover !important;
-}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="author" content="Steve Griffth" />
-	<meta name="description" content="" />
-<meta name="generator" content="Hugo 0.52" />
-
-<link rel="shortcut icon" href="/img/defaultFav.ico">
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-<style>
-body.pushable {
-	display: block;
-		background-image: var(--bgImage) !important;
-	 ;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="/css/site.css">
-<script>
-	var colorBG =  false 
-	var enabledPost =  false 
-	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
 </script>
-</head>
-<body><script>
-var prevBgIndex = 0;
-var bodyBgSwitchIndex = 0;
-		var bgImage = "url(" + "/images/background.jpg" + ")";
-	
-	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff', null );
-	document.body.style.setProperty('--bgImage', bgImage);
 
-	function getRandomInt(min, max) {
-	  min = Math.ceil(min);
-	  max = Math.floor(max);
-	  var random;
-	  while (1) {
-	    random = Math.floor(Math.random() * (max - min)) + min;
-	    if (random !== prevBgIndex) {
-	      prevBgIndex = random;
-	      break;
-	    }
-	  }
-	  return random;
-	}
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git Learnin"/>
+<meta name="twitter:description" content="gitlearnin More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.
+Initial Setup https://git-scm.com/downloads
+Check the current settings
+git config --global --list  Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)"/>
+<meta name="twitter:site" content="@SteveGriffith"/>
 
-	function connect(arr) {
-	  var str = '';
-	  for (var i = 0; i < arr.length; i++) {
-	    if (i !== arr.length - 1) {
-	      str += arr[i] + ', ';
-	    } else {
-	      str += arr[i];
-	    }
-	  }
-	  return str;
-	}
-</script><div class="blur-overlay"></div><div id="sidebar" class="ui sidebar inverted vertical menu">
-	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</section>
-	<section id="footer" class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
-
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</section>
-</div>
-<div class="pusher">
-		<div class="flipper">
-			<div class="front">
-	
-	<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-<div class="item">
-			<a href="/">
-				<i class="inverted big link home icon" title="Home"></i>
-			</a>
-		</div>
-	<div class="item">
-			<a href="/posts">
-				<i class="inverted big link archive icon" title="Archive"></i>
-			</a>
-		</div>
-	
-	
-	<div class="ui container tablet computer only grid">
-		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
-			<i class="inverted big link sidebar icon" title="Show Sidebar"></i>
-		</div>
-	</div>
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
+    <meta property="og:title" content="Git Learnin" />
+<meta property="og:description" content="gitlearnin More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.
+Initial Setup https://git-scm.com/downloads
+Check the current settings
+git config --global --list  Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.stevegriffith.nyc/posts/git-learnin/" />
+<meta property="article:published_time" content="2019-01-02T11:37:50-05:00" />
+<meta property="article:modified_time" content="2019-01-02T11:37:50-05:00" />
 
 
-<div class="ui centered grid">
-	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
-	<div id="header" class="ui inverted segment column box">
-		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</header>
-		<div class=" title header-title"></div>
-		<div id="tag-category" class=" content"></div>
-		<footer class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith - Ramblings</h1>
+      <p>Ramblings of an Azure nerd.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Git Learnin</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 2, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.stevegriffith.nyc/tags/git/">git</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/devops/">devops</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/introduction/">introduction</a></div></div>
+    </header>
+    <div class="post-content">
+      
 
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</footer>
-	</div>
-</div>
-</div>
-	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
-		<section class="ui secondary top attached black segment post-head">
-			<h1 class="post-title">
-				Git Learnin
-			</h1>
-			<div class="sub header">
-					<div><span><i class="calendar outline icon"></i>Jan 2, 2019</span></div>
-					<div><span><i class="clock outline icon"></i>9 min read</span></div>
-					<div><span><i class="angle double up icon"></i>Last updated on Jan 2, 2019</span></div>
-			</div>
-			<hr>
-			<article class="post-content twemoji">
-				
-
-<h1 id="gitlearnin">gitlearnin&nbsp;<a class="anchor" href="#gitlearnin"><i class="small linkify icon"></i></a> </h1>
+<h1 id="gitlearnin">gitlearnin</h1>
 
 <p>More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.</p>
 
-<h2 id="initial-setup">Initial Setup&nbsp;<a class="anchor" href="#initial-setup"><i class="small linkify icon"></i></a> </h2>
+<h2 id="initial-setup">Initial Setup</h2>
 
 <p><a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
 
@@ -180,7 +100,7 @@ var bodyBgSwitchIndex = 0;
 git config --global user.email &quot;stgriffi@microsoft.com&quot;
 </code></pre>
 
-<h2 id="setting-your-default-editor">Setting your default editor&nbsp;<a class="anchor" href="#setting-your-default-editor"><i class="small linkify icon"></i></a> </h2>
+<h2 id="setting-your-default-editor">Setting your default editor</h2>
 
 <p>Many activities you do in git may pop you into an editor (ex. commits, diffs, etc). Git will use your system default editor, but you may want to change this as follows:</p>
 
@@ -188,14 +108,14 @@ git config --global user.email &quot;stgriffi@microsoft.com&quot;
 git config --global core.editor nano
 </code></pre>
 
-<h2 id="cloning-and-existing-repo">Cloning and Existing Repo&nbsp;<a class="anchor" href="#cloning-and-existing-repo"><i class="small linkify icon"></i></a> </h2>
+<h2 id="cloning-and-existing-repo">Cloning and Existing Repo</h2>
 
 <pre><code>git clone https://github.com/swgriffith/gitlearnin.git
 </code></pre>
 
 <p>Now you have a local working copy of the repository that you cloned. You can do whatever you want with this copy, but need to be mindful of what you do if you intend to push back to <strong>origin</strong>.</p>
 
-<h2 id="what-is-origin">What is origin?&nbsp;<a class="anchor" href="#what-is-origin"><i class="small linkify icon"></i></a> </h2>
+<h2 id="what-is-origin">What is origin?</h2>
 
 <p>Origin is the default name for the remote repository you cloned from. You can see your origin using the following:</p>
 
@@ -211,7 +131,7 @@ git remote -v
 
 <p><strong>Note:</strong> This name will be used when you interact with the remote repository for pushes.</p>
 
-<h2 id="branches">Branches&nbsp;<a class="anchor" href="#branches"><i class="small linkify icon"></i></a> </h2>
+<h2 id="branches">Branches</h2>
 
 <p>Branches allow you to work on various changes locally at the same time without them overlapping. To switch between branches you use <strong>checkout</strong>. For example, if you have 2 hot fixes you need to apply you can create a branch for each and swap back and forth between them without any conflict, until you&rsquo;re ready to push them to your origin.</p>
 
@@ -231,7 +151,7 @@ git checkout -b griffithmods
 <pre><code>git branch -d griffithmods
 </code></pre>
 
-<h2 id="making-changes">Making changes&nbsp;<a class="anchor" href="#making-changes"><i class="small linkify icon"></i></a> </h2>
+<h2 id="making-changes">Making changes</h2>
 
 <p>Once you&rsquo;ve cloned a repository, created a branch and checked it out, you&rsquo;re ready to work. Create a new file within the cloned folder named <yourlastname.txt> and in that file enter the text &lsquo;commit1&rsquo;.</p>
 
@@ -260,7 +180,7 @@ nothing added to commit but untracked files present
 git commit
 </code></pre>
 
-<h2 id="pushing-to-your-remote-repository-i-e-github-or-azure-devops">Pushing to your remote repository (i.e. GitHub or Azure DevOps)&nbsp;<a class="anchor" href="#pushing-to-your-remote-repository-i-e-github-or-azure-devops"><i class="small linkify icon"></i></a> </h2>
+<h2 id="pushing-to-your-remote-repository-i-e-github-or-azure-devops">Pushing to your remote repository (i.e. GitHub or Azure DevOps)</h2>
 
 <p>You can push to any remote repository you have listed when you run the following:</p>
 
@@ -278,7 +198,7 @@ git push github griffithmods
 
 <p>Now go take a look at your remote repository (i.e. GitHub or Azure DevOps) and see if your new branch is available in the branches list.</p>
 
-<h2 id="credentials">Credentials&nbsp;<a class="anchor" href="#credentials"><i class="small linkify icon"></i></a> </h2>
+<h2 id="credentials">Credentials</h2>
 
 <p>Entering your UserID and password may be a bit tedious on every remote repository push. Fortunately there are a few options to solve this pain.</p>
 
@@ -287,7 +207,7 @@ git push github griffithmods
 <li>Use an SSH Key pair for authentication and SSH cloning instead of HTTPS cloning</li>
 </ol>
 
-<h3 id="using-credential-manager">Using Credential Manager&nbsp;<a class="anchor" href="#using-credential-manager"><i class="small linkify icon"></i></a> </h3>
+<h3 id="using-credential-manager">Using Credential Manager</h3>
 
 <p>To use credential manager you can simpley enable credential cache from global config. This will limit the frequency with which you have to enter your user id and password.</p>
 
@@ -296,7 +216,7 @@ git push github griffithmods
 
 <p>NEED TO ADD MORE HERE ABOUT WINDOWS CREDENTIAL MANAGER</p>
 
-<h3 id="using-an-ssg-key-pair">Using an SSG Key Pair&nbsp;<a class="anchor" href="#using-an-ssg-key-pair"><i class="small linkify icon"></i></a> </h3>
+<h3 id="using-an-ssg-key-pair">Using an SSG Key Pair</h3>
 
 <p>By generating an SSH key pair by using a tool like ssh-keygen, you can share your public key with your remote (i.e. GitHub or Azure DevOps). This key pair can be generated with or without a passphrase, although with is recommended. If you pull via the SSH endpoint rather than via the HTTPS endpoint, when you push git will attempt to use your ssh key to authenticate with the remote. If you&rsquo;ve added your public key then you&rsquo;ll be able to push without entering a user ID and Password.</p>
 
@@ -350,11 +270,11 @@ ssh-rsa AAAA&lt;BUNCH OF TEXT I REMOVED&gt;EYM2Xj steve@griffith
 
 <p>Once saved, you can now use the SSH endpoint for git clone and ssh for pushing to git remotes without user ID and password.</p>
 
-<h2 id="merging-and-rebasing">Merging and Rebasing&nbsp;<a class="anchor" href="#merging-and-rebasing"><i class="small linkify icon"></i></a> </h2>
+<h2 id="merging-and-rebasing">Merging and Rebasing</h2>
 
 <p>There are a lot of cases where you&rsquo;ll need to get changes from one branch incorporated into another. There are two main mechanisms for this and each have separate uses, pros and cons.</p>
 
-<h3 id="merge">Merge&nbsp;<a class="anchor" href="#merge"><i class="small linkify icon"></i></a> </h3>
+<h3 id="merge">Merge</h3>
 
 <p>When you have two branches (ex. feature and master) a merge will allow you to take the changes from one branch and add them to the other as a new commit. This is nice because it&rsquo;s non-destructive. All of your commits to this point are maintained and you&rsquo;re just getting a new commit that merges from one branch to another. On the other hand, if you&rsquo;re merging from a very active branch you&rsquo;ll need ot merge pretty frequently and may not like having all of those commits cluttering up your history.</p>
 
@@ -363,7 +283,7 @@ ssh-rsa AAAA&lt;BUNCH OF TEXT I REMOVED&gt;EYM2Xj steve@griffith
 <pre><code>git merge feature master
 </code></pre>
 
-<h3 id="rebase">Rebase&nbsp;<a class="anchor" href="#rebase"><i class="small linkify icon"></i></a> </h3>
+<h3 id="rebase">Rebase</h3>
 
 <p>When you rebase a branch you effectively move your branch forward replaying all of the commits from the one branch onto another. So, for example, if you created a feature branch from master yesterday morning and did some work, and then ran a rebase, git would rewind your feature branch to the begining and replay all of you&rsquo;re commits on the latest version of master. This is a nice clean way to move forward, but you&rsquo;re effectively destroying and re-writing your history.</p>
 
@@ -373,7 +293,7 @@ ssh-rsa AAAA&lt;BUNCH OF TEXT I REMOVED&gt;EYM2Xj steve@griffith
 git rebase master       #Rebases your feature branch from master
 </code></pre>
 
-<h3 id="demo">Demo&nbsp;<a class="anchor" href="#demo"><i class="small linkify icon"></i></a> </h3>
+<h3 id="demo">Demo</h3>
 
 <pre><code>mkdir test
 cd test
@@ -489,157 +409,12 @@ Date:   Thu Dec 13 20:34:38 2018 -0500
 
 </code></pre>
 
-			</article>
-		</section>
-		<section class="ui secondary attached segment dream-tags">
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
 
-	<a class="ui label purple " href="/tags/arch" title="arch">arch</a>
-
-	<a class="ui label green " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
-
-	<a class="ui label orange " href="/tags/devops" title="devops">devops</a>
-
-	<a class="ui label brown " href="/tags/fido" title="fido">fido</a>
-
-	<a class="ui label green " href="/tags/git" title="git">git</a>
-
-	<a class="ui label teal " href="/tags/google" title="google">google</a>
-
-	<a class="ui label violet " href="/tags/introduction" title="introduction">introduction</a>
-
-	<a class="ui label green " href="/tags/linux" title="linux">linux</a>
-
-	<a class="ui label purple " href="/tags/security-key" title="security-key">security-key</a>
-
-	<a class="ui label yellow " href="/tags/static-content" title="static-content">static-content</a>
-
-	<a class="ui label orange " href="/tags/titan" title="titan">titan</a>
-
-	<a class="ui label orange " href="/tags/u2f" title="u2f">u2f</a>
-
-
-		</section>
-	</div>
-</div>
-
-			</div>
-			<div class="back">
-<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-
-	
-		
-	
-		
-	
-		
-	
-		
-	
-	
-	
-	
-	
-		
-		
-		<div class="item">
-			<a href="https://github.com/swgriffith" target="	_blank">
-				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="mailto:steve.griffith@microsoft.com" target="	_blank">
-				<i id="ico" class="inverted big link mail icon" title="Email"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="https://twitter.com/SteveGriffith" target="	_blank">
-				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
-
-<div class="ui centered grid about">
-	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
-		<section class="ui stacked segments">
-			<div class="ui inverted segment">
-				<article class="twemoji"><h1>About me</h1>
-
-<hr />
-
-<p><br>
-After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</p>
-
-<p>On the personal side, I&rsquo;m a father of 2 and husband of 1. I have 28years of guitar experience behind me&hellip;but still sound like I only have 7. I also love microcontrollers and electronics projects.</p>
-
-<p><strong>Note:</strong> I am a Microsoft employee, but this IS NOT a Microsoft blog. These are my personal thoughts and inputs.</p>
-</article>
-			</div>
-		</section>
-	</div>
-</div>
-</div>
-		</div>
-	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/site.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
-
-
-	<script>
-		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-		ga('create', 'UA-129005800-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<script async src='https://www.google-analytics.com/analytics.js'></script>
-<script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
-
-
-<script>
-	(function () {
-	  console.log("Twemoji up and making stuff colourful!");
-	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
-		twemoji.parse(b[a]);
-	  }
-	})();
-</script>
-
-</body>
+    </main>
+  </body>
 </html>

@@ -1,167 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-us">
-<head>
-	<title>
-	New Blog
-</title><style>
-body {
-	display: block;
-	--colorBG: "#40e0d0, #ff8c00, #ff0080";
-		background-image: var(--bgImage) !important;
+  <head>
+    <title>New Blog // Steve Griffith - Ramblings</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage." />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
 	
+	ga('send', 'pageview');
 }
-
-body, body.pushable {
-	background-repeat: no-repeat;
-  	background-attachment: fixed;
-  	background-size: cover !important;
-}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="author" content="Steve Griffth" />
-	<meta name="description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage." />
-<meta name="generator" content="Hugo 0.52" />
-
-<link rel="shortcut icon" href="/img/defaultFav.ico">
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-<style>
-body.pushable {
-	display: block;
-		background-image: var(--bgImage) !important;
-	 ;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="/css/site.css">
-<script>
-	var colorBG =  false 
-	var enabledPost =  false 
-	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
 </script>
-</head>
-<body><script>
-var prevBgIndex = 0;
-var bodyBgSwitchIndex = 0;
-		var bgImage = "url(" + "/images/background.jpg" + ")";
-	
-	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff', null );
-	document.body.style.setProperty('--bgImage', bgImage);
 
-	function getRandomInt(min, max) {
-	  min = Math.ceil(min);
-	  max = Math.floor(max);
-	  var random;
-	  while (1) {
-	    random = Math.floor(Math.random() * (max - min)) + min;
-	    if (random !== prevBgIndex) {
-	      prevBgIndex = random;
-	      break;
-	    }
-	  }
-	  return random;
-	}
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="New Blog"/>
+<meta name="twitter:description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage."/>
+<meta name="twitter:site" content="@SteveGriffith"/>
 
-	function connect(arr) {
-	  var str = '';
-	  for (var i = 0; i < arr.length; i++) {
-	    if (i !== arr.length - 1) {
-	      str += arr[i] + ', ';
-	    } else {
-	      str += arr[i];
-	    }
-	  }
-	  return str;
-	}
-</script><div class="blur-overlay"></div><div id="sidebar" class="ui sidebar inverted vertical menu">
-	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</section>
-	<section id="footer" class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
-
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</section>
-</div>
-<div class="pusher">
-		<div class="flipper">
-			<div class="front">
-	
-	<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-<div class="item">
-			<a href="/">
-				<i class="inverted big link home icon" title="Home"></i>
-			</a>
-		</div>
-	<div class="item">
-			<a href="/posts">
-				<i class="inverted big link archive icon" title="Archive"></i>
-			</a>
-		</div>
-	
-	
-	<div class="ui container tablet computer only grid">
-		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
-			<i class="inverted big link sidebar icon" title="Show Sidebar"></i>
-		</div>
-	</div>
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
+    <meta property="og:title" content="New Blog" />
+<meta property="og:description" content="Building out an example of static hosting using Hugo, ACI and Azure Storage." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.stevegriffith.nyc/posts/newblog/" />
+<meta property="article:published_time" content="2018-10-29T14:11:52-04:00" />
+<meta property="article:modified_time" content="2018-10-29T14:11:52-04:00" />
 
 
-<div class="ui centered grid">
-	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
-	<div id="header" class="ui inverted segment column box">
-		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</header>
-		<div class=" title header-title"></div>
-		<div id="tag-category" class=" content"></div>
-		<footer class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith - Ramblings</h1>
+      <p>Ramblings of an Azure nerd.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">New Blog</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 29, 2018
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          </div></div>
+    </header>
+    <div class="post-content">
+      
 
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</footer>
-	</div>
-</div>
-</div>
-	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
-		<section class="ui secondary top attached black segment post-head">
-			<h1 class="post-title">
-				New Blog
-			</h1>
-			<div class="sub header">
-					<div><span><i class="calendar outline icon"></i>Oct 29, 2018</span></div>
-					<div><span><i class="clock outline icon"></i>7 min read</span></div>
-					<div><span><i class="angle double up icon"></i>Last updated on Oct 29, 2018</span></div>
-			</div>
-			<hr>
-			<article class="post-content twemoji">
-				
-
-<h1 id="overview">Overview&nbsp;<a class="anchor" href="#overview"><i class="small linkify icon"></i></a> </h1>
+<h1 id="overview">Overview</h1>
 
 <p>Over the last few years at Microsoft I&rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&rsquo;ve solved a problem I&rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.</p>
 
@@ -180,7 +94,7 @@ var bodyBgSwitchIndex = 0;
 
 <p>Seems like a pretty reasonable list. So lets get into it.</p>
 
-<h2 id="static-content">Static Content&nbsp;<a class="anchor" href="#static-content"><i class="small linkify icon"></i></a> </h2>
+<h2 id="static-content">Static Content</h2>
 
 <p>In order to minimize hosting complexity and cost I decided to go with a static site. I could have gone the WordPress route instead, but there are too many things that can break, and generally hosting cost for the web side and the DB side are too high. I want this thing to run for pennies a day&hellip;not dollars.</p>
 
@@ -199,7 +113,7 @@ pacman -S hugo
 
 <p>Honstly&hellip;.still getting comfortable with Hugo and this theme, so may chance out later, but its a solid start.</p>
 
-<h2 id="hosting">Hosting&nbsp;<a class="anchor" href="#hosting"><i class="small linkify icon"></i></a> </h2>
+<h2 id="hosting">Hosting</h2>
 
 <p>Ok, so I work for Microsoft. I have access to Azure subscriptions for work, but this isnt a work blog, so I can&rsquo;t use that. I do have an MSDN subscription, which I can use, but that has a pretty low spending cap, so cost efficiency is key.</p>
 
@@ -230,11 +144,11 @@ pacman -S hugo
 
 <p><img src="/newblog/customdomainssl.png" alt="Custom Domain SSL" /></p>
 
-<h2 id="it-s-alive">It&rsquo;s ALIVE!!!&nbsp;<a class="anchor" href="#it-s-alive"><i class="small linkify icon"></i></a> </h2>
+<h2 id="it-s-alive">It&rsquo;s ALIVE!!!</h2>
 
 <p>And that&rsquo;s it! Now I have a super cheap static content blog running in Azure Storage (<strong>$0.002/GB per month and $0.01 per 10,000 read operations</strong>). The Azure CDN is giving me global CDN access and SSL (<strong>$0.081/GB egress per month for traffic to North America and Europe</strong>). I&rsquo;ll have to monitor it for a few months to see if that cost break down holds up, but it looks good on paper. :-D</p>
 
-<h2 id="git-push-automation">Git Push Automation&nbsp;<a class="anchor" href="#git-push-automation"><i class="small linkify icon"></i></a> </h2>
+<h2 id="git-push-automation">Git Push Automation</h2>
 
 <p>So the site is up and running, but I still need to make changes, run hugo to regen the site and then get updates deployed. I really wanted to do this via GitHub. I explored a few options:</p>
 
@@ -248,201 +162,56 @@ pacman -S hugo
 
 <p>So here we go&hellip;</p>
 
-<h3 id="step-1">Step 1&nbsp;<a class="anchor" href="#step-1"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-1">Step 1</h3>
 
 <p>I already had an Azure DevOps account, so nothing to do there. I just went in and created a new project for my blog.</p>
 
 <p><img src="/newblog/azuredevops.png" alt="Azure DevOps" /></p>
 
-<h3 id="step-2">Step 2&nbsp;<a class="anchor" href="#step-2"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-2">Step 2</h3>
 
 <p>I needed to create a new Azure DevOps Build Pipeline.</p>
 
 <p><img src="/newblog/newpipeline.png" alt="Azure DevOps" /></p>
 
-<h3 id="step-3">Step 3&nbsp;<a class="anchor" href="#step-3"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-3">Step 3</h3>
 
 <p>Select your source repo and if necessary go through the OAuth workflow, or provide an access token. I&rsquo;m using GitHub and just followed the OAuth flow.</p>
 
 <p><img src="/newblog/selectsource.png" alt="Azure DevOps" /></p>
 
-<h3 id="step-4">Step 4&nbsp;<a class="anchor" href="#step-4"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-4">Step 4</h3>
 
 <p>You&rsquo;ll be brought to the screen to choose a build template. This is great for common scenarios, as it will assemble the pieces you need and then you can tweak. For this scenario there is no template, so we&rsquo;ll start with an &lsquo;Empty Job&rsquo;.</p>
 
-<h3 id="step-5">Step 5&nbsp;<a class="anchor" href="#step-5"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-5">Step 5</h3>
 
 <p>I want this to trigger automatically on a push, so I&rsquo;m going straight to the &lsquo;Trigger&rsquo; tab and enabling continuous integration. I&rsquo;m also going to enable batching of changes during a build.</p>
 
 <p><img src="/newblog/trigger.png" alt="Azure DevOps" /></p>
 
-<h3 id="step-6">Step 6&nbsp;<a class="anchor" href="#step-6"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-6">Step 6</h3>
 
 <p>If you want you can rename &lsquo;Agent Job 1&rsquo;. Next you can click the &lsquo;+&rsquo; from the Agent Job and add the &lsquo;Azure File Copy&rsquo; task. As noted above, $web containers are not supported in the older version of the tool due to the non-alphanumeric character in the container name, but you can just change the version to &lsquo;2.* preview&rsquo;. Then you just need to fill in the remaining details, like I have below, and you&rsquo;re ready to &lsquo;Save &amp; Queue&rsquo;.</p>
 
 <p><img src="/newblog/filecopy.png" alt="Azure DevOps" /></p>
 
-<h3 id="step-7">Step 7&nbsp;<a class="anchor" href="#step-7"><i class="small linkify icon"></i></a> </h3>
+<h3 id="step-7">Step 7</h3>
 
 <p>Once I had this up and running I realized that the CDN cache can take a while to refresh, so after a new post or site update I might want to purge the cache. You can do this manually through the Azure portal, but I also found that there&rsquo;s already a build task you can leverage for Azure CDN Purge (Hooray!). Just add the task and fill in the details about your CDN. <strong>Note:</strong> This task does take a little while to execute. I&rsquo;ve seen it take 8-14min.</p>
 
 <p><img src="/newblog/purgecdn.png" alt="Azure DevOps" /></p>
 
-<h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>So far so good. Like I said, I&rsquo;ll have to keep an eye on costs to make sure my understanding of the billing is correct, but it looks like an extremely cheap option to run this site. Next I&rsquo;d like to optimize my development platform, possibly using Azure Container Instances and Azure Files together to create a dev environment with no local install. Once I have that running I&rsquo;ll share it as well.</p>
 
-			</article>
-		</section>
-		<section class="ui secondary attached segment dream-tags">
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
 
-	<a class="ui label blue " href="/tags/arch" title="arch">arch</a>
-
-	<a class="ui label orange " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
-
-	<a class="ui label purple " href="/tags/devops" title="devops">devops</a>
-
-	<a class="ui label purple " href="/tags/fido" title="fido">fido</a>
-
-	<a class="ui label olive " href="/tags/git" title="git">git</a>
-
-	<a class="ui label blue " href="/tags/google" title="google">google</a>
-
-	<a class="ui label yellow " href="/tags/introduction" title="introduction">introduction</a>
-
-	<a class="ui label pink " href="/tags/linux" title="linux">linux</a>
-
-	<a class="ui label pink " href="/tags/security-key" title="security-key">security-key</a>
-
-	<a class="ui label teal " href="/tags/static-content" title="static-content">static-content</a>
-
-	<a class="ui label red " href="/tags/titan" title="titan">titan</a>
-
-	<a class="ui label orange " href="/tags/u2f" title="u2f">u2f</a>
-
-
-		</section>
-	</div>
-</div>
-
-			</div>
-			<div class="back">
-<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-
-	
-		
-	
-		
-	
-		
-	
-		
-	
-	
-	
-	
-	
-		
-		
-		<div class="item">
-			<a href="https://github.com/swgriffith" target="	_blank">
-				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="mailto:steve.griffith@microsoft.com" target="	_blank">
-				<i id="ico" class="inverted big link mail icon" title="Email"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="https://twitter.com/SteveGriffith" target="	_blank">
-				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
-
-<div class="ui centered grid about">
-	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
-		<section class="ui stacked segments">
-			<div class="ui inverted segment">
-				<article class="twemoji"><h1>About me</h1>
-
-<hr />
-
-<p><br>
-After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</p>
-
-<p>On the personal side, I&rsquo;m a father of 2 and husband of 1. I have 28years of guitar experience behind me&hellip;but still sound like I only have 7. I also love microcontrollers and electronics projects.</p>
-
-<p><strong>Note:</strong> I am a Microsoft employee, but this IS NOT a Microsoft blog. These are my personal thoughts and inputs.</p>
-</article>
-			</div>
-		</section>
-	</div>
-</div>
-</div>
-		</div>
-	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/site.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
-
-
-	<script>
-		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-		ga('create', 'UA-129005800-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<script async src='https://www.google-analytics.com/analytics.js'></script>
-<script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
-
-
-<script>
-	(function () {
-	  console.log("Twemoji up and making stuff colourful!");
-	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
-		twemoji.parse(b[a]);
-	  }
-	})();
-</script>
-
-</body>
+    </main>
+  </body>
 </html>

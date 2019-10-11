@@ -1,171 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-us">
-<head>
-	<title>
-	Setting up Google Titan Security Keys on Arch Linux
-</title><style>
-body {
-	display: block;
-	--colorBG: "#40e0d0, #ff8c00, #ff0080";
-		background-image: var(--bgImage) !important;
+  <head>
+    <title>Setting up Google Titan Security Keys on Arch Linux // Steve Griffith - Ramblings</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
 	
+	ga('send', 'pageview');
 }
-
-body, body.pushable {
-	background-repeat: no-repeat;
-  	background-attachment: fixed;
-  	background-size: cover !important;
-}
-</style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<meta name="author" content="Steve Griffth" />
-	<meta name="description" content="" />
-<meta name="generator" content="Hugo 0.52" />
-
-<link rel="shortcut icon" href="/img/defaultFav.ico">
-
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-<style>
-body.pushable {
-	display: block;
-		background-image: var(--bgImage) !important;
-	 ;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="/css/site.css">
-<script>
-	var colorBG =  false 
-	var enabledPost =  false 
-	var isMobile = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-	console.log("The client device is a "+(isMobile?"mobile":"PC")+".")
 </script>
-</head>
-<body><script>
-var prevBgIndex = 0;
-var bodyBgSwitchIndex = 0;
-		var bgImage = "url(" + "/images/background.jpg" + ")";
-	
-	console.log("Current background: " + bgImage.substring(bgImage.indexOf("bg"), bgImage.length));
-	document.body.style.setProperty('--blurEff', null );
-	document.body.style.setProperty('--bgImage', bgImage);
 
-	function getRandomInt(min, max) {
-	  min = Math.ceil(min);
-	  max = Math.floor(max);
-	  var random;
-	  while (1) {
-	    random = Math.floor(Math.random() * (max - min)) + min;
-	    if (random !== prevBgIndex) {
-	      prevBgIndex = random;
-	      break;
-	    }
-	  }
-	  return random;
-	}
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Setting up Google Titan Security Keys on Arch Linux"/>
+<meta name="twitter:description" content="Overview I recently decided to give Google Advanced Protection a shot. For those not aware, Advanced protection is Google&rsquo;s first party U2F authentication system. In short, you purchase the Titan Security Bundle from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively."/>
+<meta name="twitter:site" content="@SteveGriffith"/>
 
-	function connect(arr) {
-	  var str = '';
-	  for (var i = 0; i < arr.length; i++) {
-	    if (i !== arr.length - 1) {
-	      str += arr[i] + ', ';
-	    } else {
-	      str += arr[i];
-	    }
-	  }
-	  return str;
-	}
-</script><div class="blur-overlay"></div><div id="sidebar" class="ui sidebar inverted vertical menu">
-	<section id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</section>
-	<section id="footer" class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
-
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</section>
-</div>
-<div class="pusher">
-		<div class="flipper">
-			<div class="front">
-	
-	<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-<div class="item">
-			<a href="/">
-				<i class="inverted big link home icon" title="Home"></i>
-			</a>
-		</div>
-	<div class="item">
-			<a href="/posts">
-				<i class="inverted big link archive icon" title="Archive"></i>
-			</a>
-		</div>
-	
-	
-	<div class="ui container tablet computer only grid">
-		<div class="item" onClick="$('.ui.sidebar').sidebar('setting', 'transition', 'overlay').sidebar('toggle');">
-			<i class="inverted big link sidebar icon" title="Show Sidebar"></i>
-		</div>
-	</div>
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
+    <meta property="og:title" content="Setting up Google Titan Security Keys on Arch Linux" />
+<meta property="og:description" content="Overview I recently decided to give Google Advanced Protection a shot. For those not aware, Advanced protection is Google&rsquo;s first party U2F authentication system. In short, you purchase the Titan Security Bundle from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.stevegriffith.nyc/posts/titan-key-arch/" />
+<meta property="article:published_time" content="2018-12-19T10:42:47-05:00" />
+<meta property="article:modified_time" content="2018-12-19T10:42:47-05:00" />
 
 
-<div class="ui centered grid">
-	<div class="sixteen wide mobile only column"><div class="ui inverted accordion">
-	<div id="header" class="ui inverted segment column box">
-		<header id="author" class="ui top attached center aligned inverted segment"><div class="ui small circular image">
-		<img src="/images/me.jpg">
-</div>
-<h3 class="ui header">Steve Griffth
-	<div class="sub header">Maker, Programmer and Solution Architect.</div>
-</h3>
-</header>
-		<div class=" title header-title"></div>
-		<div id="tag-category" class=" content"></div>
-		<footer class="ui bottom attached center aligned inverted segment">
-	<p>© 2019 Steve Griffith - Ramblings</p>
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith - Ramblings</h1>
+      <p>Ramblings of an Azure nerd.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Setting up Google Titan Security Keys on Arch Linux</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 19, 2018
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.stevegriffith.nyc/tags/google/">google</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/arch/">arch</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/linux/">linux</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/linux/">linux</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/u2f/">u2f</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/fido/">FIDO</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/titan/">titan</a></div></div>
+    </header>
+    <div class="post-content">
+      
 
-<p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with <a href="https://github.com/UtkarshVerma/hugo-dream-plus" target="_blank">Dream Plus</a> theme.</p>
-</footer>
-	</div>
-</div>
-</div>
-	<div class="sixteen wide mobile fifteen wide tablet twelve wide computer column post-list">
-		<section class="ui secondary top attached black segment post-head">
-			<h1 class="post-title">
-				Setting up Google Titan Security Keys on Arch Linux
-			</h1>
-			<div class="sub header">
-					<div><span><i class="calendar outline icon"></i>Dec 19, 2018</span></div>
-					<div><span><i class="clock outline icon"></i>2 min read</span></div>
-					<div><span><i class="angle double up icon"></i>Last updated on Dec 19, 2018</span></div>
-			</div>
-			<hr>
-			<article class="post-content twemoji">
-				
-
-<h1 id="overview">Overview&nbsp;<a class="anchor" href="#overview"><i class="small linkify icon"></i></a> </h1>
+<h1 id="overview">Overview</h1>
 
 <p>I recently decided to give <a href="https://landing.google.com/advancedprotection/">Google Advanced Protection</a> a shot. For those not aware, Advanced protection is Google&rsquo;s first party U2F authentication system. In short, you purchase the <a href="https://store.google.com/us/product/titan_security_key_kit?hl=en-US">Titan Security Bundle</a> from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively. In hindsight, the ecosystem and support around YubiKey is more advanced. For example, my password manager still <a href="https://lastpass.com/support.php?cmd=showfaq&amp;id=8126">does not support</a> FIDO/U2F. Hopefully it will in the future, but we&rsquo;ll see. I may end up buying a yubikey as well.</p>
 
-<h2 id="problem">Problem!&nbsp;<a class="anchor" href="#problem"><i class="small linkify icon"></i></a> </h2>
+<h2 id="problem">Problem!</h2>
 
 <p>So on my windows side the Titan keys worked right away without any issue. However, on my Arch Linux box I immediately ran into issues where the browser seemed to not see the key and raise an error that either &ldquo;Something went really wrong&rdquo; (GitHub) or &ldquo;Incorrect response. Please try again.&rdquo; (Twitter).</p>
 
@@ -186,7 +100,7 @@ usb 2-6.4: Manufacturer: FS
 hid-generic 0003:096E:085B.000F: hiddev2,hidraw4: USB HID v1.10 Device [FS ePass FIDO] on usb-0000:00:14.0-6.4/input0
 </code></pre>
 
-<h2 id="the-fix">The fix&nbsp;<a class="anchor" href="#the-fix"><i class="small linkify icon"></i></a> </h2>
+<h2 id="the-fix">The fix</h2>
 
 <p>So initially I set up my own udev rules and that seemed to work for one device, but I had an issue with my second key. In searching for that fix I came across <a href="https://support.yubico.com/support/solutions/articles/15000006449-using-your-u2f-yubikey-with-linux">this</a> document from YubiKey&hellip;and when I checked the udev rules file they provided it actually included the Feitian FIDO/U2F product id and codes. A few commands later, I was up and running with both keys.</p>
 
@@ -200,161 +114,16 @@ sudo wget https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rul
 sudo udevadm control --reload
 </code></pre>
 
-<h2 id="conclusion">Conclusion&nbsp;<a class="anchor" href="#conclusion"><i class="small linkify icon"></i></a> </h2>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>So far this seems to have address all of my issues. I presume this will resolve across most linux distros. Hopefully this helps others!</p>
 
-			</article>
-		</section>
-		<section class="ui secondary attached segment dream-tags">
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
 
-	<a class="ui label yellow " href="/tags/arch" title="arch">arch</a>
-
-	<a class="ui label teal " href="/tags/azure-storage" title="azure-storage">azure-storage</a>
-
-	<a class="ui label brown " href="/tags/devops" title="devops">devops</a>
-
-	<a class="ui label brown " href="/tags/fido" title="fido">fido</a>
-
-	<a class="ui label olive " href="/tags/git" title="git">git</a>
-
-	<a class="ui label brown " href="/tags/google" title="google">google</a>
-
-	<a class="ui label teal " href="/tags/introduction" title="introduction">introduction</a>
-
-	<a class="ui label green " href="/tags/linux" title="linux">linux</a>
-
-	<a class="ui label blue " href="/tags/security-key" title="security-key">security-key</a>
-
-	<a class="ui label brown " href="/tags/static-content" title="static-content">static-content</a>
-
-	<a class="ui label olive " href="/tags/titan" title="titan">titan</a>
-
-	<a class="ui label red " href="/tags/u2f" title="u2f">u2f</a>
-
-
-		</section>
-	</div>
-</div>
-
-			</div>
-			<div class="back">
-<nav class="ui top secondary menu bar">
-	<div class="item">
-		<i class="inverted big link bullseye icon dream-flip-toggle" title="About Me"></i>
-	</div>
-
-	
-		
-	
-		
-	
-		
-	
-		
-	
-	
-	
-	
-	
-		
-		
-		<div class="item">
-			<a href="https://github.com/swgriffith" target="	_blank">
-				<i id="ico" class="inverted big link github icon" title="GitHub"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="mailto:steve.griffith@microsoft.com" target="	_blank">
-				<i id="ico" class="inverted big link mail icon" title="Email"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-		<div class="item">
-			<a href="https://twitter.com/SteveGriffith" target="	_blank">
-				<i id="ico" class="inverted big link twitter icon" title="Twitter"></i>
-			</a>
-		</div>
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-		
-		
-	
-
-	
-	<div class="item right">
-		<a href="/posts/index.xml">
-			<i class="inverted big link rss icon" title="RSS Feed"></i>
-		</a>
-	</div>
-	
-</nav>
-
-<div class="ui centered grid about">
-	<div class="sixteen wide mobile fifteen wide tablet fifteen wide computer column about">
-		<section class="ui stacked segments">
-			<div class="ui inverted segment">
-				<article class="twemoji"><h1>About me</h1>
-
-<hr />
-
-<p><br>
-After spending 13 years at Accenture, working as a developer, software engineer and eventually infrastructure and cloud engineering lead, I decided to make the jump over to Microsoft. At Microsoft I&rsquo;m a Cloud Solutions Architect, which essentially means that I work with customers and partners to make sure people are getting the best experience possible on Microsoft Azure. This ranges from building hands on PoCs to education sessions, to acting directly as a solution architect embedded within customer teams.</p>
-
-<p>On the personal side, I&rsquo;m a father of 2 and husband of 1. I have 28years of guitar experience behind me&hellip;but still sound like I only have 7. I also love microcontrollers and electronics projects.</p>
-
-<p><strong>Note:</strong> I am a Microsoft employee, but this IS NOT a Microsoft blog. These are my personal thoughts and inputs.</p>
-</article>
-			</div>
-		</section>
-	</div>
-</div>
-</div>
-		</div>
-	</div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/site.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script><script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
-
-
-	<script>
-		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-		ga('create', 'UA-129005800-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<script async src='https://www.google-analytics.com/analytics.js'></script>
-<script id="dsq-count-scr" src="//.disqus.com/count.js" async></script>
-
-
-<script>
-	(function () {
-	  console.log("Twemoji up and making stuff colourful!");
-	  for (var b = document.getElementsByClassName("twemoji"), a = 0; a < b.length; a++) {
-		twemoji.parse(b[a]);
-	  }
-	})();
-</script>
-
-</body>
+    </main>
+  </body>
 </html>

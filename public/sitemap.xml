@@ -3,8 +3,118 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/tags/aad/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/aks/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/azure/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/azure-ad/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/azure-ad/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/kubernetes/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/kubernetes/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/posts/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/</loc>
+    <lastmod>2019-10-03T16:36:14-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/devops/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/devops/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/git/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/posts/git-learnin/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/introduction/</loc>
+    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/arch/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/fido/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/google/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/linux/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/categories/security/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/security-key/</loc>
+    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
   </url>
   
   <url>
@@ -13,135 +123,37 @@
   </url>
   
   <url>
-    <loc>https://blog.stevegriffith.nyc/posts/newblog/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/cards/newblog/</loc>
-    <lastmod>2018-10-29T14:11:42-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/about/</loc>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/arch/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/azure-storage/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/cards/</loc>
-    <lastmod>2018-10-29T14:11:42-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/devops/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/categories/devops/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/fido/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/git/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/google/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/introduction/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/linux/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/posts/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/categories/security/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/security-key/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/static-content/</loc>
-    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/</loc>
-    <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.stevegriffith.nyc/tags/</loc>
-    <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.stevegriffith.nyc/tags/titan/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/u2f/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/azure-storage/</loc>
+    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/posts/newblog/</loc>
+    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/static-content/</loc>
+    <lastmod>2018-10-29T14:11:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/web-hosting/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/about/</loc>
     <priority>0</priority>
   </url>
   
