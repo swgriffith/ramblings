@@ -6,7 +6,70 @@
     <description>Recent content in Tags on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Nov 2020 13:56:40 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aks</title>
+      <link>https://blog.stevegriffith.nyc/tags/aks/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/aks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>azure</title>
+      <link>https://blog.stevegriffith.nyc/tags/azure/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>azure cni</title>
+      <link>https://blog.stevegriffith.nyc/tags/azure-cni/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/azure-cni/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cni</title>
+      <link>https://blog.stevegriffith.nyc/tags/cni/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/cni/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubenet</title>
+      <link>https://blog.stevegriffith.nyc/tags/kubenet/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/kubenet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://blog.stevegriffith.nyc/tags/kubernetes/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>networking</title>
+      <link>https://blog.stevegriffith.nyc/tags/networking/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/tags/networking/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>aad</title>
       <link>https://blog.stevegriffith.nyc/tags/aad/</link>
@@ -17,38 +80,11 @@
     </item>
     
     <item>
-      <title>aks</title>
-      <link>https://blog.stevegriffith.nyc/tags/aks/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
-      
-      <guid>https://blog.stevegriffith.nyc/tags/aks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>azure</title>
-      <link>https://blog.stevegriffith.nyc/tags/azure/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
-      
-      <guid>https://blog.stevegriffith.nyc/tags/azure/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>azure ad</title>
       <link>https://blog.stevegriffith.nyc/tags/azure-ad/</link>
       <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
       
       <guid>https://blog.stevegriffith.nyc/tags/azure-ad/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>kubernetes</title>
-      <link>https://blog.stevegriffith.nyc/tags/kubernetes/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
-      
-      <guid>https://blog.stevegriffith.nyc/tags/kubernetes/</guid>
       <description></description>
     </item>
     

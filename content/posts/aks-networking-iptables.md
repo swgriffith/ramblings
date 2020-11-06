@@ -1,7 +1,7 @@
 ---
 title: "Aks Networking Iptables in AKS"
 date: 2020-11-06T13:56:40-05:00
-draft: true
+draft: false
 categories: ["Azure", "Kubernetes", "Networking", "AKS"]
 tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"]
 ---

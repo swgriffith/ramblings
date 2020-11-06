@@ -1,7 +1,13 @@
-
-# AKS Networking Overview - Part 2: Azure CNI
+---
+title: "Aks Networking Part 2 - Azure CNI on AKS"
+date: 2020-11-06T13:56:29-05:00
+draft: false
+categories: ["Azure", "Kubernetes", "Networking", "AKS"]
+tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"]
+---
 
 ## Setup
+
 We've been through the [kubenet implementation](../aks-networking-part1), and now we're on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We've already created the Vnet and Subnets, so all we need to do is create the cluster.
 
 Notice a few changes in the 'az aks create' command below.

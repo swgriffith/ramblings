@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kubernetes on Steve Griffith - Ramblings</title>
-    <link>https://blog.stevegriffith.nyc/tags/kubernetes/</link>
-    <description>Recent content in kubernetes on Steve Griffith - Ramblings</description>
+    <title>AKS on Steve Griffith - Ramblings</title>
+    <link>https://blog.stevegriffith.nyc/categories/aks/</link>
+    <description>Recent content in AKS on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Nov 2020 13:56:40 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Nov 2020 13:56:40 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/categories/aks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Aks Networking Iptables in AKS</title>
       <link>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</link>
@@ -35,15 +35,6 @@ Create Resource Group, Vnet and Subnets RG=NetworkLab LOC=eastus VNET_CIDR=&amp;
       <description>Setup We&amp;rsquo;ve been through the kubenet implementation, and now we&amp;rsquo;re on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We&amp;rsquo;ve already created the Vnet and Subnets, so all we need to do is create the cluster.
 Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
  Cluster name to &amp;lsquo;azurecni-cluster&amp;rsquo; Network Plugin to &amp;lsquo;azure&amp;rsquo; Removed the &amp;lsquo;&amp;ndash;pod-cidr&amp;rsquo; flag, as pods will be attached to the subnet directly  Pod and Service CIDR Sizes As noted in our kubenet walkthrough, the options we set on cluster creation will impact the size of the pod and service cidrs.</description>
-    </item>
-    
-    <item>
-      <title>Aks Minimum Permissions</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
-      
-      <guid>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
-      <description>Cluster Management Roles When working with Azure Kubernetes Service there can be a lot of confusion about the access needed by the individuals managing the cluster as well as the roles required by the Service Principal used by the cluster itself to execute Azure operations (ex. Creating an Azure Public IP on a Service type=LoadBalancer). The following tries to break it down and demonstrate the minimal roles required for Cluster Administration.</description>
     </item>
     
   </channel>

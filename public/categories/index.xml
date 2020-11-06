@@ -6,22 +6,49 @@
     <description>Recent content in Categories on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Nov 2020 13:56:40 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Azure AD</title>
-      <link>https://blog.stevegriffith.nyc/categories/azure-ad/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
+      <title>AKS</title>
+      <link>https://blog.stevegriffith.nyc/categories/aks/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/azure-ad/</guid>
+      <guid>https://blog.stevegriffith.nyc/categories/aks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Azure</title>
+      <link>https://blog.stevegriffith.nyc/categories/azure/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/categories/azure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
       <link>https://blog.stevegriffith.nyc/categories/kubernetes/</link>
-      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
       
       <guid>https://blog.stevegriffith.nyc/categories/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>https://blog.stevegriffith.nyc/categories/networking/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/categories/networking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Azure AD</title>
+      <link>https://blog.stevegriffith.nyc/categories/azure-ad/</link>
+      <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/categories/azure-ad/</guid>
       <description></description>
     </item>
     
