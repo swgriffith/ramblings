@@ -37,5 +37,15 @@ Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
  Cluster name to &amp;lsquo;azurecni-cluster&amp;rsquo; Network Plugin to &amp;lsquo;azure&amp;rsquo; Removed the &amp;lsquo;&amp;ndash;pod-cidr&amp;rsquo; flag, as pods will be attached to the subnet directly  Pod and Service CIDR Sizes As noted in our kubenet walkthrough, the options we set on cluster creation will impact the size of the pod and service cidrs.</description>
     </item>
     
+    <item>
+      <title>Aks Networking Overview</title>
+      <link>https://blog.stevegriffith.nyc/posts/aks-networking/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:05 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/aks-networking/</guid>
+      <description>Topics In this session we&amp;rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.
+ Outbound Type: Check out the session from @RayKao&amp;hellip;here Network Plugin  Kubenet Azure CNI   Windows Networking  Great Overview Details (Linux &amp;ndash;&amp;gt; Windows):  Azure CNI Required  Supported in AKS Engine and an open issue exists to promote this capability to AKS.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -38,6 +38,16 @@ Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
     </item>
     
     <item>
+      <title>Aks Networking Overview</title>
+      <link>https://blog.stevegriffith.nyc/posts/aks-networking/</link>
+      <pubDate>Fri, 06 Nov 2020 13:56:05 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/aks-networking/</guid>
+      <description>Topics In this session we&amp;rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.
+ Outbound Type: Check out the session from @RayKao&amp;hellip;here Network Plugin  Kubenet Azure CNI   Windows Networking  Great Overview Details (Linux &amp;ndash;&amp;gt; Windows):  Azure CNI Required  Supported in AKS Engine and an open issue exists to promote this capability to AKS.</description>
+    </item>
+    
+    <item>
       <title>Aks Minimum Permissions</title>
       <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
       <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Aks Networking Overview // Steve Griffith - Ramblings</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Aks Networking Overview"/>
+<meta name="twitter:description" content="Topics In this session we&rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.
+ Outbound Type: Check out the session from @RayKao&hellip;here Network Plugin  Kubenet Azure CNI   Windows Networking  Great Overview Details (Linux &ndash;&gt; Windows):  Azure CNI Required  Supported in AKS Engine and an open issue exists to promote this capability to AKS."/>
+<meta name="twitter:site" content="@SteveGriffith"/>
+
+    <meta property="og:title" content="Aks Networking Overview" />
+<meta property="og:description" content="Topics In this session we&rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.
+ Outbound Type: Check out the session from @RayKao&hellip;here Network Plugin  Kubenet Azure CNI   Windows Networking  Great Overview Details (Linux &ndash;&gt; Windows):  Azure CNI Required  Supported in AKS Engine and an open issue exists to promote this capability to AKS." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.stevegriffith.nyc/posts/aks-networking/" />
+<meta property="article:published_time" content="2020-11-06T13:56:05-05:00" />
+<meta property="article:modified_time" content="2020-11-06T13:56:05-05:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith - Ramblings</h1>
+      <p>Ramblings of an Azure nerd.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Aks Networking Overview</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 6, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.stevegriffith.nyc/tags/azure/">azure</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/kubernetes/">kubernetes</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/networking/">networking</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/kubenet/">kubenet</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/cni/">cni</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/aks/">aks</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="topics">Topics</h2>
+<p>In this session we&rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.</p>
+<ul>
+<li>Outbound Type: Check out the session from <a href="https://twitter.com/raykao">@RayKao</a>&hellip;<a href="https://www.youtube.com/channel/UCvdABD6_HuCG_to6kVprdjQ">here</a></li>
+<li>Network Plugin
+<ul>
+<li><a href="../aks-networking-part1">Kubenet</a></li>
+<li><a href="../aks-networking-part2">Azure CNI</a></li>
+</ul>
+</li>
+<li>Windows Networking
+<ul>
+<li><a href="https://techcommunity.microsoft.com/t5/networking-blog/introducing-kubernetes-overlay-networking-for-windows/ba-p/363082">Great Overview</a></li>
+<li>Details (Linux &ndash;&gt; Windows):
+<ul>
+<li>Azure CNI Required
+<ul>
+<li>Supported in <a href="https://github.com/Azure/aks-engine/blob/master/examples/windows/kubernetes-hybrid.kubenet-containerd.json">AKS Engine</a> and an open issue exists to promote this capability to AKS. See issue <a href="https://github.com/Azure/AKS/issues/1244">#1244</a></li>
+</ul>
+</li>
+<li>Linux Bridge &ndash;&gt; Host Networking Service</li>
+<li>iptables &ndash;&gt; vSwitch + Virtual Filtering Platform + Distributed Router</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Network Policy: None/Azure/Calico</li>
+<li><a href="../aks-networking-iptables">How iptables come into play</a></li>
+<li>Debugging
+<ul>
+<li><a href="https://github.com/yokawasa/kubectl-plugin-ssh-jump">ssh-jump</a> - Create a jump server pod in your cluster and tunnels ssh through kubernetes port-forward</li>
+<li>tcpdump - Native Linux command line tool. Run in host or pod. Check out this zine from <a href="https://twitter.com/b0rk">Julia Evans - @b0rk</a>&hellip;.<a href="https://wizardzines.com/zines/tcpdump/">tcpdump</a></li>
+<li><a href="https://github.com/eldadru/ksniff">ksniff</a> - Creates a tcpdump proxy and can stream directly to <a href="https://www.wireshark.org/">Wireshark</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="network-feature-status">Network Feature Status</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPVS vs. IPTables</td>
+<td>No Current Plan</td>
+<td>Transition to IPVS over IPTables has been considered, but the known stability of IPTables has won out over IPVS, for the time being. Feel free to contribute to the discussion in the AKS github under issue <a href="https://github.com/Azure/AKS/issues/1846">#1846</a></td>
+</tr>
+<tr>
+<td>IPv6</td>
+<td><a href="https://github.com/Azure/AKS/issues/460">Backlog</a></td>
+<td>IPv6 is still in alpha state in upstream Kubernetes, so not ready for production workloads. You can track the status under <a href="https://github.com/kubernetes/enhancements/issues?q=is%3Aopen+label%3Asig%2Fnetwork+ipv6">sig-networking</a>. Microsoft has been heavily involved in it&rsquo;s development, so I hoped to see adoption in AKS pretty rapidly, but not dates have yet been shared.</td>
+</tr>
+<tr>
+<td>Nodepool Subnet</td>
+<td><a href="https://github.com/Azure/AKS/issues/1338">Public Preview</a></td>
+<td>Allows you to choose the target subnet at the nodepool level rather than at the cluster level. Currently Azure CNI only, but Kubenet is <a href="https://github.com/Azure/AKS/issues/1500">planned</a></td>
+</tr>
+<tr>
+<td>Calico on Windows</td>
+<td><a href="https://github.com/Azure/AKS/issues/1681">In Progress</a></td>
+<td>Adds support for open source Calico Kubernetes Network Policy in AKS for Windows</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
