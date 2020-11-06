@@ -3,11 +3,11 @@
   <head>
     <title>Setting up Google Titan Security Keys on Arch Linux // Steve Griffith - Ramblings</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="generator" content="Hugo 0.75.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
 
     
 <script type="application/javascript">
@@ -73,37 +73,23 @@ if (!doNotTrack) {
           <a class="tag" href="https://blog.stevegriffith.nyc/tags/google/">google</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/arch/">arch</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/linux/">linux</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/linux/">linux</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/u2f/">u2f</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/fido/">FIDO</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/titan/">titan</a></div></div>
     </header>
     <div class="post-content">
-      
-
-<h1 id="overview">Overview</h1>
-
+      <h1 id="overview">Overview</h1>
 <p>I recently decided to give <a href="https://landing.google.com/advancedprotection/">Google Advanced Protection</a> a shot. For those not aware, Advanced protection is Google&rsquo;s first party U2F authentication system. In short, you purchase the <a href="https://store.google.com/us/product/titan_security_key_kit?hl=en-US">Titan Security Bundle</a> from Google, which includes two physical keys. One is a standard USB U2F key and the second is a bluetooth key. I decided to try this over YubiKey for no good reason, other than the fact that with Google behind it I assume it will pick up extensively. In hindsight, the ecosystem and support around YubiKey is more advanced. For example, my password manager still <a href="https://lastpass.com/support.php?cmd=showfaq&amp;id=8126">does not support</a> FIDO/U2F. Hopefully it will in the future, but we&rsquo;ll see. I may end up buying a yubikey as well.</p>
-
 <h2 id="problem">Problem!</h2>
-
 <p>So on my windows side the Titan keys worked right away without any issue. However, on my Arch Linux box I immediately ran into issues where the browser seemed to not see the key and raise an error that either &ldquo;Something went really wrong&rdquo; (GitHub) or &ldquo;Incorrect response. Please try again.&rdquo; (Twitter).</p>
-
-<p><img src="/titan-key-arch/githuberror.png" alt="GitHub Error" /> <img src="/titan-key-arch/twittererror.png" alt="Twitter Error" /></p>
-
+<p><img src="/titan-key-arch/githuberror.png" alt="GitHub Error"> <img src="/titan-key-arch/twittererror.png" alt="Twitter Error"></p>
 <p>A quick search returned the <a href="https://support.google.com/titansecuritykey/answer/9148044?hl=en">this</a> article from Google on linux setup, however thse steps did not work. When I checked dmesg after plugging in my key I could see that the vendor and product id&rsquo;s did not match what google provided, as you can see below.</p>
-
 <pre><code>#Google Provided udev rule
 KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, ATTRS{idVendor}==&quot;18d1&quot;, ATTRS{idProduct}==&quot;5026&quot;, TAG+=&quot;uaccess&quot;
-</code></pre>
-
-<pre><code>#Actual from dmesg
+</code></pre><pre><code>#Actual from dmesg
 usb 2-6.4: new full-speed USB device number 14 using xhci_hcd
 usb 2-6.4: New USB device found, idVendor=096e, idProduct=085b, bcdDevice=32.10
 usb 2-6.4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
 usb 2-6.4: Product: ePass FIDO
 usb 2-6.4: Manufacturer: FS
 hid-generic 0003:096E:085B.000F: hiddev2,hidraw4: USB HID v1.10 Device [FS ePass FIDO] on usb-0000:00:14.0-6.4/input0
-</code></pre>
-
-<h2 id="the-fix">The fix</h2>
-
+</code></pre><h2 id="the-fix">The fix</h2>
 <p>So initially I set up my own udev rules and that seemed to work for one device, but I had an issue with my second key. In searching for that fix I came across <a href="https://support.yubico.com/support/solutions/articles/15000006449-using-your-u2f-yubikey-with-linux">this</a> document from YubiKey&hellip;and when I checked the udev rules file they provided it actually included the Feitian FIDO/U2F product id and codes. A few commands later, I was up and running with both keys.</p>
-
 <pre><code>#Go to the udev rules folder
 cd /etc/udev/rules.d
 
@@ -112,10 +98,7 @@ sudo wget https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rul
 
 #Reboot, or run the following to reload your rules
 sudo udevadm control --reload
-</code></pre>
-
-<h2 id="conclusion">Conclusion</h2>
-
+</code></pre><h2 id="conclusion">Conclusion</h2>
 <p>So far this seems to have address all of my issues. I presume this will resolve across most linux distros. Hopefully this helps others!</p>
 
     </div>

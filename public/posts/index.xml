@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Steve Griffith - Ramblings</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Posts on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate>
-    
-	<atom:link href="https://blog.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Aks Minimum Permissions</title>
       <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
@@ -29,7 +25,7 @@
       <description>gitlearnin More and more I&amp;rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.
 Initial Setup https://git-scm.com/downloads
 Check the current settings
-git config --global --list  Note: You can also use &amp;ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)</description>
+git config --global --list Note: You can also use &amp;ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)</description>
     </item>
     
     <item>
@@ -49,6 +45,17 @@ git config --global --list  Note: You can also use &amp;ndash;local to see the s
       <guid>https://blog.stevegriffith.nyc/posts/newblog/</guid>
       <description>Overview Over the last few years at Microsoft I&amp;rsquo;ve worked with a lot of people to help them out with Azure, and generally when I&amp;rsquo;ve solved a problem I&amp;rsquo;ve put the resolution in my public github. Unfortunately this isnt really the best place for that content..or at least the text side of it, so I decided to start moving this content over to a new personal blog.
 The issue with setting up a blog, however, is that I had a lot of requirements.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://blog.stevegriffith.nyc/posts/aks-networking-part2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/aks-networking-part2/</guid>
+      <description>AKS Networking Overview - Part 2: Azure CNI Setup We&amp;rsquo;ve been through the kubenet implementation, and now we&amp;rsquo;re on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We&amp;rsquo;ve already created the Vnet and Subnets, so all we need to do is create the cluster.
+Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
+ Cluster name to &amp;lsquo;azurecni-cluster&amp;rsquo; Network Plugin to &amp;lsquo;azure&amp;rsquo; Removed the &amp;lsquo;&amp;ndash;pod-cidr&amp;rsquo; flag, as pods will be attached to the subnet directly  Pod and Service CIDR Sizes As noted in our kubenet walkthrough, the options we set on cluster creation will impact the size of the pod and service cidrs.</description>
     </item>
     
   </channel>

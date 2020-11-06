@@ -3,11 +3,11 @@
   <head>
     <title>Git Learnin // Steve Griffith - Ramblings</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="generator" content="Hugo 0.75.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.59023e5fd38d6ecb0e1dfbb295077c3c67e00e3b9eb3feaf34b5a5e6b332897a.css" />
+    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
 
     
 <script type="application/javascript">
@@ -28,14 +28,14 @@ if (!doNotTrack) {
 <meta name="twitter:description" content="gitlearnin More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.
 Initial Setup https://git-scm.com/downloads
 Check the current settings
-git config --global --list  Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)"/>
+git config --global --list Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)"/>
 <meta name="twitter:site" content="@SteveGriffith"/>
 
     <meta property="og:title" content="Git Learnin" />
 <meta property="og:description" content="gitlearnin More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.
 Initial Setup https://git-scm.com/downloads
 Check the current settings
-git config --global --list  Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)" />
+git config --global --list Note: You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.stevegriffith.nyc/posts/git-learnin/" />
 <meta property="article:published_time" content="2019-01-02T11:37:50-05:00" />
@@ -79,84 +79,44 @@ git config --global --list  Note: You can also use &ndash;local to see the setti
           <a class="tag" href="https://blog.stevegriffith.nyc/tags/git/">git</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/devops/">devops</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/introduction/">introduction</a></div></div>
     </header>
     <div class="post-content">
-      
-
-<h1 id="gitlearnin">gitlearnin</h1>
-
+      <h1 id="gitlearnin">gitlearnin</h1>
 <p>More and more I&rsquo;m working with non-dev resources that are now needing to learn Git. The following is a quick and dirty guide I threw together to share with people that could use a quick git primer.</p>
-
 <h2 id="initial-setup">Initial Setup</h2>
-
 <p><a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
-
 <p>Check the current settings</p>
-
 <pre><code>git config --global --list
-</code></pre>
-
-<p><strong>Note:</strong> You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)</p>
-
+</code></pre><p><strong>Note:</strong> You can also use &ndash;local to see the settings for a given repository, or leave it off to see ALL settings relevant to the current repository (global and local)</p>
 <pre><code>git config --global user.name &quot;Steve Griffith&quot;
 git config --global user.email &quot;stgriffi@microsoft.com&quot;
-</code></pre>
-
-<h2 id="setting-your-default-editor">Setting your default editor</h2>
-
+</code></pre><h2 id="setting-your-default-editor">Setting your default editor</h2>
 <p>Many activities you do in git may pop you into an editor (ex. commits, diffs, etc). Git will use your system default editor, but you may want to change this as follows:</p>
-
 <pre><code>#Ex. Using Nano for linux or WSL
 git config --global core.editor nano
-</code></pre>
-
-<h2 id="cloning-and-existing-repo">Cloning and Existing Repo</h2>
-
+</code></pre><h2 id="cloning-and-existing-repo">Cloning and Existing Repo</h2>
 <pre><code>git clone https://github.com/swgriffith/gitlearnin.git
-</code></pre>
-
-<p>Now you have a local working copy of the repository that you cloned. You can do whatever you want with this copy, but need to be mindful of what you do if you intend to push back to <strong>origin</strong>.</p>
-
+</code></pre><p>Now you have a local working copy of the repository that you cloned. You can do whatever you want with this copy, but need to be mindful of what you do if you intend to push back to <strong>origin</strong>.</p>
 <h2 id="what-is-origin">What is origin?</h2>
-
 <p>Origin is the default name for the remote repository you cloned from. You can see your origin using the following:</p>
-
 <pre><code>git remote -v
-</code></pre>
-
-<p>You can rename your origin as well:</p>
-
+</code></pre><p>You can rename your origin as well:</p>
 <pre><code>#git remote rename &lt;originalName&gt; &lt;newName&gt;
 git remote rename origin github
 git remote -v
-</code></pre>
-
-<p><strong>Note:</strong> This name will be used when you interact with the remote repository for pushes.</p>
-
+</code></pre><p><strong>Note:</strong> This name will be used when you interact with the remote repository for pushes.</p>
 <h2 id="branches">Branches</h2>
-
 <p>Branches allow you to work on various changes locally at the same time without them overlapping. To switch between branches you use <strong>checkout</strong>. For example, if you have 2 hot fixes you need to apply you can create a branch for each and swap back and forth between them without any conflict, until you&rsquo;re ready to push them to your origin.</p>
-
 <p><strong>Note:</strong> On your first check-in a &lsquo;master&rsquo; branch is created for you automatically. <strong>General best practice is to avoid making changes directly in master</strong></p>
-
 <p>You create a new branch as follows:</p>
-
 <pre><code>git branch griffithmods
 git checkout griffithmods
 # or
 
 git checkout -b griffithmods
-</code></pre>
-
-<p>You can delete a branch as follows:</p>
-
+</code></pre><p>You can delete a branch as follows:</p>
 <pre><code>git branch -d griffithmods
-</code></pre>
-
-<h2 id="making-changes">Making changes</h2>
-
-<p>Once you&rsquo;ve cloned a repository, created a branch and checked it out, you&rsquo;re ready to work. Create a new file within the cloned folder named <yourlastname.txt> and in that file enter the text &lsquo;commit1&rsquo;.</p>
-
+</code></pre><h2 id="making-changes">Making changes</h2>
+<p>Once you&rsquo;ve cloned a repository, created a branch and checked it out, you&rsquo;re ready to work. Create a new file within the cloned folder named &lt;yourlastname.txt&gt; and in that file enter the text &lsquo;commit1&rsquo;.</p>
 <p>This file is now in your folder, but has not been added to the repository. You can see this by trying to commit your change.</p>
-
 <pre><code>git commit -m &quot;commit1&quot; .
 On branch griffithmods
 Untracked files:
@@ -164,64 +124,35 @@ Untracked files:
 
 nothing added to commit but untracked files present
 
-</code></pre>
-
-<p>In order to commit this new file we need to add it to the repo:</p>
-
+</code></pre><p>In order to commit this new file we need to add it to the repo:</p>
 <pre><code>git add griffith.txt
-</code></pre>
-
-<p>We&rsquo;re now ready to commit our change to the current branch. Every commit requires a comment be added. You can do this either in line, or git will bring up your editor to enter your commit message.</p>
-
+</code></pre><p>We&rsquo;re now ready to commit our change to the current branch. Every commit requires a comment be added. You can do this either in line, or git will bring up your editor to enter your commit message.</p>
 <p><strong>Note:</strong> This will commit all staged files. If you want to commit a single file you can name that file at the end of the command (ex. git commit griffith.txt).</p>
-
 <pre><code>git commit -m &quot;Added new file griffith.txt&quot;
 # or 
 git commit
-</code></pre>
-
-<h2 id="pushing-to-your-remote-repository-i-e-github-or-azure-devops">Pushing to your remote repository (i.e. GitHub or Azure DevOps)</h2>
-
+</code></pre><h2 id="pushing-to-your-remote-repository-ie-github-or-azure-devops">Pushing to your remote repository (i.e. GitHub or Azure DevOps)</h2>
 <p>You can push to any remote repository you have listed when you run the following:</p>
-
 <pre><code>git remote -v
-</code></pre>
-
-<p>In this case we want to push our branch with it&rsquo;s changes up to github, so we&rsquo;ll run the following and when prompted enter our github credentials.</p>
-
+</code></pre><p>In this case we want to push our branch with it&rsquo;s changes up to github, so we&rsquo;ll run the following and when prompted enter our github credentials.</p>
 <p><strong>Note 1:</strong> We&rsquo;ll come back to the credentials discussion, but use login and password for now.
 <strong>Note 2:</strong> If you&rsquo;re not a collaborator on a remote repository, you cannot push to it. You will get an error.</p>
-
 <pre><code>#git push &lt;remotename&gt; &lt;branchname&gt;
 git push github griffithmods
-</code></pre>
-
-<p>Now go take a look at your remote repository (i.e. GitHub or Azure DevOps) and see if your new branch is available in the branches list.</p>
-
+</code></pre><p>Now go take a look at your remote repository (i.e. GitHub or Azure DevOps) and see if your new branch is available in the branches list.</p>
 <h2 id="credentials">Credentials</h2>
-
 <p>Entering your UserID and password may be a bit tedious on every remote repository push. Fortunately there are a few options to solve this pain.</p>
-
 <ol>
 <li>Use credential manager</li>
 <li>Use an SSH Key pair for authentication and SSH cloning instead of HTTPS cloning</li>
 </ol>
-
 <h3 id="using-credential-manager">Using Credential Manager</h3>
-
 <p>To use credential manager you can simpley enable credential cache from global config. This will limit the frequency with which you have to enter your user id and password.</p>
-
 <pre><code>git config --global credential.helper cache
-</code></pre>
-
-<p>NEED TO ADD MORE HERE ABOUT WINDOWS CREDENTIAL MANAGER</p>
-
+</code></pre><p>NEED TO ADD MORE HERE ABOUT WINDOWS CREDENTIAL MANAGER</p>
 <h3 id="using-an-ssg-key-pair">Using an SSG Key Pair</h3>
-
 <p>By generating an SSH key pair by using a tool like ssh-keygen, you can share your public key with your remote (i.e. GitHub or Azure DevOps). This key pair can be generated with or without a passphrase, although with is recommended. If you pull via the SSH endpoint rather than via the HTTPS endpoint, when you push git will attempt to use your ssh key to authenticate with the remote. If you&rsquo;ve added your public key then you&rsquo;ll be able to push without entering a user ID and Password.</p>
-
 <p>Using ssh-keygen from Linux, Mac or Windows Subsystem for Linux should look like the following. Again, entering a passphrase is recommended.</p>
-
 <pre><code>ssh-keygen
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/steve/.ssh/id_rsa):
@@ -243,58 +174,34 @@ The key's randomart image is:
 |       . o+* ===B|
 |        +++.= +o=|
 +----[SHA256]-----+
-</code></pre>
-
-<p>The above process will create a new folder under /home/<username>/.ssh which contains the following files:</p>
-
+</code></pre><p>The above process will create a new folder under /home/<!-- raw HTML omitted -->/.ssh which contains the following files:</p>
 <ul>
 <li><strong>id_rsa</strong> - File containing your private key</li>
 <li><strong>id_rsa.pub</strong> - File containing your public key</li>
 <li><strong>known_hosts</strong> - File tracking connections you&rsquo;ve made to various hosts and which ssh-key was used</li>
 </ul>
-
 <p>Grab the full contents of the id_rsa.pub files either opening the file or using cat on linux.</p>
-
 <pre><code>cat ~/.ssh/id_rsa.pub
 ssh-rsa AAAA&lt;BUNCH OF TEXT I REMOVED&gt;EYM2Xj steve@griffith
-</code></pre>
-
-<p>Got do your remote repository, and add the ssh key for your user.</p>
-
+</code></pre><p>Got do your remote repository, and add the ssh key for your user.</p>
 <ol>
 <li>GitHub - You can find this by clicking on your user profile and going to &lsquo;Settings -&gt; SSH and PGP Keys&rsquo;</li>
 <li>Azure DevOps - You can find this by clicking on your user profile and going to &lsquo;Security -&gt; SSH Public Keys&rsquo;</li>
 </ol>
-
 <p>In either case you&rsquo;ll want to come up with a name for your key that represents where you&rsquo;re using it from (ex. Azure Cloud Shell, Windows PC, etc)</p>
-
 <p>Once saved, you can now use the SSH endpoint for git clone and ssh for pushing to git remotes without user ID and password.</p>
-
 <h2 id="merging-and-rebasing">Merging and Rebasing</h2>
-
 <p>There are a lot of cases where you&rsquo;ll need to get changes from one branch incorporated into another. There are two main mechanisms for this and each have separate uses, pros and cons.</p>
-
 <h3 id="merge">Merge</h3>
-
 <p>When you have two branches (ex. feature and master) a merge will allow you to take the changes from one branch and add them to the other as a new commit. This is nice because it&rsquo;s non-destructive. All of your commits to this point are maintained and you&rsquo;re just getting a new commit that merges from one branch to another. On the other hand, if you&rsquo;re merging from a very active branch you&rsquo;ll need ot merge pretty frequently and may not like having all of those commits cluttering up your history.</p>
-
 <p>The following will merge the differences from the master branch into the feature branch as a new commit.</p>
-
 <pre><code>git merge feature master
-</code></pre>
-
-<h3 id="rebase">Rebase</h3>
-
+</code></pre><h3 id="rebase">Rebase</h3>
 <p>When you rebase a branch you effectively move your branch forward replaying all of the commits from the one branch onto another. So, for example, if you created a feature branch from master yesterday morning and did some work, and then ran a rebase, git would rewind your feature branch to the begining and replay all of you&rsquo;re commits on the latest version of master. This is a nice clean way to move forward, but you&rsquo;re effectively destroying and re-writing your history.</p>
-
 <p>To do this you checkout the branch you want to update and run rebase as follows:</p>
-
 <pre><code>git checkout feature    #Checks out the feature branch
 git rebase master       #Rebases your feature branch from master
-</code></pre>
-
-<h3 id="demo">Demo</h3>
-
+</code></pre><h3 id="demo">Demo</h3>
 <pre><code>mkdir test
 cd test
 git init
@@ -308,10 +215,7 @@ Author: Steve Griffith &lt;stgriffi@microsoft.com&gt;
 Date:   Thu Dec 13 20:34:38 2018 -0500
 
     added file
-</code></pre>
-
-<p>Now create a new branch, change a file and merge from master.</p>
-
+</code></pre><p>Now create a new branch, change a file and merge from master.</p>
 <pre><code>git checkout -b feature
 echo &quot;commit2&quot;&gt;&gt;newfile.txt
 git commit -m &quot;commit2&quot; .
@@ -329,9 +233,7 @@ Date:   Thu Dec 13 20:34:38 2018 -0500
 
     added file
 
-</code></pre>
-
-<pre><code>git checkout master
+</code></pre><pre><code>git checkout master
 echo &quot;commit 3&quot; &gt; newfile2.txt
 git add newfile2.txt
 git commit -m &quot;added another file&quot; .
@@ -348,9 +250,7 @@ Author: Steve Griffith &lt;stgriffi@microsoft.com&gt;
 Date:   Thu Dec 13 20:34:38 2018 -0500
 
     added file
-</code></pre>
-
-<pre><code>git checkout feature
+</code></pre><pre><code>git checkout feature
 git merge feature master
 
 git log
@@ -379,12 +279,8 @@ Date:   Thu Dec 13 20:34:38 2018 -0500
 
     added file
 
-</code></pre>
-
-<p>Now lets back out the merge and use a rebase instead. Take a look at the commit log for each option and pay special attention to the commit id and timestamps. You can see that rebase blew away the history and re-executed every commit, where the merge actually shows all of the original commits as the occured.</p>
-
+</code></pre><p>Now lets back out the merge and use a rebase instead. Take a look at the commit log for each option and pay special attention to the commit id and timestamps. You can see that rebase blew away the history and re-executed every commit, where the merge actually shows all of the original commits as the occured.</p>
 <p><strong>Note:</strong> git reset allows you to rewind your commits back. Think rewinding a tape, and your last commit is where the tape head is sitting before the rewind. When I say HEAD~1 that means go back one commit from where the HEAD currently sits. &ndash;hard means that I dont care if commits are discarded. You can use soft if you might want to recover commits after moving back in the commit tree.</p>
-
 <pre><code>git reset --hard HEAD~1
 git rebase master
 
@@ -408,7 +304,6 @@ Date:   Thu Dec 13 20:34:38 2018 -0500
     added file
 
 </code></pre>
-
     </div>
     <div class="post-footer">
       

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>security key on Steve Griffith - Ramblings</title>
@@ -6,11 +6,7 @@
     <description>Recent content in security key on Steve Griffith - Ramblings</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Dec 2018 10:42:47 -0500</lastBuildDate>
-    
-	<atom:link href="https://blog.stevegriffith.nyc/tags/security-key/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 19 Dec 2018 10:42:47 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/security-key/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up Google Titan Security Keys on Arch Linux</title>
       <link>https://blog.stevegriffith.nyc/posts/titan-key-arch/</link>
