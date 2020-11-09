@@ -1,7 +1,7 @@
 baseURL = "https://blog.stevegriffith.nyc/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-title = "Steve Griffith - Ramblings"
+title = "Steve Griffith"
 theme = "m10c"
 
 googleAnalytics = "UA-129005800-1"

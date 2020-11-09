@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>static content on Steve Griffith - Ramblings</title>
+    <title>static content on Steve Griffith</title>
     <link>https://blog.stevegriffith.nyc/tags/static-content/</link>
-    <description>Recent content in static content on Steve Griffith - Ramblings</description>
+    <description>Recent content in static content on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Oct 2018 14:11:52 -0400</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/static-content/index.xml" rel="self" type="application/rss+xml" />
