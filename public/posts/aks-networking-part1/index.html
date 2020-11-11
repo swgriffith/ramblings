@@ -140,6 +140,9 @@ az aks create <span style="color:#ae81ff">\
 <span style="color:#75715e"># Get Credentials</span>
 az aks get-credentials -g $RG -n kubenet-cluster
 
+<span style="color:#75715e"># Get the deployment manifest</span>
+wget https://raw.githubusercontent.com/swgriffith/azure-guides/master/networking-overview/nginx.yaml
+
 <span style="color:#75715e"># Deploy 3 Nginx Pods across 3 nodes</span>
 kubectl apply -f nginx.yaml
 

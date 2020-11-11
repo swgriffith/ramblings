@@ -97,6 +97,9 @@ az aks create <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--dns-service-ip <span style="color:#e6db74">&#34;10.200.0.10&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--enable-managed-identity
 
+<span style="color:#75715e"># Get the deployment manifest</span>
+wget https://raw.githubusercontent.com/swgriffith/azure-guides/master/networking-overview/nginx.yaml
+
 <span style="color:#75715e"># Deploy 3 Nginx Pods across 3 nodes</span>
 kubectl apply -f nginx.yaml
 

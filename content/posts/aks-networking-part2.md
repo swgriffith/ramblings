@@ -49,6 +49,9 @@ az aks create \
 # Get Credentials
 az aks get-credentials -g $RG -n azurecni-cluster
 
+# Get the deployment manifest
+wget https://raw.githubusercontent.com/swgriffith/azure-guides/master/networking-overview/nginx.yaml
+
 # Deploy 3 Nginx Pods across 3 nodes
 kubectl apply -f nginx.yaml
 
