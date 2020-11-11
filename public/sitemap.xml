@@ -4,81 +4,96 @@
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/aks/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/aks/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <loc>https://blog.stevegriffith.nyc/posts/bridge-vs-transparent/</loc>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/azure/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/azure/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/azure-cni/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/bridge/</loc>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/cni/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/kubenet/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/kubernetes/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/kubernetes/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/categories/networking/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/networking/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/posts/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/</loc>
-    <lastmod>2020-11-06T13:56:40-05:00</lastmod>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.stevegriffith.nyc/tags/</loc>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/tags/transparent/</loc>
+    <lastmod>2020-11-11T13:56:01-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</loc>
     <lastmod>2020-11-06T13:56:40-05:00</lastmod>
   </url>
   

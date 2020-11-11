@@ -22,7 +22,7 @@ As noted in our kubenet walkthrough, the options we set on cluster creation will
 
 Again, as we noted in the kubenet overview, when a service of type 'LoadBalancer' is created, you will want to [specify a target subnet](https://docs.microsoft.com/en-us/azure/aks/internal-lb#specify-a-different-subnet) where the Azure Loadbalancer frontend will live.
 
-### Create the Kubenet AKS Cluster
+### Create the Azure CNI AKS Cluster
 ```bash
 # We'll re-use the RG and LOC, so lets set those
 RG=NetworkLab
@@ -165,6 +165,8 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 ```
 
 Nice! We can see that the azure0 interface has the subnet gateway IP as it's gateway, so azure0 interacts directly with the subnet! Also we can see that inbound traffic for our cluster address space (10.220.2.0/24) will also use the azure0 network.
+
+> **NOTE:** In this walk through we are NOT covering the impact of network policy on the above. There are some key key changes to the above introduced by a network policy plugin. For more information I created this side bar post on [bridge vs. transparent mode](../bridge-vs-transparent) you can check out.
 
 We have the wiring from the container through to the network all sorted out. The only part we're missing is understanding how an IP address from an Azure subnet gets assigned, since there are multiple hosts constantly adding and dropping pods and there-by adding and dropping ips. This is where the CNI part of Azure CNI comes into play. Azure CNI is an implementation of the [Container Network Interface](https://github.com/containernetworking/cni/blob/master/README.md) specification. Azure CNI is deployed on each node, and defined via a flag as the CNI plugin when the kubelet process starts. Additionally, CNI implementations are reponsible for providing an IPAM (IP Address Management) implementation for IP address assignment.
 

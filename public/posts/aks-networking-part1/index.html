@@ -66,7 +66,7 @@ Create Resource Group, Vnet and Subnets RG=NetworkLab LOC=eastus VNET_CIDR=&#34;
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          9 min read
+          10 min read
         </div><div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
   <title>tag</title>
@@ -232,6 +232,9 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 169.254.169.254 10.220.1.1      255.255.255.255 UGH   <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span> eth0
 172.17.0.0      0.0.0.0         255.255.0.0     U     <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span> docker0
 </code></pre></div><p>FINALLY, the bridge network has brought us to the NIC of our Azure node (eth0). So, now we have the network wiring in place to get packets from outside of our node to a given container, within a pod, and the wiring to get traffic out of a container and pod out through the node network interface card. There&rsquo;s more to cover as our packet traverses that path, in particular how Kubernetes uses iptables to direct traffic flow, but lets hold off on how iptables come into play until after we look at Azure CNI so we can compare how the Kubenet and CNI wiring differ.</p>
+<blockquote>
+<p><strong>NOTE:</strong> In this walk through we are NOT covering the impact of network policy on the above. There are some key key changes to the above introduced by a network policy plugin. For more information I created this side bar post on <a href="../bridge-vs-transparent">bridge vs. transparent mode</a> you can check out.</p>
+</blockquote>
 <p>We still haven&rsquo;t seen how traffic from a container in one pod can reach a container in a pod on another node. This is one of the fundamental ways that Azure Kubernetes Service with the kubenet plugin differs from AKS with Azure CNI. Node to node traffic is directed by an Azure Route table. Before we look at the route table, one thing to know is that traffic between pods does not go through SNAT (Source NAT). That means that when a pod sends traffic to another pod, it retains it&rsquo;s pod ip.</p>
 <p>I know I said we&rsquo;d cover iptables later, but just fyi&hellip;this is the set of rules that ensure packets originating from our pod cidr dont get SNAT&rsquo;d to the node IP address. Notice the !10.100.0.0/16 for destination, meaning &lsquo;NOT 10.100.0.0/16&rsquo; aka &lsquo;NOT our pod cidr&rsquo;. That rule is saying that SNAT should ONLY happen for packets NOT destined for our cluster&rsquo;s pod cidr.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run iptables for the &#39;nat&#39; table pulling the POSTROUTING chain...and do some formatting to make more pretty</span>
