@@ -93,6 +93,11 @@
   </url>
   
   <url>
+    <loc>https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</loc>
+    <lastmod>2020-11-11T10:50:23-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</loc>
     <lastmod>2020-11-06T13:56:40-05:00</lastmod>
   </url>

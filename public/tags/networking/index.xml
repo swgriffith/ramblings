@@ -18,6 +18,15 @@ Azure CNI If we take a look at the &amp;lsquo;Technical Deep Dive&amp;rsquo; doc
     </item>
     
     <item>
+      <title>AKS Advanced Load Balancing - Part 1</title>
+      <link>https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</link>
+      <pubDate>Wed, 11 Nov 2020 10:50:23 -0500</pubDate>
+      
+      <guid>https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</guid>
+      <description>Overview In the next few posts (yeah&amp;hellip;I think this will require a few)..we&amp;rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</description>
+    </item>
+    
+    <item>
       <title>Aks Networking Iptables in AKS</title>
       <link>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</link>
       <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
