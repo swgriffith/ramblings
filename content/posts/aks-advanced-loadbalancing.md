@@ -10,7 +10,7 @@ tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 In the next few posts (yeah...I think this will require a few)..we're going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.
 
-In previous posts I've run you through the full stack for the AKS network plugins [Kubenet](../aks-networking-part1) and [Azure CNI](../aks-networking-part2). As part of that, we also ran through the traffic flows at the kernel level via [iptables](./aks-networking-iptables). Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.
+In previous posts I've run you through the full stack for the AKS network plugins [Kubenet](../aks-networking-part1) and [Azure CNI](../aks-networking-part2). As part of that, we also ran through the traffic flows at the kernel level via [iptables](../aks-networking-iptables). Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.
 
 Let's start by setting up our test cluster, and checking out the Azure Load Balancer.
 
@@ -134,7 +134,7 @@ In short the ALB creates a hash of the the following:
 
 Hashing of the above provides some stickiness, specifically if all of the above match, which will happen if the requests are from a common session. A common session will will obviously have the same source and destination IP and protocol, but additionally the outbound port from the source will be consistent. The client side 'TCP Keep Alive' setting will determine if an how long that outbound port will remain active. Lets have a look.
 
-To see this lets first [setup SSH on our cluster](https://docs.microsoft.com/en-us/azure/aks/ssh) and use [ssh-jump](https://github.com/yokawasa/kubectl-plugin-ssh-jump/blob/master/README.md) to access a node. 
+To see this lets first [setup SSH on our cluster](https://docs.microsoft.com/en-us/azure/aks/ssh) and use [ssh-jump](https://github.com/yokawasa/kubectl-plugin-ssh-jump/blob/master/README.md) to access a node.
 
 ```bash
 # Get the managed cluster resource group and scale set names
@@ -209,7 +209,7 @@ hey -d "YO" -n 10 -c 1 http://20.62.153.212
 71.246.222.127  65519 20.62.153.222 80  6
 ```
 
-Well thats interesting! I have a 3 node cluster, but it seems that ALL of my traffic came directly to my node. Knowing that we have a hash based load balancer I was hoping to see traffic hitting different nodes and bouncing over here. If you paid attention when we discussed how has based load balancing works you probably already know what happened. The output above shows all the values that go into the hashing...and they're the same for EVERY request, so of course the traffic went the same way every time.
+Well thats interesting! I have a 3 node cluster, but it seems that ALL of my traffic came directly to my node. Knowing that we have a hash based load balancer I was hoping to see traffic hitting different nodes and bouncing over here. If you paid attention when we discussed how hash based load balancing works you probably already know what happened. The output above shows all the values that go into the hashing...and they're the same for EVERY request, so of course the traffic went the same way every time.
 
 If I want my traffic to hit different nodes, how can I force that. I could send traffic from a bunch of different machines to change the source IP, but that's annoying. I cant change the destination IP or port, or the protocol. What I can change, however, is the source port. Source port is unique for each tcp session. If I can disable tcp keep alive, then every request should have it's own source port. Fortunately 'hey' has a flag for that. Lets try.
 
