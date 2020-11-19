@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="https://blog.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+    <link rel="stylesheet" href="https://www.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
 
     
 <script type="application/javascript">
@@ -31,7 +31,7 @@ if (!doNotTrack) {
     <meta property="og:title" content="AKS Advanced Load Balancing - Part 1" />
 <meta property="og:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/" />
 <meta property="article:published_time" content="2020-11-11T10:50:23-05:00" />
 <meta property="article:modified_time" content="2020-11-11T10:50:23-05:00" />
 
@@ -39,7 +39,7 @@ if (!doNotTrack) {
   </head>
   <body>
     <header class="app-header">
-      <a href="https://blog.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <a href="https://www.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
       <h1>Steve Griffith</h1>
       <p>Ramblings of an Azure nerd.</p>
       <div class="app-header-social">
@@ -70,7 +70,7 @@ if (!doNotTrack) {
   <title>tag</title>
   <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
 </svg>
-          <a class="tag" href="https://blog.stevegriffith.nyc/tags/azure/">azure</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/kubernetes/">kubernetes</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/networking/">networking</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/kubenet/">kubenet</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/cni/">cni</a><a class="tag" href="https://blog.stevegriffith.nyc/tags/aks/">aks</a></div></div>
+          <a class="tag" href="https://www.stevegriffith.nyc/tags/azure/">azure</a><a class="tag" href="https://www.stevegriffith.nyc/tags/kubernetes/">kubernetes</a><a class="tag" href="https://www.stevegriffith.nyc/tags/networking/">networking</a><a class="tag" href="https://www.stevegriffith.nyc/tags/kubenet/">kubenet</a><a class="tag" href="https://www.stevegriffith.nyc/tags/cni/">cni</a><a class="tag" href="https://www.stevegriffith.nyc/tags/aks/">aks</a></div></div>
     </header>
     <div class="post-content">
       <h2 id="overview">Overview</h2>
@@ -113,13 +113,17 @@ az aks create <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>-n kubenet-cluster <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--network-plugin kubenet <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--vnet-subnet-id $KUBENET_SUBNET_ID <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--zones <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--pod-cidr <span style="color:#e6db74">&#34;10.100.0.0/16&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--service-cidr <span style="color:#e6db74">&#34;10.200.0.0/16&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--dns-service-ip <span style="color:#e6db74">&#34;10.200.0.10&#34;</span>
 
 <span style="color:#75715e"># Get Credentials</span>
 az aks get-credentials -g $RG -n kubenet-cluster
-</code></pre></div><h3 id="deploy-the-sample-app">Deploy the sample app</h3>
+</code></pre></div><blockquote>
+<p><strong>NOTE:</strong> We&rsquo;re creating this cluster using Availability Zones. While this post doesn&rsquo;t focus on zones, we will cover it in when we dig into services and ingress, so I&rsquo;m enabling it here for future use.</p>
+</blockquote>
+<h3 id="deploy-the-sample-app">Deploy the sample app</h3>
 <p>To walk through the load balancing traffic flow we&rsquo;ll need a set of pods distributed across nodes with an Azure Load Balancer in front. For the sake of testing, since we have a 3 node cluster, lets have 2 pods and for the load balancer we&rsquo;ll set up a Kubernetes Service of type &lsquo;LoadBalancer&rsquo;. That will provision a public Azure Load Balancer for us in front of our pods.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create the Deployment and Service</span>
 cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
@@ -143,7 +147,7 @@ cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
 </span><span style="color:#e6db74">    run: testapp
 </span><span style="color:#e6db74">  name: testapp
 </span><span style="color:#e6db74">spec:
-</span><span style="color:#e6db74">  replicas: 2
+</span><span style="color:#e6db74">  replicas: 1
 </span><span style="color:#e6db74">  selector:
 </span><span style="color:#e6db74">    matchLabels:
 </span><span style="color:#e6db74">      run: testapp
@@ -254,7 +258,7 @@ hey -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <span style="color:#ae
 71.246.222.127  <span style="color:#ae81ff">65519</span> 20.62.153.222 <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
 71.246.222.127  <span style="color:#ae81ff">65519</span> 20.62.153.222 <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
 71.246.222.127  <span style="color:#ae81ff">65519</span> 20.62.153.222 <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
-</code></pre></div><p>Well thats interesting! I have a 3 node cluster, but it seems that ALL of my traffic came directly to my node. Knowing that we have a hash based load balancer I was hoping to see traffic hitting different nodes and bouncing over here. If you paid attention when we discussed how has based load balancing works you probably already know what happened. The output above shows all the values that go into the hashing&hellip;and they&rsquo;re the same for EVERY request, so of course the traffic went the same way every time.</p>
+</code></pre></div><p>Well thats interesting! I have a 3 node cluster, but it seems that ALL of my traffic came directly to my node. Knowing that we have a hash based load balancer I was hoping to see traffic hitting different nodes and bouncing over here. If you paid attention when we discussed how hash based load balancing works you probably already know what happened. The output above shows all the values that go into the hashing&hellip;and they&rsquo;re the same for EVERY request, so of course the traffic went the same way every time.</p>
 <p>If I want my traffic to hit different nodes, how can I force that. I could send traffic from a bunch of different machines to change the source IP, but that&rsquo;s annoying. I cant change the destination IP or port, or the protocol. What I can change, however, is the source port. Source port is unique for each tcp session. If I can disable tcp keep alive, then every request should have it&rsquo;s own source port. Fortunately &lsquo;hey&rsquo; has a flag for that. Lets try.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Send another 10 request, but disable keepalive</span>
 hey --disable-keepalive -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <span style="color:#ae81ff">10</span> -c <span style="color:#ae81ff">1</span> http://20.62.153.212

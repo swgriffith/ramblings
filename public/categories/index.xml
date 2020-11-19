@@ -2,80 +2,80 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Steve Griffith</title>
-    <link>https://blog.stevegriffith.nyc/categories/</link>
+    <link>https://www.stevegriffith.nyc/categories/</link>
     <description>Recent content in Categories on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AKS</title>
-      <link>https://blog.stevegriffith.nyc/categories/aks/</link>
+      <link>https://www.stevegriffith.nyc/categories/aks/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/aks/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/aks/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Azure</title>
-      <link>https://blog.stevegriffith.nyc/categories/azure/</link>
+      <link>https://www.stevegriffith.nyc/categories/azure/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/azure/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/azure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>https://blog.stevegriffith.nyc/categories/kubernetes/</link>
+      <link>https://www.stevegriffith.nyc/categories/kubernetes/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/kubernetes/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Networking</title>
-      <link>https://blog.stevegriffith.nyc/categories/networking/</link>
+      <link>https://www.stevegriffith.nyc/categories/networking/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/networking/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/networking/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Azure AD</title>
-      <link>https://blog.stevegriffith.nyc/categories/azure-ad/</link>
+      <link>https://www.stevegriffith.nyc/categories/azure-ad/</link>
       <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/azure-ad/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/azure-ad/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DevOps</title>
-      <link>https://blog.stevegriffith.nyc/categories/devops/</link>
+      <link>https://www.stevegriffith.nyc/categories/devops/</link>
       <pubDate>Wed, 02 Jan 2019 11:37:50 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/devops/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/devops/</guid>
       <description></description>
     </item>
     
     <item>
       <title>security</title>
-      <link>https://blog.stevegriffith.nyc/categories/security/</link>
+      <link>https://www.stevegriffith.nyc/categories/security/</link>
       <pubDate>Wed, 19 Dec 2018 10:42:47 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/security/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/security/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Web Hosting</title>
-      <link>https://blog.stevegriffith.nyc/categories/web-hosting/</link>
+      <link>https://www.stevegriffith.nyc/categories/web-hosting/</link>
       <pubDate>Mon, 29 Oct 2018 14:11:52 -0400</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/categories/web-hosting/</guid>
+      <guid>https://www.stevegriffith.nyc/categories/web-hosting/</guid>
       <description></description>
     </item>
     

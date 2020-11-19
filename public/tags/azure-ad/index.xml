@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>azure ad on Steve Griffith</title>
-    <link>https://blog.stevegriffith.nyc/tags/azure-ad/</link>
+    <link>https://www.stevegriffith.nyc/tags/azure-ad/</link>
     <description>Recent content in azure ad on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/azure-ad/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Oct 2019 16:36:14 -0400</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/azure-ad/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Aks Minimum Permissions</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
       <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
       <description>Cluster Management Roles When working with Azure Kubernetes Service there can be a lot of confusion about the access needed by the individuals managing the cluster as well as the roles required by the Service Principal used by the cluster itself to execute Azure operations (ex. Creating an Azure Public IP on a Service type=LoadBalancer). The following tries to break it down and demonstrate the minimal roles required for Cluster Administration.</description>
     </item>
     

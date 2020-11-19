@@ -2,55 +2,55 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kubernetes on Steve Griffith</title>
-    <link>https://blog.stevegriffith.nyc/categories/kubernetes/</link>
+    <link>https://www.stevegriffith.nyc/categories/kubernetes/</link>
     <description>Recent content in Kubernetes on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AKS Networking Overview - Network Policy Impact on Bridge Mode vs. Transparent</title>
-      <link>https://blog.stevegriffith.nyc/posts/bridge-vs-transparent/</link>
+      <link>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/bridge-vs-transparent/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</guid>
       <description>Overview In our Azure CNI and Kubenet overviews, we assumed no network policy is deployed on our cluster. When you enable network policy there are a few fundamental changes that are probably worth calling out. I&amp;rsquo;m going to focus on Calico network policy in AKS, which is implemented using open source Calico.
 Azure CNI If we take a look at the &amp;lsquo;Technical Deep Dive&amp;rsquo; doc for Azure CNI we see that when you implement network policy on a cluster there is one fundamental change.</description>
     </item>
     
     <item>
       <title>AKS Advanced Load Balancing - Part 1</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</link>
       <pubDate>Wed, 11 Nov 2020 10:50:23 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</guid>
       <description>Overview In the next few posts (yeah&amp;hellip;I think this will require a few)..we&amp;rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</description>
     </item>
     
     <item>
       <title>Aks Networking Iptables in AKS</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-networking-iptables/</link>
       <pubDate>Fri, 06 Nov 2020 13:56:40 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-networking-iptables/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-networking-iptables/</guid>
       <description>Overview We&amp;rsquo;ve seen the network wiring for both kubenet and Azure CNI, so now we understand the core plumbing used to move packets around within an AKS cluster. There is one more layer that comes into play, however. As packets arrive on a host, the linux kernel will pass them through iptables to apply filtering (ex. Firewalls) and routing rules. Today, iptables is the default implementation for AKS in cluster routing.</description>
     </item>
     
     <item>
       <title>Aks Networking Part 1 - Kubenet on AKS</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-networking-part1/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-networking-part1/</link>
       <pubDate>Fri, 06 Nov 2020 13:56:29 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-networking-part1/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-networking-part1/</guid>
       <description>Setup For this session we&amp;rsquo;ll create a resource group with a Vnet, three subnets and two AKS Clusters.
 Create Resource Group, Vnet and Subnets RG=NetworkLab LOC=eastus VNET_CIDR=&amp;#34;10.220.0.0/16&amp;#34; KUBENET_AKS_CIDR=&amp;#34;10.220.1.0/24&amp;#34; AZURECNI_AKS_CIDR=&amp;#34;10.220.2.0/24&amp;#34; SVC_LB_CIDR=&amp;#34;10.220.3.0/24&amp;#34; # Create Resource Group az group create -n $RG -l $LOC # Create Vnet az network vnet create \ -g $RG \ -n aksvnet \ --address-prefix $VNET_CIDR # Create Kubenet AKS Cluster Subnet az network vnet subnet create \  --resource-group $RG \  --vnet-name aksvnet \  --name kubenet \  --address-prefix $KUBENET_AKS_CIDR # Get the Kubenet Subnet ID KUBENET_SUBNET_ID=$(az network vnet show -g $RG -n aksvnet -o tsv --query &amp;#34;subnets[?</description>
     </item>
     
     <item>
       <title>Aks Networking Part 2 - Azure CNI on AKS</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-networking-part2/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-networking-part2/</link>
       <pubDate>Fri, 06 Nov 2020 13:56:29 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-networking-part2/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-networking-part2/</guid>
       <description>Setup We&amp;rsquo;ve been through the kubenet implementation, and now we&amp;rsquo;re on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We&amp;rsquo;ve already created the Vnet and Subnets, so all we need to do is create the cluster.
 Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
  Cluster name to &amp;lsquo;azurecni-cluster&amp;rsquo; Network Plugin to &amp;lsquo;azure&amp;rsquo; Removed the &amp;lsquo;&amp;ndash;pod-cidr&amp;rsquo; flag, as pods will be attached to the subnet directly  Pod and Service CIDR Sizes As noted in our kubenet walkthrough, the options we set on cluster creation will impact the size of the pod and service cidrs.</description>
@@ -58,20 +58,20 @@ Notice a few changes in the &amp;lsquo;az aks create&amp;rsquo; command below.
     
     <item>
       <title>Aks Networking Overview</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-networking/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-networking/</link>
       <pubDate>Fri, 06 Nov 2020 13:56:05 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-networking/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-networking/</guid>
       <description>Topics In this session we&amp;rsquo;re going to deep dive into the network stack associated with both Kubenet and Azure CNI, to help explain how they work internally, how they can be debugged the pros and cons of each.
  Outbound Type: Check out the session from @RayKao&amp;hellip;here Network Plugin  Kubenet Azure CNI   Windows Networking  Great Overview Details (Linux &amp;ndash;&amp;gt; Windows):  Azure CNI Required  Supported in AKS Engine and an open issue exists to promote this capability to AKS.</description>
     </item>
     
     <item>
       <title>Aks Minimum Permissions</title>
-      <link>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
+      <link>https://www.stevegriffith.nyc/posts/aks-minimum-permissions/</link>
       <pubDate>Thu, 03 Oct 2019 16:36:14 -0400</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/aks-minimum-permissions/</guid>
       <description>Cluster Management Roles When working with Azure Kubernetes Service there can be a lot of confusion about the access needed by the individuals managing the cluster as well as the roles required by the Service Principal used by the cluster itself to execute Azure operations (ex. Creating an Azure Public IP on a Service type=LoadBalancer). The following tries to break it down and demonstrate the minimal roles required for Cluster Administration.</description>
     </item>
     

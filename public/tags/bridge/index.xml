@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bridge on Steve Griffith</title>
-    <link>https://blog.stevegriffith.nyc/tags/bridge/</link>
+    <link>https://www.stevegriffith.nyc/tags/bridge/</link>
     <description>Recent content in bridge on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://blog.stevegriffith.nyc/tags/bridge/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/bridge/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AKS Networking Overview - Network Policy Impact on Bridge Mode vs. Transparent</title>
-      <link>https://blog.stevegriffith.nyc/posts/bridge-vs-transparent/</link>
+      <link>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</link>
       <pubDate>Wed, 11 Nov 2020 13:56:01 -0500</pubDate>
       
-      <guid>https://blog.stevegriffith.nyc/posts/bridge-vs-transparent/</guid>
+      <guid>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</guid>
       <description>Overview In our Azure CNI and Kubenet overviews, we assumed no network policy is deployed on our cluster. When you enable network policy there are a few fundamental changes that are probably worth calling out. I&amp;rsquo;m going to focus on Calico network policy in AKS, which is implemented using open source Calico.
 Azure CNI If we take a look at the &amp;lsquo;Technical Deep Dive&amp;rsquo; doc for Azure CNI we see that when you implement network policy on a cluster there is one fundamental change.</description>
     </item>

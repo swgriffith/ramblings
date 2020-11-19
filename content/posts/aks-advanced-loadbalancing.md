@@ -58,6 +58,7 @@ az aks create \
 -n kubenet-cluster \
 --network-plugin kubenet \
 --vnet-subnet-id $KUBENET_SUBNET_ID \
+--zones 1 2 \
 --pod-cidr "10.100.0.0/16" \
 --service-cidr "10.200.0.0/16" \
 --dns-service-ip "10.200.0.10"
@@ -65,6 +66,8 @@ az aks create \
 # Get Credentials
 az aks get-credentials -g $RG -n kubenet-cluster
 ```
+
+>**NOTE:** We're creating this cluster using Availability Zones. While this post doesn't focus on zones, we will cover it in when we dig into services and ingress, so I'm enabling it here for future use. 
 
 ### Deploy the sample app
 
@@ -93,7 +96,7 @@ metadata:
     run: testapp
   name: testapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       run: testapp
