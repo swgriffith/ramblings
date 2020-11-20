@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>AKS Advanced Load Balancing - Part 1 // Steve Griffith</title>
+    <title>AKS Advanced Load Balancing - Part 1: Azure Load Balancer // Steve Griffith</title>
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.75.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,16 +24,16 @@ if (!doNotTrack) {
 </script>
 
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="AKS Advanced Load Balancing - Part 1"/>
-<meta name="twitter:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance."/>
+<meta name="twitter:title" content="AKS Advanced Load Balancing - Part 1: Azure Load Balancer"/>
+<meta name="twitter:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance."/>
 <meta name="twitter:site" content="@SteveGriffith"/>
 
-    <meta property="og:title" content="AKS Advanced Load Balancing - Part 1" />
-<meta property="og:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance." />
+    <meta property="og:title" content="AKS Advanced Load Balancing - Part 1: Azure Load Balancer" />
+<meta property="og:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/" />
-<meta property="article:published_time" content="2020-11-11T10:50:23-05:00" />
-<meta property="article:modified_time" content="2020-11-11T10:50:23-05:00" />
+<meta property="article:published_time" content="2020-11-16T10:50:23-05:00" />
+<meta property="article:modified_time" content="2020-11-16T10:50:23-05:00" />
 
 
   </head>
@@ -50,14 +50,14 @@ if (!doNotTrack) {
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">AKS Advanced Load Balancing - Part 1</h1>
+      <h1 class ="post-title">AKS Advanced Load Balancing - Part 1: Azure Load Balancer</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
   <title>calendar</title>
   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
 </svg>
-          Nov 11, 2020
+          Nov 16, 2020
         </div>
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
@@ -74,7 +74,7 @@ if (!doNotTrack) {
     </header>
     <div class="post-content">
       <h2 id="overview">Overview</h2>
-<p>In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</p>
+<p>In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</p>
 <p>In previous posts I&rsquo;ve run you through the full stack for the AKS network plugins <a href="../aks-networking-part1">Kubenet</a> and <a href="../aks-networking-part2">Azure CNI</a>. As part of that, we also ran through the traffic flows at the kernel level via <a href="../aks-networking-iptables">iptables</a>. Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.</p>
 <p>Let&rsquo;s start by setting up our test cluster, and checking out the Azure Load Balancer.</p>
 <h2 id="setup">Setup</h2>
@@ -124,7 +124,7 @@ az aks get-credentials -g $RG -n kubenet-cluster
 <p><strong>NOTE:</strong> We&rsquo;re creating this cluster using Availability Zones. While this post doesn&rsquo;t focus on zones, we will cover it in when we dig into services and ingress, so I&rsquo;m enabling it here for future use.</p>
 </blockquote>
 <h3 id="deploy-the-sample-app">Deploy the sample app</h3>
-<p>To walk through the load balancing traffic flow we&rsquo;ll need a set of pods distributed across nodes with an Azure Load Balancer in front. For the sake of testing, since we have a 3 node cluster, lets have 2 pods and for the load balancer we&rsquo;ll set up a Kubernetes Service of type &lsquo;LoadBalancer&rsquo;. That will provision a public Azure Load Balancer for us in front of our pods.</p>
+<p>To walk through the load balancing traffic flow we&rsquo;ll need a set of pods distributed across nodes with an Azure Load Balancer in front. For the sake of testing, since we have a 3 node cluster, lets have 2 pods and for the load balancer we&rsquo;ll set up a Kubernetes Service of type &lsquo;LoadBalancer&rsquo;. That will provision a public Azure Load Balancer for us in front of our cluster.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create the Deployment and Service</span>
 cat <span style="color:#e6db74">&lt;&lt;EOF | kubectl apply -f -
 </span><span style="color:#e6db74">apiVersion: v1
@@ -169,7 +169,6 @@ service/testapp      LoadBalancer   10.200.252.245   20.62.153.222   80:31857/TC
 
 NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE                                NOMINATED NODE   READINESS GATES
 pod/testapp-6f7947bc4b-92g9l   1/1     Running   <span style="color:#ae81ff">0</span>          36s   10.100.0.4   aks-nodepool1-23454376-vmss000001   &lt;none&gt;           &lt;none&gt;
-pod/testapp-6f7947bc4b-vpmfz   1/1     Running   <span style="color:#ae81ff">0</span>          36s   10.100.2.3   aks-nodepool1-23454376-vmss000002   &lt;none&gt;           &lt;none&gt;
 </code></pre></div><p>Great! Now we have our network, our cluster and a deployment we can start to play with. Since we create our service as &lsquo;type: LoadBalancer&rsquo; our cluster called out to Azure and created an Azure Load Balancer for us. Let&rsquo;s send some traffic to that endpoint and see how it behaves.</p>
 <h3 id="azure-load-balancer-alb-to-node">Azure Load Balancer (ALB) to Node</h3>
 <p>Any load balancer will have an algorithm it uses to determine where to send traffic. Some of the most common and basic are &lsquo;Round Robin&rsquo;, &lsquo;Statistic&rsquo; and &lsquo;Hash Based&rsquo;. If you take a look at the <a href="https://docs.microsoft.com/en-us/azure/load-balancer/concepts#load-balancing-algorithm">Azure docs for the ALB</a> we can see that the default algorithm used by the ALB is hash based.</p>
@@ -204,7 +203,6 @@ az vmss update-instances --instance-ids <span style="color:#e6db74">&#39;*&#39;<
 kubectl get pods -o wide
 NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE                                NOMINATED NODE   READINESS GATES
 testapp-6f7947bc4b-92g9l   1/1     Running   <span style="color:#ae81ff">0</span>          26m   10.100.0.4   aks-nodepool1-23454376-vmss000001   &lt;none&gt;           &lt;none&gt;
-testapp-6f7947bc4b-vpmfz   1/1     Running   <span style="color:#ae81ff">0</span>          26m   10.100.2.3   aks-nodepool1-23454376-vmss000002   &lt;none&gt;           &lt;none&gt;
 
 <span style="color:#75715e"># ssh-jump to the node. Note: Sometimes it takes a minute for the jump pod to be ready, </span>
 <span style="color:#75715e"># so you may need to run the command a couple times.</span>
@@ -242,7 +240,7 @@ sudo apt install tshark
 </tr>
 </tbody>
 </table>
-<p>If we run the above command on the kubernetes node it should now be listening for our traffic&hellip;.and now we need to send some traffic. There are a million options here. I personally like either curl or <a href="https://github.com/rakyll/hey">hey</a>. For this test I&rsquo;ll use hey.</p>
+<p>If we run the above command on the Kubernetes node it should now be listening for our traffic&hellip;.and now we need to send some traffic. There are a million options here. I personally like either curl or <a href="https://github.com/rakyll/hey">hey</a>. For this test I&rsquo;ll use hey.</p>
 <p>I&rsquo;ll start by sending just 10 request to see what we see come through on our node.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Send 10 web request with the message body &#39;YO&#39; to my service load balancer</span>
 hey -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <span style="color:#ae81ff">10</span> -c <span style="color:#ae81ff">1</span> http://20.62.153.212
@@ -274,10 +272,10 @@ hey --disable-keepalive -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <s
 71.246.222.127  <span style="color:#ae81ff">49214</span> 20.62.153.222 <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
 10.220.1.4      <span style="color:#ae81ff">62651</span> 10.100.0.4    <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
 10.220.1.6      <span style="color:#ae81ff">22446</span> 10.100.0.4    <span style="color:#ae81ff">80</span>  <span style="color:#ae81ff">6</span>
-</code></pre></div><p>Ah, that looks better. Now we&rsquo;re seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my next post). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we&rsquo;re currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.</p>
-<p>So what we can gleam from the above is that our traffic will be evenly distributed if it&rsquo;s evenly sourced. If we have a specific source that holds extra long tcp sessions, that traffic may make the distribution a bit unbalanced.</p>
+</code></pre></div><p>Ah, that looks better. Now we&rsquo;re seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my <a href="../aks-adv-loadbalancing-part2">next post</a>). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we&rsquo;re currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.</p>
+<p>So what we can gleam from the above is that our traffic will be evenly distributed if it&rsquo;s evenly sourced. If we have a specific source that holds extra long tcp sessions, or if a specific source is very &lsquo;bursty&rsquo; (i.e. a bunch of traffic in a very short period of time), that traffic may make the distribution a bit unbalanced.</p>
 <h3 id="sessionaffinity">SessionAffinity</h3>
-<p>What if we actually want the session to be sticky? Well, kubernetes has a solution for that. Let&rsquo;s see how that works.</p>
+<p>What if we actually want the session to be sticky? Well, Kubernetes has a solution for that. Let&rsquo;s see how that works.</p>
 <p>If you want session affinity, you can set this on the service object by setting &lsquo;service.spec.sessionAffinity&rsquo; to &lsquo;ClientIP&rsquo;&hellip;.but what impact does that actually have? Does the routing algorithm for the Azure Load Balancer actually change from using a hash based distribution (Default). Lets have a look.</p>
 <p>First lets check out our cluster&rsquo;s load balancer current configuration</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Get the Cluster Resource Group, which will contain the load balancer</span>
@@ -286,12 +284,13 @@ CLUSTER_RESOURCE_GROUP<span style="color:#f92672">=</span><span style="color:#66
 <span style="color:#75715e"># Get the distribution mode for the Azure Load Balancer</span>
 az network lb rule list -g $CLUSTER_RESOURCE_GROUP --lb-name kubernetes -o yaml|grep loadDistribution
 <span style="color:#75715e"># Output</span>
-loadDistribution: SourceIP
+loadDistribution: Default
 </code></pre></div><p>As you can see above, we&rsquo;re still using the &lsquo;Default&rsquo; loadDistribution algorithm which is hash based. Lets change the service to enable sessionAffinity.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># I&#39;m going to be evil here and just kubectl edit...YOLO</span>
 kubectl edit svc testapp
 
 <span style="color:#75715e"># Change the sessionAffinity setting to &#39;ClientIP</span>
+<span style="color:#75715e"># Save and exit vim...unless you&#39;ve changed your default editor</span>
 
 <span style="color:#75715e"># On the client side, run our hey test again</span>
 hey --disable-keepalive -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <span style="color:#ae81ff">100</span> -c <span style="color:#ae81ff">2</span> http://20.62.153.222
@@ -339,7 +338,8 @@ loadDistribution: SourceIP
 <p>AKS will modify the distribution method of the ALB to SourceIP if you enable sessionAffinity for your Kubernetes service.</p>
 </li>
 </ol>
-<p>I very intentionally avoided getting into kubernetes service routing, internal to the cluster, and the impact of iptables. We&rsquo;ll take a look at that next. Hopefully you found this useful.</p>
+<p>I very intentionally avoided getting into kubernetes service routing, internal to the cluster, and the impact of iptables. We&rsquo;ll take a look at that in my next post. Hopefully you found this useful.</p>
+<p><strong>Next:</strong> <a href="../aks-adv-loadbalancing-part2">AKS Advanced Load Balancing Part 2: Kubernetes Services</a></p>
 
     </div>
     <div class="post-footer">

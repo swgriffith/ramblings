@@ -6,7 +6,25 @@
     <description>Recent content in kubenet on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Nov 2020 13:56:01 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/kubenet/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 11:36:21 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/kubenet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AKS Advanced Load Balancing Part 2: Kubernetes Services</title>
+      <link>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</link>
+      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</guid>
+      <description>Overview In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &amp;lsquo;ClientIP&amp;rsquo; to enable sticky sessions. If you haven&amp;rsquo;t run through that, then I&amp;rsquo;d definitely give part 1 a read before continuing here.</description>
+    </item>
+    
+    <item>
+      <title>AKS Advanced Load Balancing - Part 1: Azure Load Balancer</title>
+      <link>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</link>
+      <pubDate>Mon, 16 Nov 2020 10:50:23 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</guid>
+      <description>Overview In the next few posts (yeah&amp;hellip;I think this will require a few)..we&amp;rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</description>
+    </item>
+    
     <item>
       <title>AKS Networking Overview - Network Policy Impact on Bridge Mode vs. Transparent</title>
       <link>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</link>
@@ -15,15 +33,6 @@
       <guid>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</guid>
       <description>Overview In our Azure CNI and Kubenet overviews, we assumed no network policy is deployed on our cluster. When you enable network policy there are a few fundamental changes that are probably worth calling out. I&amp;rsquo;m going to focus on Calico network policy in AKS, which is implemented using open source Calico.
 Azure CNI If we take a look at the &amp;lsquo;Technical Deep Dive&amp;rsquo; doc for Azure CNI we see that when you implement network policy on a cluster there is one fundamental change.</description>
-    </item>
-    
-    <item>
-      <title>AKS Advanced Load Balancing - Part 1</title>
-      <link>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</link>
-      <pubDate>Wed, 11 Nov 2020 10:50:23 -0500</pubDate>
-      
-      <guid>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</guid>
-      <description>Overview In the next few posts (yeah&amp;hellip;I think this will require a few)..we&amp;rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.</description>
     </item>
     
     <item>

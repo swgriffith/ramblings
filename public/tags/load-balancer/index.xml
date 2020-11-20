@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>load balancer on Steve Griffith</title>
+    <link>https://www.stevegriffith.nyc/tags/load-balancer/</link>
+    <description>Recent content in load balancer on Steve Griffith</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Nov 2020 11:36:21 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/load-balancer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AKS Advanced Load Balancing Part 2: Kubernetes Services</title>
+      <link>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</link>
+      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</guid>
+      <description>Overview In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &amp;lsquo;ClientIP&amp;rsquo; to enable sticky sessions. If you haven&amp;rsquo;t run through that, then I&amp;rsquo;d definitely give part 1 a read before continuing here.</description>
+    </item>
+    
+  </channel>
+</rss>

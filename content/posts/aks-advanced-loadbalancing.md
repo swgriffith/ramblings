@@ -1,14 +1,14 @@
 ---
-title: "AKS Advanced Load Balancing - Part 1"
-date: 2020-11-11T10:50:23-05:00
+title: "AKS Advanced Load Balancing - Part 1: Azure Load Balancer"
+date: 2020-11-16T10:50:23-05:00
 draft: false
 categories: ["Azure", "Kubernetes", "Networking", "AKS"]
-tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"]
+tags: ["azure", "Kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"]
 ---
 
 ## Overview
 
-In the next few posts (yeah...I think this will require a few)..we're going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into an Nginx ingress controller and then to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.
+In the next few posts (yeah...I think this will require a few)..we're going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.
 
 In previous posts I've run you through the full stack for the AKS network plugins [Kubenet](../aks-networking-part1) and [Azure CNI](../aks-networking-part2). As part of that, we also ran through the traffic flows at the kernel level via [iptables](../aks-networking-iptables). Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.
 
@@ -67,11 +67,11 @@ az aks create \
 az aks get-credentials -g $RG -n kubenet-cluster
 ```
 
->**NOTE:** We're creating this cluster using Availability Zones. While this post doesn't focus on zones, we will cover it in when we dig into services and ingress, so I'm enabling it here for future use. 
+>**NOTE:** We're creating this cluster using Availability Zones. While this post doesn't focus on zones, we will cover it in when we dig into services and ingress, so I'm enabling it here for future use.
 
 ### Deploy the sample app
 
-To walk through the load balancing traffic flow we'll need a set of pods distributed across nodes with an Azure Load Balancer in front. For the sake of testing, since we have a 3 node cluster, lets have 2 pods and for the load balancer we'll set up a Kubernetes Service of type 'LoadBalancer'. That will provision a public Azure Load Balancer for us in front of our pods.
+To walk through the load balancing traffic flow we'll need a set of pods distributed across nodes with an Azure Load Balancer in front. For the sake of testing, since we have a 3 node cluster, lets have 2 pods and for the load balancer we'll set up a Kubernetes Service of type 'LoadBalancer'. That will provision a public Azure Load Balancer for us in front of our cluster.
 
 ```bash
 # Create the Deployment and Service
@@ -118,7 +118,6 @@ service/testapp      LoadBalancer   10.200.252.245   20.62.153.222   80:31857/TC
 
 NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE                                NOMINATED NODE   READINESS GATES
 pod/testapp-6f7947bc4b-92g9l   1/1     Running   0          36s   10.100.0.4   aks-nodepool1-23454376-vmss000001   <none>           <none>
-pod/testapp-6f7947bc4b-vpmfz   1/1     Running   0          36s   10.100.2.3   aks-nodepool1-23454376-vmss000002   <none>           <none>
 ```
 
 Great! Now we have our network, our cluster and a deployment we can start to play with. Since we create our service as 'type: LoadBalancer' our cluster called out to Azure and created an Azure Load Balancer for us. Let's send some traffic to that endpoint and see how it behaves.
@@ -161,7 +160,6 @@ az vmss update-instances --instance-ids '*' \
 kubectl get pods -o wide
 NAME                       READY   STATUS    RESTARTS   AGE   IP           NODE                                NOMINATED NODE   READINESS GATES
 testapp-6f7947bc4b-92g9l   1/1     Running   0          26m   10.100.0.4   aks-nodepool1-23454376-vmss000001   <none>           <none>
-testapp-6f7947bc4b-vpmfz   1/1     Running   0          26m   10.100.2.3   aks-nodepool1-23454376-vmss000002   <none>           <none>
 
 # ssh-jump to the node. Note: Sometimes it takes a minute for the jump pod to be ready, 
 # so you may need to run the command a couple times.
@@ -191,7 +189,7 @@ Here are the key components of this command:
 |-Y "http.request.method == "GET" && http contains YO"|Since we're grabbing all port 80 traffic we need a way to filter it down to our specific requests. There are many ways to do this, but I chose to use the -Y flag to query out all of the GET requests that contain the word 'YO'|
 |-T fields -e ip.src -e tcp.srcport -e ip.dst -e tcp.dstport -e ip.proto| Display the source ip, source port, destination ip, destination port and protocol as output (6=TCP for protocol)|
 
-If we run the above command on the kubernetes node it should now be listening for our traffic....and now we need to send some traffic. There are a million options here. I personally like either curl or [hey](https://github.com/rakyll/hey). For this test I'll use hey. 
+If we run the above command on the Kubernetes node it should now be listening for our traffic....and now we need to send some traffic. There are a million options here. I personally like either curl or [hey](https://github.com/rakyll/hey). For this test I'll use hey. 
 
 I'll start by sending just 10 request to see what we see come through on our node.
 
@@ -233,13 +231,13 @@ hey --disable-keepalive -d "YO" -n 10 -c 1 http://20.62.153.212
 10.220.1.6      22446 10.100.0.4    80  6
 ```
 
-Ah, that looks better. Now we're seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my next post). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we're currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.
+Ah, that looks better. Now we're seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my [next post](../aks-adv-loadbalancing-part2)). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we're currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.
 
-So what we can gleam from the above is that our traffic will be evenly distributed if it's evenly sourced. If we have a specific source that holds extra long tcp sessions, that traffic may make the distribution a bit unbalanced.
+So what we can gleam from the above is that our traffic will be evenly distributed if it's evenly sourced. If we have a specific source that holds extra long tcp sessions, or if a specific source is very 'bursty' (i.e. a bunch of traffic in a very short period of time), that traffic may make the distribution a bit unbalanced.
 
 ### SessionAffinity
 
-What if we actually want the session to be sticky? Well, kubernetes has a solution for that. Let's see how that works.
+What if we actually want the session to be sticky? Well, Kubernetes has a solution for that. Let's see how that works.
 
 If you want session affinity, you can set this on the service object by setting 'service.spec.sessionAffinity' to 'ClientIP'....but what impact does that actually have? Does the routing algorithm for the Azure Load Balancer actually change from using a hash based distribution (Default). Lets have a look.
 
@@ -252,7 +250,7 @@ CLUSTER_RESOURCE_GROUP=$(az aks show --resource-group $RG --name kubenet-cluster
 # Get the distribution mode for the Azure Load Balancer
 az network lb rule list -g $CLUSTER_RESOURCE_GROUP --lb-name kubernetes -o yaml|grep loadDistribution
 # Output
-loadDistribution: SourceIP
+loadDistribution: Default
 ```
 
 As you can see above, we're still using the 'Default' loadDistribution algorithm which is hash based. Lets change the service to enable sessionAffinity.
@@ -262,6 +260,7 @@ As you can see above, we're still using the 'Default' loadDistribution algorithm
 kubectl edit svc testapp
 
 # Change the sessionAffinity setting to 'ClientIP
+# Save and exit vim...unless you've changed your default editor
 
 # On the client side, run our hey test again
 hey --disable-keepalive -d "YO" -n 100 -c 2 http://20.62.153.222
@@ -317,4 +316,6 @@ In this post we focused directly on the relationship between an Azure Load Balan
 
 1. AKS will modify the distribution method of the ALB to SourceIP if you enable sessionAffinity for your Kubernetes service.
 
-I very intentionally avoided getting into kubernetes service routing, internal to the cluster, and the impact of iptables. We'll take a look at that next. Hopefully you found this useful.
+I very intentionally avoided getting into kubernetes service routing, internal to the cluster, and the impact of iptables. We'll take a look at that in my next post. Hopefully you found this useful.
+
+**Next:** [AKS Advanced Load Balancing Part 2: Kubernetes Services](../aks-adv-loadbalancing-part2)
