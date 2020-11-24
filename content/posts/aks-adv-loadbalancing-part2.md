@@ -14,7 +14,7 @@ We're working our way down from an external user sending traffic through the ALB
 
 ## Services
 
-I won't go into a full explanation of services in Kubernetes here, as the Kubernetes [docs](https://kubernetes.io/docs/concepts/services-networking/service/) do a good job of that on their own, but I will lay our a few key concepts relative to Azure Kubernetes Service.
+I won't go into a full explanation of services in Kubernetes here, as the Kubernetes [docs](https://kubernetes.io/docs/concepts/services-networking/service/) do a good job of that on their own, but I will lay out a few key concepts relative to Azure Kubernetes Service.
 
 1. A service in Kubernetes provides a mechanism to expose a deployment to callers within and external to the cluster
 
@@ -160,7 +160,7 @@ KUBE-MARK-DROP  all  --  0.0.0.0/0            0.0.0.0/0            /* default/te
 
 So this chain is effectively accomplishes the same thing as the ClusterIP chain with two additions.
 
-First, any inbound traffic that hits this chain will get sent to KUBE-MARK-MASQ, which will mark the packet for SNAT. That means that when the traffic hits the pod, it will have gone through SNAT to the node ip, which you can see if you run '```kubectl logs <podname> -f```' and then throw some traffic at the ExternalIP. The logs will show the node IP as the source. So, even though we saw my internet ip coming through at the host interface card with tshark, once that traffic hits this rule it will SNAT and the pod will only ever see the host ip.
+First, any traffic that hits this chain will get sent to KUBE-MARK-MASQ, which will mark the packet for SNAT. That means that when the traffic hits the pod, it will have gone through SNAT to the node ip, which you can see if you run '```kubectl logs <podname> -f```' and then throw some traffic at the ExternalIP. The logs will show the node IP as the source. So, even though we saw my internet ip coming through at the host interface card with tshark, once that traffic hits this rule it will SNAT and the pod will only ever see the host ip.
 
 Second, the traffic gets passed along to the KUBE-SVC-K4VUERBNKSOP4S25 chain, which is the exact same chain we discussed above. So that chain will ultimately pass the traffic along to the pod itself.
 

@@ -41,7 +41,7 @@ if (!doNotTrack) {
     <header class="app-header">
       <a href="https://www.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
       <h1>Steve Griffith</h1>
-      <p>Ramblings of an Azure nerd.</p>
+      <p>Microsoft Cloud Native Global Black Belt. This is my personal blog, so opinions are my own.</p>
       <div class="app-header-social">
         
       </div>
@@ -77,7 +77,7 @@ if (!doNotTrack) {
 <p>In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &lsquo;ClientIP&rsquo; to enable sticky sessions. If you haven&rsquo;t run through that, then I&rsquo;d definitely give <a href="../aks-advanced-loadbalancing">part 1</a> a read before continuing here.</p>
 <p>We&rsquo;re working our way down from an external user sending traffic through the ALB into a cluster, through an ingress controller and ultimately landing on a pod. After looking at the ALB, the next hop in our journey is a Kubernetes service. In this post we&rsquo;ll crack open iptables to see how creation and modification of a service ultimately translates to inter-cluster routing.</p>
 <h2 id="services">Services</h2>
-<p>I won&rsquo;t go into a full explanation of services in Kubernetes here, as the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">docs</a> do a good job of that on their own, but I will lay our a few key concepts relative to Azure Kubernetes Service.</p>
+<p>I won&rsquo;t go into a full explanation of services in Kubernetes here, as the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">docs</a> do a good job of that on their own, but I will lay out a few key concepts relative to Azure Kubernetes Service.</p>
 <ol>
 <li>
 <p>A service in Kubernetes provides a mechanism to expose a deployment to callers within and external to the cluster</p>
@@ -210,7 +210,7 @@ KUBE-MARK-MASQ  all  --  0.0.0.0/0            0.0.0.0/0            /* default/te
 KUBE-SVC-K4VUERBNKSOP4S25  all  --  0.0.0.0/0            0.0.0.0/0            /* default/testapp: loadbalancer IP */
 KUBE-MARK-DROP  all  --  0.0.0.0/0            0.0.0.0/0            /* default/testapp: loadbalancer IP */
 </code></pre></div><p>So this chain is effectively accomplishes the same thing as the ClusterIP chain with two additions.</p>
-<p>First, any inbound traffic that hits this chain will get sent to KUBE-MARK-MASQ, which will mark the packet for SNAT. That means that when the traffic hits the pod, it will have gone through SNAT to the node ip, which you can see if you run &lsquo;<code>kubectl logs &lt;podname&gt; -f</code>&rsquo; and then throw some traffic at the ExternalIP. The logs will show the node IP as the source. So, even though we saw my internet ip coming through at the host interface card with tshark, once that traffic hits this rule it will SNAT and the pod will only ever see the host ip.</p>
+<p>First, any traffic that hits this chain will get sent to KUBE-MARK-MASQ, which will mark the packet for SNAT. That means that when the traffic hits the pod, it will have gone through SNAT to the node ip, which you can see if you run &lsquo;<code>kubectl logs &lt;podname&gt; -f</code>&rsquo; and then throw some traffic at the ExternalIP. The logs will show the node IP as the source. So, even though we saw my internet ip coming through at the host interface card with tshark, once that traffic hits this rule it will SNAT and the pod will only ever see the host ip.</p>
 <p>Second, the traffic gets passed along to the KUBE-SVC-K4VUERBNKSOP4S25 chain, which is the exact same chain we discussed above. So that chain will ultimately pass the traffic along to the pod itself.</p>
 <p>Finally, if the KUBE-SVC-K4VUERBNKSOP4S25 chain doesn&rsquo;t pass along the traffic, which I think will only happen if the protocol doesnt match (i.e. you send udp instead of tcp, which it&rsquo;s expecting in the DNAT rule), the KUBE-MARK-DROP rule will hit and the packet will be marked such that the KUBE-FIREWALL chain drops it. You can check out the KUBE-FIREWALL chain with the following: <code>sudo iptables -nL KUBE-FIREWALL</code></p>
 <p>Btw - all of the rules we&rsquo;ve run through above are exactly the same across ALL nodes. Whoohooo! Why, though? Well, the magic lies in the very end of the chain, and the underlying network plugin. Looking above you can see that the final chain sends us to the pod IP of 10.100.2.2. From that point the host networking takes over by looking at the routes on the host. As you may recall from previous posts, if we run <code>routes -n</code> we can see where packets should next hop.</p>

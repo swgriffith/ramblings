@@ -13,7 +13,7 @@ enableEmoji=true
 
 [params]
   author = "Steve Griffth"
-  description = "Ramblings of an Azure nerd."
+  description = "Microsoft Cloud Native Global Black Belt. This is my personal blog, so opinions are my own."
   avatar = "/images/me.jpg"
   motto = "Maker, Programmer and Solution Architect."
 
