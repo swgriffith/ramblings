@@ -6,11 +6,11 @@
     <description>Recent content in Tags on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Nov 2020 11:36:21 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Dec 2020 11:42:17 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>aks</title>
       <link>https://www.stevegriffith.nyc/tags/aks/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/aks/</guid>
       <description></description>
@@ -19,7 +19,7 @@
     <item>
       <title>azure</title>
       <link>https://www.stevegriffith.nyc/tags/azure/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/azure/</guid>
       <description></description>
@@ -28,16 +28,25 @@
     <item>
       <title>azure cni</title>
       <link>https://www.stevegriffith.nyc/tags/azure-cni/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/azure-cni/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>calico</title>
+      <link>https://www.stevegriffith.nyc/tags/calico/</link>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/tags/calico/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>cni</title>
       <link>https://www.stevegriffith.nyc/tags/cni/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/cni/</guid>
       <description></description>
@@ -46,7 +55,7 @@
     <item>
       <title>kubenet</title>
       <link>https://www.stevegriffith.nyc/tags/kubenet/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/kubenet/</guid>
       <description></description>
@@ -55,9 +64,18 @@
     <item>
       <title>kubernetes</title>
       <link>https://www.stevegriffith.nyc/tags/kubernetes/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>networking</title>
+      <link>https://www.stevegriffith.nyc/tags/networking/</link>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/tags/networking/</guid>
       <description></description>
     </item>
     
@@ -67,15 +85,6 @@
       <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
       
       <guid>https://www.stevegriffith.nyc/tags/load-balancer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>networking</title>
-      <link>https://www.stevegriffith.nyc/tags/networking/</link>
-      <pubDate>Wed, 18 Nov 2020 11:36:21 -0500</pubDate>
-      
-      <guid>https://www.stevegriffith.nyc/tags/networking/</guid>
       <description></description>
     </item>
     

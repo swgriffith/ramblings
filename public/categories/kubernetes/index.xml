@@ -6,7 +6,16 @@
     <description>Recent content in Kubernetes on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Nov 2020 11:36:21 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Dec 2020 11:42:17 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AKS Azure CNI Calico IP Masquerade</title>
+      <link>https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/</link>
+      <pubDate>Fri, 11 Dec 2020 11:42:17 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/</guid>
+      <description>Overview Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&amp;rsquo;ve covered this a bit when I dug into the Azure CNI and it&amp;rsquo;s impact on iptables in my Aks Networking Iptables in AKS post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it was ranges it should ignore for outbound NAT.</description>
+    </item>
+    
     <item>
       <title>AKS Advanced Load Balancing Part 2: Kubernetes Services</title>
       <link>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</link>

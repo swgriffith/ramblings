@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>AKS Azure CNI Calico IP Masquerade // Steve Griffith</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AKS Azure CNI Calico IP Masquerade"/>
+<meta name="twitter:description" content="Overview Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&rsquo;ve covered this a bit when I dug into the Azure CNI and it&rsquo;s impact on iptables in my Aks Networking Iptables in AKS post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it was ranges it should ignore for outbound NAT."/>
+<meta name="twitter:site" content="@SteveGriffith"/>
+
+    <meta property="og:title" content="AKS Azure CNI Calico IP Masquerade" />
+<meta property="og:description" content="Overview Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&rsquo;ve covered this a bit when I dug into the Azure CNI and it&rsquo;s impact on iptables in my Aks Networking Iptables in AKS post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it was ranges it should ignore for outbound NAT." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/" />
+<meta property="article:published_time" content="2020-12-11T11:42:17-05:00" />
+<meta property="article:modified_time" content="2020-12-11T11:42:17-05:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith</h1>
+      <p>Microsoft Cloud Native Global Black Belt. This is my personal blog, so opinions are my own.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">AKS Azure CNI Calico IP Masquerade</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 11, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://www.stevegriffith.nyc/tags/azure/">azure</a><a class="tag" href="https://www.stevegriffith.nyc/tags/kubernetes/">kubernetes</a><a class="tag" href="https://www.stevegriffith.nyc/tags/networking/">networking</a><a class="tag" href="https://www.stevegriffith.nyc/tags/kubenet/">kubenet</a><a class="tag" href="https://www.stevegriffith.nyc/tags/cni/">cni</a><a class="tag" href="https://www.stevegriffith.nyc/tags/aks/">aks</a><a class="tag" href="https://www.stevegriffith.nyc/tags/calico/">calico</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="overview">Overview</h2>
+<p>Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&rsquo;ve covered this a bit when I dug into the Azure CNI and it&rsquo;s impact on iptables in my <a href="../aks-networking-iptables">Aks Networking Iptables in AKS</a> post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it was ranges it should ignore for outbound NAT. By default this range is set to the cluster&rsquo;s Vnet CIDR, however, in this post I was only looking at Azure CNI without any Kubernetes Network Policy applied. When you introduce calico into the mix some interesting things happen. Most noteably the ip-masq-agent config I shared in that article gets hijacked by Calico. Lets have a quick look at how this works.</p>
+<h2 id="setup">Setup</h2>
+<p>I&rsquo;m not going to go through the full network setup here, as if you&rsquo;re hitting this post you&rsquo;ve probably already run into this issue, but let me share my high level setup. In my lab I have two Vnets peered with each other. In Vnet A I have an AKS cluster and an Ubuntu node that I can use to test traffic between a node and cluster in the same Vnet. In Vnet B I just have an Ubuntu node to test traffic leaving the the AKS Vnet across the Vnet peering. On both Ubuntu nodes I&rsquo;ve installed docker and started up an nginx pod using &ldquo;<code>docker run -d -p 80:80 nginx</code>&rdquo; and then once running I ran &ldquo;<code>docker logs &lt;containername&gt; -f</code>&rdquo; to watch the logs for nginx. The nginx logs will show the source IP for every request.</p>
+<p>As for the AKS cluster, I created that in Vnet A using the following command to make sure I&rsquo;d enabled Azure CNI and Calico.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create Cluster</span>
+az aks create -g &lt;ResourceGroupName&gt; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-n azurecnicalico <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--network-plugin azure <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--network-policy calico <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--vnet-subnet-id &lt;subnet resource id&gt;
+</code></pre></div><p>So now we have two Ubuntu nodes running Nginx that we can hit, with one being in the AKS Vnet and one in a separate peered Vnet. In our cluster we&rsquo;ll fire up a quick ubuntu test pod we can use to curl the two Ubuntu servers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Create Ubuntu Pod</span>
+cat <span style="color:#e6db74">&lt;&lt;EOF |kubectl apply -f -
+</span><span style="color:#e6db74">apiVersion: v1
+</span><span style="color:#e6db74">kind: Pod
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  creationTimestamp: null
+</span><span style="color:#e6db74">  labels:
+</span><span style="color:#e6db74">    run: ubuntu
+</span><span style="color:#e6db74">  name: ubuntu
+</span><span style="color:#e6db74">spec:
+</span><span style="color:#e6db74">  containers:
+</span><span style="color:#e6db74">  - image: ubuntu
+</span><span style="color:#e6db74">    name: ubuntu
+</span><span style="color:#e6db74">    command: [ &#34;/bin/bash&#34;, &#34;-c&#34;, &#34;--&#34; ]
+</span><span style="color:#e6db74">    args: [ &#34;while true; do sleep 30; done;&#34; ]
+</span><span style="color:#e6db74">  restartPolicy: Never
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><p>Now you can exec into the pod with <code>kubectl exec -it ubuntu -- bash</code>, run an <code>apt update</code> and then <code>apt install curl</code>. If you curl either of your servers you should see the nginx logs show the source IP. On the node in Vnet A (same vnet as the cluster) you&rsquo;ll see the pod ip, and on the node in Vnet B (outside of the AKS vnet) you&rsquo;ll see the node IP.</p>
+<p>Lets check that out:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Check out the pod IP</span>
+kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE     IP            NODE                                NOMINATED NODE   READINESS GATES
+ubuntu                   1/1     Running   <span style="color:#ae81ff">0</span>          10m     10.240.0.46   aks-nodepool1-30745869-vmss000001   &lt;none&gt;           &lt;none&gt;
+
+<span style="color:#75715e"># Get the IP of the node the pod is running on</span>
+kubectl get node aks-nodepool1-30745869-vmss000001 -o wide
+NAME                                STATUS   ROLES   AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+aks-nodepool1-30745869-vmss000001   Ready    agent   3d22h   v1.19.3   10.240.0.35   &lt;none&gt;        Ubuntu 18.04.5 LTS   5.4.0-1031-azure   containerd://1.4.1+azure
+</code></pre></div><p>After running the above I can see the following:</p>
+<ul>
+<li>Pod IP: 10.240.0.46</li>
+<li>AKS Node IP: 10.240.0.97</li>
+<li>VNet A Server IP (Same Vnet as AKS): 10.240.0.97</li>
+<li>Vnet B Server IP (Different Vnet from AKS): 172.17.0.4</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Curl Vnet A Server (AKS Vnet) from our Ubuntu Pod</span>
+curl 10.240.0.97
+
+<span style="color:#75715e"># Docker Logs on the Vnet A Server</span>
+10.240.0.46 - - <span style="color:#f92672">[</span>11/Dec/2020:17:20:04 +0000<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;GET / HTTP/1.1&#34;</span> <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">612</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;curl/7.68.0&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</code></pre></div><p>As you can see above, within the same Vnet, the server we&rsquo;re calling sees the source IP is the pod IP (10.240.0.46).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Curl Vnet B Server (Peered Vnet) from our Ubuntu Pod</span>
+curl 172.17.0.4
+
+<span style="color:#75715e"># Docker Logs on the Vnet A Server</span>
+10.240.0.35 - - <span style="color:#f92672">[</span>11/Dec/2020:17:21:45 +0000<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;GET / HTTP/1.1&#34;</span> <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">612</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;curl/7.68.0&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</code></pre></div><p>Now we can see that when traffic leaves the Vnet the server outside sees the source IP as the node IP (10.240.0.35).</p>
+<h2 id="iptables">iptables</h2>
+<p>At this point we have a valid test scenario, and have been able to show the SNAT that is taking place..but where is this in an Azure CNI + Calico cluster. Lets have a look through the iptables. You&rsquo;ll need to ssh into a node. For this, as always, we&rsquo;ll use <a href="https://github.com/yokawasa/kubectl-plugin-ssh-jump/blob/master/README.md">ssh-jump</a> but there are various other options, including using privileged containers. If you do ssh to a node, you&rsquo;ll need to <a href="https://docs.microsoft.com/en-us/azure/aks/ssh">set up ssh access</a>.</p>
+<p>I&rsquo;m going to jump right to the POSTROUTING chain here to save us some time, but obviously you could explore the full set of chains more extensively if you prefer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># First I&#39;ll jump into a node</span>
+kubectl ssh-jump aks-nodepool1-30745869-vmss000000
+
+<span style="color:#75715e"># Now lets check out the POSTROUTING chain</span>
+sudo iptables -t nat -L POSTROUTING
+Chain POSTROUTING <span style="color:#f92672">(</span>policy ACCEPT<span style="color:#f92672">)</span>
+target     prot opt source               destination
+cali-POSTROUTING  all  --  anywhere             anywhere             /* cali:O3lYWMrLQYEMJtB5 */
+KUBE-POSTROUTING  all  --  anywhere             anywhere             /* kubernetes postrouting rules */
+</code></pre></div><p>As we can see above, the POSTROUTING chain passes everything along to &lsquo;cali-POSTROUTING&rsquo;, so lets check that one out.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo iptables -t nat -L cali-POSTROUTING
+Chain cali-POSTROUTING <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> references<span style="color:#f92672">)</span>
+target     prot opt source               destination
+cali-fip-snat  all  --  anywhere             anywhere             /* cali:Z-c7XtVd2Bq7s_hA */
+cali-nat-outgoing  all  --  anywhere             anywhere             /* cali:nYKhEzDlr11Jccal */
+
+<span style="color:#75715e"># So cali-POSTROUTING passes to cali-fip-snat and cali-nat-outgoing</span>
+<span style="color:#75715e"># Lets check those out</span>
+sudo iptables -t nat -L cali-fip-snat
+Chain cali-fip-snat <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> references<span style="color:#f92672">)</span>
+target     prot opt source               destination
+
+sudo iptables -t nat -L cali-nat-outgoing
+Chain cali-nat-outgoing <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> references<span style="color:#f92672">)</span>
+target     prot opt source               destination
+MASQUERADE  all  --  anywhere             anywhere             /* cali:flqWnvo8yq4ULQLa */ match-set cali40masq-ipam-pools src ! match-set cali40all-ipam-pools dst
+</code></pre></div><p>Not much happending in cali-fip-snat, but we do see a pass to the MASQUERADE chain from the cali-nat-outgoing chain. MASQUERADE is where the SNAT happens. This rule has a few parameters on it. I won&rsquo;t dig deep into these, but the key to point out is the &lsquo;match-set&rsquo; flag. match-set uses the <a href="https://ipset.netfilter.org/iptables-extensions.man.html">iptables extension</a> ipset. IPSet allows you to have a table of addresses/ranges that can be queried from iptables. We can actaully see these tables using the <a href="https://wiki.archlinux.org/index.php/Ipset">ipset</a> command. Let&rsquo;s check that out on our host.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ipset list cali40masq-ipam-pools
+Name: cali40masq-ipam-pools
+Type: hash:net
+Revision: <span style="color:#ae81ff">6</span>
+Header: family inet hashsize <span style="color:#ae81ff">1024</span> maxelem <span style="color:#ae81ff">1048576</span>
+Size in memory: <span style="color:#ae81ff">512</span>
+References: <span style="color:#ae81ff">1</span>
+Number of entries: <span style="color:#ae81ff">1</span>
+Members:
+10.240.0.0/16
+</code></pre></div><p>There it is! You can see the AKS Cluster Vnet CIDR is listed in the &lsquo;Members&rsquo; block of this ipset, but how did it get there. We have a tip in the name of the ipset. If we search online for &lsquo;Calico IP Pools&rsquo; we get to the Calico <a href="https://docs.projectcalico.org/reference/resources/ippool">ip pool</a> documentation, where it turns out there&rsquo;s an ipool CRD! Lets check that out!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get ippools
+NAME                  AGE
+default-ipv4-ippool   3d23h
+
+<span style="color:#75715e"># Lets see whats in that ippool </span>
+kubectl get ippool default-ipv4-ippool -o yaml
+apiVersion: crd.projectcalico.org/v1
+kind: IPPool
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;apiVersion&#34;</span>:<span style="color:#e6db74">&#34;crd.projectcalico.org/v1&#34;</span>,<span style="color:#e6db74">&#34;kind&#34;</span>:<span style="color:#e6db74">&#34;IPPool&#34;</span>,<span style="color:#e6db74">&#34;metadata&#34;</span>:<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;annotations&#34;</span>:<span style="color:#f92672">{}</span>,<span style="color:#e6db74">&#34;labels&#34;</span>:<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;addonmanager.kubernetes.io/mode&#34;</span>:<span style="color:#e6db74">&#34;Reconcile&#34;</span><span style="color:#f92672">}</span>,<span style="color:#e6db74">&#34;name&#34;</span>:<span style="color:#e6db74">&#34;default-ipv4-ippool&#34;</span><span style="color:#f92672">}</span>,<span style="color:#e6db74">&#34;spec&#34;</span>:<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;blockSize&#34;</span>:26,<span style="color:#e6db74">&#34;cidr&#34;</span>:<span style="color:#e6db74">&#34;10.240.0.0/16&#34;</span>,<span style="color:#e6db74">&#34;ipipMode&#34;</span>:<span style="color:#e6db74">&#34;Never&#34;</span>,<span style="color:#e6db74">&#34;natOutgoing&#34;</span>:true<span style="color:#f92672">}}</span>
+  creationTimestamp: <span style="color:#e6db74">&#34;2020-12-07T18:15:30Z&#34;</span>
+  generation: <span style="color:#ae81ff">3</span>
+  labels:
+    addonmanager.kubernetes.io/mode: Reconcile
+  managedFields:
+  - apiVersion: crd.projectcalico.org/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: <span style="color:#f92672">{}</span>
+          f:kubectl.kubernetes.io/last-applied-configuration: <span style="color:#f92672">{}</span>
+        f:labels:
+          .: <span style="color:#f92672">{}</span>
+          f:addonmanager.kubernetes.io/mode: <span style="color:#f92672">{}</span>
+      f:spec:
+        .: <span style="color:#f92672">{}</span>
+        f:blockSize: <span style="color:#f92672">{}</span>
+        f:cidr: <span style="color:#f92672">{}</span>
+        f:ipipMode: <span style="color:#f92672">{}</span>
+        f:natOutgoing: <span style="color:#f92672">{}</span>
+    manager: kubectl
+    operation: Update
+    time: <span style="color:#e6db74">&#34;2020-12-11T15:49:39Z&#34;</span>
+  name: default-ipv4-ippool
+  resourceVersion: <span style="color:#e6db74">&#34;802963&#34;</span>
+  selfLink: /apis/crd.projectcalico.org/v1/ippools/default-ipv4-ippool
+  uid: 8d1132dd-358a-4422-b188-f938fc2edc57
+spec:
+  blockSize: <span style="color:#ae81ff">26</span>
+  cidr: 10.240.0.0/16
+  ipipMode: Never
+  natOutgoing: true
+</code></pre></div><p>Right at the bottom of that manifest we can see the spec, including the CIDR block, that matches our ippool CIDR. Now that we can see where this Vnet CIDR is coming from, can we change that routing rule to add additional CIDR blocks, like the one from VNet B. I&rsquo;m going to use the <a href="https://docs.projectcalico.org/reference/resources/ippool">IPPool example</a> from the Calico docs to create an ip pool with Vnet B&rsquo;s CIDR. I&rsquo;m going to set the &lsquo;disable&rsquo; flag to false, to be sure nothing tries to assign IPs from this range, but I do want calico to be aware of it for NAT.</p>
+<blockquote>
+<p><strong>Note:</strong> Before you mess around with ippools you should make sure you understand all of the options and the impact on your cluster.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+cat <span style="color:#e6db74">&lt;&lt;EOF |kubectl apply -f -
+</span><span style="color:#e6db74">apiVersion: crd.projectcalico.org/v1
+</span><span style="color:#e6db74">kind: IPPool
+</span><span style="color:#e6db74">metadata:
+</span><span style="color:#e6db74">  name: othervnet
+</span><span style="color:#e6db74">spec:
+</span><span style="color:#e6db74">  cidr: 172.17.0.0/16
+</span><span style="color:#e6db74">  natOutgoing: true
+</span><span style="color:#e6db74">  disabled: true
+</span><span style="color:#e6db74">  nodeSelector: all()
+</span><span style="color:#e6db74">EOF</span>
+
+<span style="color:#75715e"># Check out the ippools list</span>
+kubectl get ippools
+NAME                  AGE
+default-ipv4-ippool   4d
+othervnet             61m
+
+<span style="color:#75715e"># Lets take another look at that ipset and see if we have a new cidr block added</span>
+sudo ipset list cali40masq-ipam-pools
+Name: cali40masq-ipam-pools
+Type: hash:net
+Revision: <span style="color:#ae81ff">6</span>
+Header: family inet hashsize <span style="color:#ae81ff">1024</span> maxelem <span style="color:#ae81ff">1048576</span>
+Size in memory: <span style="color:#ae81ff">576</span>
+References: <span style="color:#ae81ff">1</span>
+Number of entries: <span style="color:#ae81ff">2</span>
+Members:
+10.240.0.0/16
+172.17.0.0/16
+</code></pre></div><p>It worked! Now lets check out the traffic to Vnet A and Vnet B.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Curl Vnet A Server (AKS Vnet) from our Ubuntu Pod</span>
+curl 10.240.0.97
+
+<span style="color:#75715e"># Docker Logs on the Vnet A Server</span>
+10.240.0.46 - - <span style="color:#f92672">[</span>11/Dec/2020:17:20:04 +0000<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;GET / HTTP/1.1&#34;</span> <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">612</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;curl/7.68.0&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</code></pre></div><p>As you can see above, within the same Vnet the server we&rsquo;re calling still sees the source IP is the pod IP (10.240.0.46). So we didnt break that.</p>
+<p>What about the server in Vnet B.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Curl Vnet B Server (Peered Vnet) from our Ubuntu Pod</span>
+curl 172.17.0.4
+
+<span style="color:#75715e"># Docker Logs on the Vnet A Server</span>
+10.240.0.46 - - <span style="color:#f92672">[</span>11/Dec/2020:17:55:50 +0000<span style="color:#f92672">]</span> <span style="color:#e6db74">&#34;GET / HTTP/1.1&#34;</span> <span style="color:#ae81ff">200</span> <span style="color:#ae81ff">612</span> <span style="color:#e6db74">&#34;-&#34;</span> <span style="color:#e6db74">&#34;curl/7.68.0&#34;</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</code></pre></div><p>Success! The server in Vnet B now can see the pod IP!</p>
+<h2 id="summary">Summary</h2>
+<p>As we saw in this post, Azure CNI will use the ip-masq-agent to snat any traffic leaving the vnet, but when we enable Calico network policy that control is taken over by Calico itself. Calico uses the IPPool crd to allow you to manage ippools, which are implemented with ipsets and the ipset iptables extension. You can add an IPPool to your cluster to your cluster to extend the range of IPs that will be ignored from SNAT.</p>
+<blockquote>
+<p><strong>WARNING:</strong> My understanding is that some network appliances may not like to see pod traffic that hasnt been NAT&rsquo;d to a real host IP address, and may drop that traffic. I need to dig into this topic further in a future post, but for now you should proceed with caution when updating ippools in your AKS clusters. Assume that AKS does this SNAT for traffic outside of the Vnet for good reason, and do your own extensive testing for any such change.</p>
+</blockquote>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
