@@ -66,7 +66,7 @@ aks-nodepool1-30745869-vmss000001   Ready    agent   3d22h   v1.19.3   10.240.0.
 After running the above I can see the following:
 
 * Pod IP: 10.240.0.46
-* AKS Node IP: 10.240.0.97
+* AKS Node IP: 10.240.0.35
 * VNet A Server IP (Same Vnet as AKS): 10.240.0.97
 * Vnet B Server IP (Different Vnet from AKS): 172.17.0.4
 
