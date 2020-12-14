@@ -12,8 +12,8 @@ In this session we're going to deep dive into the network stack associated with 
 
 * Outbound Type: Check out the session from [@RayKao](https://twitter.com/raykao)...[here](https://www.youtube.com/channel/UCvdABD6_HuCG_to6kVprdjQ)
 * Network Plugin
-  * [Kubenet](../aks-networking-part1)
-  * [Azure CNI](../aks-networking-part2)
+  * [Kubenet]({{< relref "aks-networking-part1" >}})
+  * [Azure CNI]({{< relref "aks-networking-part2" >}})
 * Windows Networking
   * [Great Overview](https://techcommunity.microsoft.com/t5/networking-blog/introducing-kubernetes-overlay-networking-for-windows/ba-p/363082)
   * Details (Linux --> Windows):
@@ -22,7 +22,7 @@ In this session we're going to deep dive into the network stack associated with 
     * Linux Bridge --> Host Networking Service
     * iptables --> vSwitch + Virtual Filtering Platform + Distributed Router
 * Network Policy: None/Azure/Calico
-* [How iptables come into play](../aks-networking-iptables)
+* [How iptables come into play]({{< relref "aks-networking-iptables" >}})
 * Debugging
   * [ssh-jump](https://github.com/yokawasa/kubectl-plugin-ssh-jump) - Create a jump server pod in your cluster and tunnels ssh through kubernetes port-forward
   * tcpdump - Native Linux command line tool. Run in host or pod. Check out this zine from [Julia Evans - @b0rk](https://twitter.com/b0rk)....[tcpdump](https://wizardzines.com/zines/tcpdump/)
