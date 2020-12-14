@@ -10,7 +10,7 @@ tags: ["azure", "Kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 In the next few posts (yeah...I think this will require a few)..we're going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance.
 
-In previous posts I've run you through the full stack for the AKS network plugins [Kubenet](../aks-networking-part1) and [Azure CNI](../aks-networking-part2). As part of that, we also ran through the traffic flows at the kernel level via [iptables](../aks-networking-iptables). Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.
+In previous posts I've run you through the full stack for the AKS network plugins [Kubenet]({{< relref "aks-networking-part1" >}}) and [Azure CNI]({{< relref "aks-networking-part2" >}}). As part of that, we also ran through the traffic flows at the kernel level via [iptables]({{< relref "aks-networking-iptables" >}}). Before we get into advanced load balancing, I strongly recommend you read through those posts to help with some of the base concepts that will come into play here.
 
 Let's start by setting up our test cluster, and checking out the Azure Load Balancer.
 
@@ -231,7 +231,7 @@ hey --disable-keepalive -d "YO" -n 10 -c 1 http://20.62.153.212
 10.220.1.6      22446 10.100.0.4    80  6
 ```
 
-Ah, that looks better. Now we're seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my [next post](../aks-adv-loadbalancing-part2)). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we're currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.
+Ah, that looks better. Now we're seeing traffic more evenly distributed. I have three nodes, so some of my traffic comes direct to the node without any SNAT (thats the traffic you see with an internet ip of 71.X.X.X), the rest of the traffic you see coming from 10.220.1.4 and 10.220.1.6, which are the other nodes in the cluster. When traffic hits a node kube-proxy and iptables will take over and send that traffic along to the right place (more on this in my [next post]({{< relref "aks-adv-loadbalancing-part2" >}})). In this case, since we only have one node with my testapp pod on it, all the other nodes will just pass the traffic to the node we're currently monitoring. That traffic will SNAT, which is why we only see my internet IP on traffic that the ALB sent directly to the node my pod is sitting on.
 
 So what we can gleam from the above is that our traffic will be evenly distributed if it's evenly sourced. If we have a specific source that holds extra long tcp sessions, or if a specific source is very 'bursty' (i.e. a bunch of traffic in a very short period of time), that traffic may make the distribution a bit unbalanced.
 
@@ -318,4 +318,4 @@ In this post we focused directly on the relationship between an Azure Load Balan
 
 I very intentionally avoided getting into kubernetes service routing, internal to the cluster, and the impact of iptables. We'll take a look at that in my next post. Hopefully you found this useful.
 
-**Next:** [AKS Advanced Load Balancing Part 2: Kubernetes Services](../aks-adv-loadbalancing-part2)
+**Next:** [AKS Advanced Load Balancing Part 2: Kubernetes Services]({{< relref "aks-adv-loadbalancing-part2" >}})

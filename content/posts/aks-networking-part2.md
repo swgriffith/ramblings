@@ -8,7 +8,7 @@ tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 ## Setup
 
-We've been through the [kubenet implementation](../aks-networking-part1), and now we're on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We've already created the Vnet and Subnets, so all we need to do is create the cluster.
+We've been through the [kubenet implementation]({{< relref "aks-networking-part1" >}}), and now we're on to Azure CNI. Lets start by creating an Azure CNI based AKS cluster. We've already created the Vnet and Subnets, so all we need to do is create the cluster.
 
 Notice a few changes in the 'az aks create' command below.
 
@@ -112,7 +112,7 @@ docker ps|grep nginx
 1f840366a5ea        mcr.microsoft.com/oss/kubernetes/pause:1.3.1   "/pause"                 26 minutes ago      Up 26 minutes                           k8s_POD_nginx-7cf567cc7-5pvnj_default_56899928-244b-485e-846b-5302430a0c45_0
 ```
 
-So far, all the same as when we tested with kubenet. We have two containers because of the /pause container we mentioned in [part 1](../aks-networking-part1). Now lets dig into the newtork stack.
+So far, all the same as when we tested with kubenet. We have two containers because of the /pause container we mentioned in [part 1]({{< relref "aks-networking-part1" >}}). Now lets dig into the newtork stack.
 
 ```bash
 # Get the pid for your container
@@ -169,7 +169,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 Nice! We can see that the azure0 interface has the subnet gateway IP as it's gateway, so azure0 interacts directly with the subnet! Also we can see that inbound traffic for our cluster address space (10.220.2.0/24) will also use the azure0 network.
 
-> **NOTE:** In this walk through we are NOT covering the impact of network policy on the above. There are some key key changes to the above introduced by a network policy plugin. For more information I created this side bar post on [bridge vs. transparent mode](../bridge-vs-transparent) you can check out.
+> **NOTE:** In this walk through we are NOT covering the impact of network policy on the above. There are some key key changes to the above introduced by a network policy plugin. For more information I created this side bar post on [bridge vs. transparent mode]({{< relref "bridge-vs-transparent" >}}) you can check out.
 
 We have the wiring from the container through to the network all sorted out. The only part we're missing is understanding how an IP address from an Azure subnet gets assigned, since there are multiple hosts constantly adding and dropping pods and there-by adding and dropping ips. This is where the CNI part of Azure CNI comes into play. Azure CNI is an implementation of the [Container Network Interface](https://github.com/containernetworking/cni/blob/master/README.md) specification. Azure CNI is deployed on each node, and defined via a flag as the CNI plugin when the kubelet process starts. Additionally, CNI implementations are reponsible for providing an IPAM (IP Address Management) implementation for IP address assignment.
 
@@ -214,7 +214,7 @@ The only other thing to look at, which we touched on in part 1, is how iptables 
 
 ### Next
 
-[IPTables](../aks-networking-iptables)
+[IPTables]({{< relref "aks-networking-iptables" >}})
 
 ### Big Picture
 

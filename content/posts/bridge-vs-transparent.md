@@ -8,11 +8,11 @@ tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 ## Overview
 
-In our [Azure CNI](../aks-networking-part1) and [Kubenet](../aks-networking-part1) overviews, we assumed no network policy is deployed on our cluster. When you enable network policy there are a few fundamental changes that are probably worth calling out. I'm going to focus on Calico network policy in AKS, which is implemented using open source Calico.
+In our [Azure CNI]({{< relref "aks-networking-part1" >}}) and [Kubenet]({{< relref "aks-networking-part1" >}}) overviews, we assumed no network policy is deployed on our cluster. When you enable network policy there are a few fundamental changes that are probably worth calling out. I'm going to focus on Calico network policy in AKS, which is implemented using open source Calico.
 
 ## Azure CNI
 
-If we take a look at the ['Technical Deep Dive'](https://azure.microsoft.com/en-us/blog/integrating-azure-cni-and-calico-a-technical-deep-dive/) doc for Azure CNI we see that when you implement network policy on a cluster there is one fundamental change. We move from 'bridge mode' to 'transparent mode' networking. What does that actually mean? Well, we can see it very quickly and easily by running either the kubenet or azure cni deployments we already talked about, setting the '--network-policy calico' flag and then running through the same analysis we've already shown in [part1](../aks-networking-part1) and [part2](../aks-networking-part2) of our networking overview.
+If we take a look at the ['Technical Deep Dive'](https://azure.microsoft.com/en-us/blog/integrating-azure-cni-and-calico-a-technical-deep-dive/) doc for Azure CNI we see that when you implement network policy on a cluster there is one fundamental change. We move from 'bridge mode' to 'transparent mode' networking. What does that actually mean? Well, we can see it very quickly and easily by running either the kubenet or azure cni deployments we already talked about, setting the '--network-policy calico' flag and then running through the same analysis we've already shown in [part1]({{< relref "aks-networking-part1" >}}) and [part2]({{< relref "aks-networking-part2" >}}) of our networking overview.
 
 ```bash
 # We'll re-use the RG and LOC, so lets set those

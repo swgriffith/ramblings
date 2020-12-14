@@ -8,7 +8,7 @@ tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 ## Overview
 
-In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of 'ClientIP' to enable sticky sessions. If you haven't run through that, then I'd definitely give [part 1](../aks-advanced-loadbalancing) a read before continuing here.
+In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of 'ClientIP' to enable sticky sessions. If you haven't run through that, then I'd definitely give [part 1]({{< relref "aks-advanced-loadbalancing" >}}) a read before continuing here.
 
 We're working our way down from an external user sending traffic through the ALB into a cluster, through an ingress controller and ultimately landing on a pod. After looking at the ALB, the next hop in our journey is a Kubernetes service. In this post we'll crack open iptables to see how creation and modification of a service ultimately translates to inter-cluster routing.
 
@@ -24,11 +24,11 @@ I won't go into a full explanation of services in Kubernetes here, as the Kubern
 
 1. [kube-proxy](https://kubernetes.io/docs/concepts/overview/components/#kube-proxy) is responsible for interacting with the host node packet filtering implementation to set up relevant routes for resources on the cluster based on the 'type' you set
 
-1. A service of type 'LoadBalancer' will trigger a call to the cloud provider to deploy a load balancer on the host cloud (ex. In AKS an ALB will be created. See [part 1](../aks-advanced-loadbalancing) for more details on this implementation)
+1. A service of type 'LoadBalancer' will trigger a call to the cloud provider to deploy a load balancer on the host cloud (ex. In AKS an ALB will be created. See [part 1]({{< relref "aks-advanced-loadbalancing" >}}) for more details on this implementation)
 
 ## Setup
 
-For this walk-through we're going to re-use the cluster created in [part 1](../aks-advanced-loadbalancing). This setup includes the following:
+For this walk-through we're going to re-use the cluster created in [part 1]({{< relref "aks-advanced-loadbalancing" >}}). This setup includes the following:
 
 * Resource Group
 * Vnet with a subnet for the cluster
@@ -40,7 +40,7 @@ For this walk-through we're going to re-use the cluster created in [part 1](../a
 
 ## ALB Routing Review
 
-As we discussed in [part 1](../aks-advanced-loadbalancing), the 'Default' distribution method for an ALB is hash based. That means that it uses a hash of the source and destination IP and ports, along with the protocol, to distribute traffic. This can be modified by enabling sessionAffinity on the Service, but lets leave it to Default for now. 
+As we discussed in [part 1]({{< relref "aks-advanced-loadbalancing" >}}), the 'Default' distribution method for an ALB is hash based. That means that it uses a hash of the source and destination IP and ports, along with the protocol, to distribute traffic. This can be modified by enabling sessionAffinity on the Service, but lets leave it to Default for now. 
 
 Let's again use [ssh-jump](https://github.com/yokawasa/kubectl-plugin-ssh-jump/blob/master/README.md) to access a node and fire up our sweet [tshark](https://www.wireshark.org/docs/man-pages/tshark.html) command to watch for traffic. We'll again use [hey](https://github.com/rakyll/hey) to throw some requests at the cluster with tcp-keep-alive disabled.
 
@@ -88,7 +88,7 @@ As you can see, our ALB is evenly distributing traffic such that we have some tr
 
 So how does this traffic actually hit a node where a pod doesnt exist and then get bounced over to the right node. The answer lies in the impact of Service creation on kube-proxy and iptables. Lets have a look at the iptables rules on our node.
 
->**NOTE:** We're going to run through some iptables commands which you have seen before if you read my post on [AKS Networking iptables](../aks-networking-iptables). If you haven't read that, it's probably worth a quick scan.
+>**NOTE:** We're going to run through some iptables commands which you have seen before if you read my post on [AKS Networking iptables]({{< relref "aks-networking-iptables" >}}). If you haven't read that, it's probably worth a quick scan.
 
 ```bash
 # First have a look at the KUBE-SERVICES chain
@@ -180,7 +180,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
 ```
 
-On this kubenet cluster, any packet destined for my local node pod cidr of 10.100.0.0/24 will get sent to the cbr0 bridge network, otherwise it will go the way of the subnet gateway at 10.220.1.1, which will make sure it gets to the right node. Go back and check out [AKS Networking Part 1](../aks-networking-part1) and [AKS Networking Part 2](../aks-networking-part2) for more details.
+On this kubenet cluster, any packet destined for my local node pod cidr of 10.100.0.0/24 will get sent to the cbr0 bridge network, otherwise it will go the way of the subnet gateway at 10.220.1.1, which will make sure it gets to the right node. Go back and check out [AKS Networking Part 1]({{< relref "aks-networking-part1" >}}) and [AKS Networking Part 2]({{< relref "aks-networking-part2" >}}) for more details.
 
 ## Scaling Impact
 
@@ -214,7 +214,7 @@ As I mentioned, I'm not going to make you read ALL of the chains. Just know that
 
 ## sessionAffinity
 
-The last thing we'll look at is the impact of the Kubernetes service sessionAffinity option. As we saw in [part 1](../aks-adv-loadbalancing), if we set the sessionAffinity to ClientIP, the ALB gets updated to use SourceIP based distribution...but what does that do on the Kubernetes service side. Looking at the above we can see that once a packet hits iptables it will statistically distribute, so it goes to reason that a change must occur within iptables to make the pod sticky rather than using pure statistic load balancing.
+The last thing we'll look at is the impact of the Kubernetes service sessionAffinity option. As we saw in [part 1]({{< relref "aks-advanced-loadbalancing" >}}), if we set the sessionAffinity to ClientIP, the ALB gets updated to use SourceIP based distribution...but what does that do on the Kubernetes service side. Looking at the above we can see that once a packet hits iptables it will statistically distribute, so it goes to reason that a change must occur within iptables to make the pod sticky rather than using pure statistic load balancing.
 
 ```bash
 # Again...channel your inner villain and lets directly edit the service

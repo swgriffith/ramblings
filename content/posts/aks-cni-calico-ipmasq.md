@@ -8,7 +8,7 @@ tags: ["azure", "kubernetes", "networking", "kubenet", "azure cni", "cni", "aks"
 
 ## Overview
 
-Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I've covered this a bit when I dug into the Azure CNI and it's impact on iptables in my [Aks Networking Iptables in AKS](../aks-networking-iptables) post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it what ranges it should ignore for outbound NAT. By default this range is set to the cluster's Vnet CIDR, however, in this post I was only looking at Azure CNI without any Kubernetes Network Policy applied. When you introduce calico into the mix some interesting things happen. Most noteably the ip-masq-agent config I shared in that article gets hijacked by Calico. Lets have a quick look at how this works.
+Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I've covered this a bit when I dug into the Azure CNI and it's impact on iptables in my [Aks Networking Iptables in AKS]({{< relref "aks-networking-iptables" >}}) post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it what ranges it should ignore for outbound NAT. By default this range is set to the cluster's Vnet CIDR, however, in this post I was only looking at Azure CNI without any Kubernetes Network Policy applied. When you introduce calico into the mix some interesting things happen. Most noteably the ip-masq-agent config I shared in that article gets hijacked by Calico. Lets have a quick look at how this works.
 
 ## Setup
 

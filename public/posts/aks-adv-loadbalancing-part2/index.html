@@ -74,7 +74,7 @@ if (!doNotTrack) {
     </header>
     <div class="post-content">
       <h2 id="overview">Overview</h2>
-<p>In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &lsquo;ClientIP&rsquo; to enable sticky sessions. If you haven&rsquo;t run through that, then I&rsquo;d definitely give <a href="../aks-advanced-loadbalancing">part 1</a> a read before continuing here.</p>
+<p>In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &lsquo;ClientIP&rsquo; to enable sticky sessions. If you haven&rsquo;t run through that, then I&rsquo;d definitely give <a href="/posts/aks-advanced-loadbalancing/">part 1</a> a read before continuing here.</p>
 <p>We&rsquo;re working our way down from an external user sending traffic through the ALB into a cluster, through an ingress controller and ultimately landing on a pod. After looking at the ALB, the next hop in our journey is a Kubernetes service. In this post we&rsquo;ll crack open iptables to see how creation and modification of a service ultimately translates to inter-cluster routing.</p>
 <h2 id="services">Services</h2>
 <p>I won&rsquo;t go into a full explanation of services in Kubernetes here, as the Kubernetes <a href="https://kubernetes.io/docs/concepts/services-networking/service/">docs</a> do a good job of that on their own, but I will lay out a few key concepts relative to Azure Kubernetes Service.</p>
@@ -92,11 +92,11 @@ if (!doNotTrack) {
 <p><a href="https://kubernetes.io/docs/concepts/overview/components/#kube-proxy">kube-proxy</a> is responsible for interacting with the host node packet filtering implementation to set up relevant routes for resources on the cluster based on the &lsquo;type&rsquo; you set</p>
 </li>
 <li>
-<p>A service of type &lsquo;LoadBalancer&rsquo; will trigger a call to the cloud provider to deploy a load balancer on the host cloud (ex. In AKS an ALB will be created. See <a href="../aks-advanced-loadbalancing">part 1</a> for more details on this implementation)</p>
+<p>A service of type &lsquo;LoadBalancer&rsquo; will trigger a call to the cloud provider to deploy a load balancer on the host cloud (ex. In AKS an ALB will be created. See <a href="/posts/aks-advanced-loadbalancing/">part 1</a> for more details on this implementation)</p>
 </li>
 </ol>
 <h2 id="setup">Setup</h2>
-<p>For this walk-through we&rsquo;re going to re-use the cluster created in <a href="../aks-advanced-loadbalancing">part 1</a>. This setup includes the following:</p>
+<p>For this walk-through we&rsquo;re going to re-use the cluster created in <a href="/posts/aks-advanced-loadbalancing/">part 1</a>. This setup includes the following:</p>
 <ul>
 <li>Resource Group</li>
 <li>Vnet with a subnet for the cluster</li>
@@ -110,7 +110,7 @@ if (!doNotTrack) {
 <li>Test Application deployment with a Service of type LoadBalancer</li>
 </ul>
 <h2 id="alb-routing-review">ALB Routing Review</h2>
-<p>As we discussed in <a href="../aks-advanced-loadbalancing">part 1</a>, the &lsquo;Default&rsquo; distribution method for an ALB is hash based. That means that it uses a hash of the source and destination IP and ports, along with the protocol, to distribute traffic. This can be modified by enabling sessionAffinity on the Service, but lets leave it to Default for now.</p>
+<p>As we discussed in <a href="/posts/aks-advanced-loadbalancing/">part 1</a>, the &lsquo;Default&rsquo; distribution method for an ALB is hash based. That means that it uses a hash of the source and destination IP and ports, along with the protocol, to distribute traffic. This can be modified by enabling sessionAffinity on the Service, but lets leave it to Default for now.</p>
 <p>Let&rsquo;s again use <a href="https://github.com/yokawasa/kubectl-plugin-ssh-jump/blob/master/README.md">ssh-jump</a> to access a node and fire up our sweet <a href="https://www.wireshark.org/docs/man-pages/tshark.html">tshark</a> command to watch for traffic. We&rsquo;ll again use <a href="https://github.com/rakyll/hey">hey</a> to throw some requests at the cluster with tcp-keep-alive disabled.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Get the node name for the node running out pod</span>
 kubectl get pods -o wide
@@ -147,7 +147,7 @@ hey --disable-keepalive -d <span style="color:#e6db74">&#34;YO&#34;</span> -n <s
 <h2 id="iptables-and-kubernetes-services">iptables and Kubernetes Services</h2>
 <p>So how does this traffic actually hit a node where a pod doesnt exist and then get bounced over to the right node. The answer lies in the impact of Service creation on kube-proxy and iptables. Lets have a look at the iptables rules on our node.</p>
 <blockquote>
-<p><strong>NOTE:</strong> We&rsquo;re going to run through some iptables commands which you have seen before if you read my post on <a href="../aks-networking-iptables">AKS Networking iptables</a>. If you haven&rsquo;t read that, it&rsquo;s probably worth a quick scan.</p>
+<p><strong>NOTE:</strong> We&rsquo;re going to run through some iptables commands which you have seen before if you read my post on <a href="/posts/aks-networking-iptables/">AKS Networking iptables</a>. If you haven&rsquo;t read that, it&rsquo;s probably worth a quick scan.</p>
 </blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># First have a look at the KUBE-SERVICES chain</span>
 sudo iptables -t nat -nL KUBE-SERVICES
@@ -223,7 +223,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 168.63.129.16   10.220.1.1      255.255.255.255 UGH   <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span> eth0
 169.254.169.254 10.220.1.1      255.255.255.255 UGH   <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span> eth0
 172.17.0.0      0.0.0.0         255.255.0.0     U     <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">0</span> docker0
-</code></pre></div><p>On this kubenet cluster, any packet destined for my local node pod cidr of 10.100.0.0/24 will get sent to the cbr0 bridge network, otherwise it will go the way of the subnet gateway at 10.220.1.1, which will make sure it gets to the right node. Go back and check out <a href="../aks-networking-part1">AKS Networking Part 1</a> and <a href="../aks-networking-part2">AKS Networking Part 2</a> for more details.</p>
+</code></pre></div><p>On this kubenet cluster, any packet destined for my local node pod cidr of 10.100.0.0/24 will get sent to the cbr0 bridge network, otherwise it will go the way of the subnet gateway at 10.220.1.1, which will make sure it gets to the right node. Go back and check out <a href="/posts/aks-networking-part1/">AKS Networking Part 1</a> and <a href="/posts/aks-networking-part2/">AKS Networking Part 2</a> for more details.</p>
 <h2 id="scaling-impact">Scaling Impact</h2>
 <p>Thus far we&rsquo;ve had a deployment with only a single replica (i.e. single pod). Lets take a quick look at what happens when we scale up. To save on bytes, I&rsquo;ll isolate this down to JUST the parts from the above iptables chains that actually change.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Scale the deployment</span>
@@ -245,7 +245,7 @@ KUBE-SEP-SHJOK7USDC7L53KY  all  --  0.0.0.0/0            0.0.0.0/0            st
 KUBE-SEP-STQ7EMRESDHHERMG  all  --  0.0.0.0/0            0.0.0.0/0
 </code></pre></div><p>As I mentioned, I&rsquo;m not going to make you read ALL of the chains. Just know that the KUBE-SVC-XXXX chain is the only one that really changed. As you can see above, we now have three KUBE-SEP-XXXX chains that will be hit using a statistical distribution of 1/3 to each. They execute in order, so if the first rule doesn&rsquo;t hit then there are only two left which switches the probability to 50%&hellip;so don&rsquo;t let that confuse you. It&rsquo;s still evenly distributing across the three backend pods. Again, as above, once the KUBE-SEP-XXXX chain is hit, then we do a DNAT to the right pod IP and the host network routing takes over to get the packet to the right host and/or bridge network.</p>
 <h2 id="sessionaffinity">sessionAffinity</h2>
-<p>The last thing we&rsquo;ll look at is the impact of the Kubernetes service sessionAffinity option. As we saw in <a href="../aks-adv-loadbalancing">part 1</a>, if we set the sessionAffinity to ClientIP, the ALB gets updated to use SourceIP based distribution&hellip;but what does that do on the Kubernetes service side. Looking at the above we can see that once a packet hits iptables it will statistically distribute, so it goes to reason that a change must occur within iptables to make the pod sticky rather than using pure statistic load balancing.</p>
+<p>The last thing we&rsquo;ll look at is the impact of the Kubernetes service sessionAffinity option. As we saw in <a href="/posts/aks-advanced-loadbalancing/">part 1</a>, if we set the sessionAffinity to ClientIP, the ALB gets updated to use SourceIP based distribution&hellip;but what does that do on the Kubernetes service side. Looking at the above we can see that once a packet hits iptables it will statistically distribute, so it goes to reason that a change must occur within iptables to make the pod sticky rather than using pure statistic load balancing.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Again...channel your inner villain and lets directly edit the service</span>
 kubectl edit svc testapp
 
