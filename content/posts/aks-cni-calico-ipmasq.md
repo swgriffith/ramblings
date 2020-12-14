@@ -258,6 +258,6 @@ Success! The server in Vnet B now can see the pod IP!
 
 ## Summary
 
-As we saw in this post, Azure CNI will use the ip-masq-agent to snat any traffic leaving the vnet, but when we enable Calico network policy that control is taken over by Calico itself. Calico uses the IPPool crd to allow you to manage ippools, which are implemented with ipsets and the ipset iptables extension. You can add an IPPool to your cluster to your cluster to extend the range of IPs that will be ignored from SNAT. 
+As we saw in this post, Azure CNI will use the ip-masq-agent to snat any traffic leaving the vnet, but when we enable Calico network policy that control is taken over by Calico itself. Calico uses the IPPool crd to allow you to manage ippools, which are implemented with ipsets and the ipset iptables extension. You can add an IPPool to your cluster to extend the range of IPs that will be ignored from SNAT. 
 
 > **WARNING:** My understanding is that some network appliances may not like to see pod traffic that hasnt been NAT'd to a real host IP address, and may drop that traffic. I need to dig into this topic further in a future post, but for now you should proceed with caution when updating ippools in your AKS clusters. Assume that AKS does this SNAT for traffic outside of the Vnet for good reason, and do your own extensive testing for any such change.
