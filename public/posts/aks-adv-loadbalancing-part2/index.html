@@ -3,7 +3,7 @@
   <head>
     <title>AKS Advanced Load Balancing Part 2: Kubernetes Services // Steve Griffith</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="generator" content="Hugo 0.83.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
@@ -22,7 +22,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AKS Advanced Load Balancing Part 2: Kubernetes Services"/>
 <meta name="twitter:description" content="Overview In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &lsquo;ClientIP&rsquo; to enable sticky sessions. If you haven&rsquo;t run through that, then I&rsquo;d definitely give part 1 a read before continuing here."/>
@@ -31,9 +30,10 @@ if (!doNotTrack) {
     <meta property="og:title" content="AKS Advanced Load Balancing Part 2: Kubernetes Services" />
 <meta property="og:description" content="Overview In my last post I focused on getting a deeper understanding of how AKS interacts with Azure, and specifically the Azure Load Balancer (ALB), to route traffic into a cluster. We walked through the default hashed based load balancing algorithm, and then showed the routing and ALB impact of using the Kubernetes service sessionAffinity mode of &lsquo;ClientIP&rsquo; to enable sticky sessions. If you haven&rsquo;t run through that, then I&rsquo;d definitely give part 1 a read before continuing here." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-11-18T11:36:21-05:00" />
 <meta property="article:modified_time" content="2020-11-18T11:36:21-05:00" />
+
 
 
   </head>

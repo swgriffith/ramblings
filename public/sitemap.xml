@@ -1,250 +1,155 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>https://www.stevegriffith.nyc/posts/lizardo/</loc>
+    <lastmod>2022-01-24T16:07:41-05:00</lastmod>
+  </url><url>
+    <loc>https://www.stevegriffith.nyc/posts/</loc>
+    <lastmod>2022-01-24T16:07:41-05:00</lastmod>
+  </url><url>
+    <loc>https://www.stevegriffith.nyc/</loc>
+    <lastmod>2022-01-24T16:07:41-05:00</lastmod>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/aks/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/aks/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/azure/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/azure/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/azure-cni/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/calico/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/cni/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/kubenet/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/kubernetes/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/kubernetes/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/networking/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/networking/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.stevegriffith.nyc/posts/</loc>
-    <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://www.stevegriffith.nyc/</loc>
-    <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/</loc>
     <lastmod>2020-12-11T11:42:17-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-adv-loadbalancing-part2/</loc>
     <lastmod>2020-11-18T11:36:21-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/load-balancer/</loc>
     <lastmod>2020-11-18T11:36:21-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/</loc>
     <lastmod>2020-11-16T10:50:23-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/bridge-vs-transparent/</loc>
     <lastmod>2020-11-11T13:56:01-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/bridge/</loc>
     <lastmod>2020-11-11T13:56:01-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/transparent/</loc>
     <lastmod>2020-11-11T13:56:01-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-networking-iptables/</loc>
     <lastmod>2020-11-06T13:56:40-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-networking-part1/</loc>
     <lastmod>2020-11-06T13:56:29-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-networking-part2/</loc>
     <lastmod>2020-11-06T13:56:29-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-networking/</loc>
     <lastmod>2020-11-06T13:56:05-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/aad/</loc>
     <lastmod>2019-10-03T16:36:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/aks-minimum-permissions/</loc>
     <lastmod>2019-10-03T16:36:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/azure-ad/</loc>
     <lastmod>2019-10-03T16:36:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/azure-ad/</loc>
     <lastmod>2019-10-03T16:36:14-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/devops/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/devops/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/git/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/git-learnin/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/introduction/</loc>
     <lastmod>2019-01-02T11:37:50-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/arch/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/fido/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/google/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/linux/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/security/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/security-key/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/titan-key-arch/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/titan/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/u2f/</loc>
     <lastmod>2018-12-19T10:42:47-05:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/azure-storage/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/posts/newblog/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/tags/static-content/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://www.stevegriffith.nyc/categories/web-hosting/</loc>
     <lastmod>2018-10-29T14:11:52-04:00</lastmod>
   </url>
-  
 </urlset>

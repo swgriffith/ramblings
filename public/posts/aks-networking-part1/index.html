@@ -3,7 +3,7 @@
   <head>
     <title>Aks Networking Part 1 - Kubenet on AKS // Steve Griffith</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="generator" content="Hugo 0.83.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
@@ -22,7 +22,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Aks Networking Part 1 - Kubenet on AKS"/>
 <meta name="twitter:description" content="Setup For this session we&rsquo;ll create a resource group with a Vnet, three subnets and two AKS Clusters.
@@ -33,9 +32,10 @@ Create Resource Group, Vnet and Subnets RG=NetworkLab LOC=eastus VNET_CIDR=&#34;
 <meta property="og:description" content="Setup For this session we&rsquo;ll create a resource group with a Vnet, three subnets and two AKS Clusters.
 Create Resource Group, Vnet and Subnets RG=NetworkLab LOC=eastus VNET_CIDR=&#34;10.220.0.0/16&#34; KUBENET_AKS_CIDR=&#34;10.220.1.0/24&#34; AZURECNI_AKS_CIDR=&#34;10.220.2.0/24&#34; SVC_LB_CIDR=&#34;10.220.3.0/24&#34; # Create Resource Group az group create -n $RG -l $LOC # Create Vnet az network vnet create \ -g $RG \ -n aksvnet \ --address-prefix $VNET_CIDR # Create Kubenet AKS Cluster Subnet az network vnet subnet create \  --resource-group $RG \  --vnet-name aksvnet \  --name kubenet \  --address-prefix $KUBENET_AKS_CIDR # Get the Kubenet Subnet ID KUBENET_SUBNET_ID=$(az network vnet show -g $RG -n aksvnet -o tsv --query &#34;subnets[?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-networking-part1/" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-networking-part1/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-11-06T13:56:29-05:00" />
 <meta property="article:modified_time" content="2020-11-06T13:56:29-05:00" />
+
 
 
   </head>

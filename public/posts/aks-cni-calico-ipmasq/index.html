@@ -3,7 +3,7 @@
   <head>
     <title>AKS Azure CNI Calico IP Masquerade // Steve Griffith</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="generator" content="Hugo 0.83.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
@@ -22,7 +22,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AKS Azure CNI Calico IP Masquerade"/>
 <meta name="twitter:description" content="Overview Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&rsquo;ve covered this a bit when I dug into the Azure CNI and it&rsquo;s impact on iptables in my Aks Networking Iptables in AKS post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it what ranges it should ignore for outbound NAT."/>
@@ -31,9 +30,10 @@ if (!doNotTrack) {
     <meta property="og:title" content="AKS Azure CNI Calico IP Masquerade" />
 <meta property="og:description" content="Overview Recently someone raised a question because they were seeing their traffic source NAT to the node IP when using Azure CNI and Calico. I&rsquo;ve covered this a bit when I dug into the Azure CNI and it&rsquo;s impact on iptables in my Aks Networking Iptables in AKS post. The short version is that the ip-masq-agent that runs in the cluster has a matching configmap which tells it what ranges it should ignore for outbound NAT." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-12-11T11:42:17-05:00" />
 <meta property="article:modified_time" content="2020-12-11T11:42:17-05:00" />
+
 
 
   </head>

@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Steve Griffith</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Dec 2020 11:42:17 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jan 2022 16:07:41 -0500</lastBuildDate><atom:link href="https://www.stevegriffith.nyc/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lizardo</title>
+      <link>https://www.stevegriffith.nyc/posts/lizardo/</link>
+      <pubDate>Mon, 24 Jan 2022 16:07:41 -0500</pubDate>
+      
+      <guid>https://www.stevegriffith.nyc/posts/lizardo/</guid>
+      <description>Lizardo Meet Asher! This year for Christmas, one of our children decided they really wanted a bearded dragon. They asked Santa for the equipment (tank, etc) and then after Christmas we all went out and bought the dragon. Bearded dragons are great pets, apart from all the live roaches we now need to keep stored in our apartment, and the constant fear that they&amp;rsquo;ll escape and crawl all over me while I sleep.</description>
+    </item>
+    
     <item>
       <title>AKS Azure CNI Calico IP Masquerade</title>
       <link>https://www.stevegriffith.nyc/posts/aks-cni-calico-ipmasq/</link>

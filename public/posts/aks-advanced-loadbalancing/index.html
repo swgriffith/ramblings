@@ -3,7 +3,7 @@
   <head>
     <title>AKS Advanced Load Balancing - Part 1: Azure Load Balancer // Steve Griffith</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.75.1" />
+    <meta name="generator" content="Hugo 0.83.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Steve Griffth" />
     <meta name="description" content="" />
@@ -22,7 +22,6 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script>
-
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AKS Advanced Load Balancing - Part 1: Azure Load Balancer"/>
 <meta name="twitter:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance."/>
@@ -31,9 +30,10 @@ if (!doNotTrack) {
     <meta property="og:title" content="AKS Advanced Load Balancing - Part 1: Azure Load Balancer" />
 <meta property="og:description" content="Overview In the next few posts (yeah&hellip;I think this will require a few)..we&rsquo;re going to run through what the end to end traffic flow looks like for a packet going through an Azure Load Balancer, into a Kubernetes service, then an ingress controller and finally to a backend set of pods. In particular, I want to help clarify the routing decisions that are made at each step of the flow and how that can impact your application behavior and performance." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/aks-advanced-loadbalancing/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-11-16T10:50:23-05:00" />
 <meta property="article:modified_time" content="2020-11-16T10:50:23-05:00" />
+
 
 
   </head>
