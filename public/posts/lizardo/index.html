@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Lizardo // Steve Griffith</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.83.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Steve Griffth" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://www.stevegriffith.nyc/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-129005800-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Lizardo"/>
+<meta name="twitter:description" content="Lizardo Meet Asher! This year for Christmas, one of our children decided they really wanted a bearded dragon. They asked Santa for the equipment (tank, etc) and then after Christmas we all went out and bought the dragon. Bearded dragons are great pets, apart from all the live roaches we now need to keep stored in our apartment, and the constant fear that they&rsquo;ll escape and crawl all over me while I sleep."/>
+<meta name="twitter:site" content="@SteveGriffith"/>
+
+    <meta property="og:title" content="Lizardo" />
+<meta property="og:description" content="Lizardo Meet Asher! This year for Christmas, one of our children decided they really wanted a bearded dragon. They asked Santa for the equipment (tank, etc) and then after Christmas we all went out and bought the dragon. Bearded dragons are great pets, apart from all the live roaches we now need to keep stored in our apartment, and the constant fear that they&rsquo;ll escape and crawl all over me while I sleep." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.stevegriffith.nyc/posts/lizardo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-24T16:07:41-05:00" />
+<meta property="article:modified_time" content="2022-01-24T16:07:41-05:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://www.stevegriffith.nyc/"><img class="app-header-avatar" src="/images/me.jpg" alt="Steve Griffth" /></a>
+      <h1>Steve Griffith</h1>
+      <p>Microsoft Cloud Native Global Black Belt. This is my personal blog, so opinions are my own.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Lizardo</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 24, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          15 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <h1 id="lizardo">Lizardo</h1>
+<p><img src="/lizardo/asher.png" alt="Asher"></p>
+<p>Meet Asher! This year for Christmas, one of our children decided they really wanted a bearded dragon. They asked Santa for the equipment (tank, etc) and then after Christmas we all went out and bought the dragon. Bearded dragons are great pets, apart from all the live roaches we now need to keep stored in our apartment, and the constant fear that they&rsquo;ll escape and crawl all over me while I sleep. That aside, they&rsquo;re great.</p>
+<p>So we have this new member of our family, and he (or she&hellip;TBD) is pretty easy to care for, but does have some strict requirements around temperature and humidity. We live in an apartment building where we have zero control over the heat, and since our heat is hot water radiator based, our rooms get extremely dry in the winter, requiring several humidifiers. We needed a way to monitor the tank and make sure that Ash was in a good spot.</p>
+<p>I love tinkering with electronics, so this was a perfect opportunity to put something together that was both fun and useful. Here we go&hellip;.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Reqs were pretty easy.</p>
+<ol>
+<li>Monitor temperature</li>
+<li>Monitor Humidity</li>
+<li>Temp and humidity need to be track on both the basking and abmient sides of the tank separately</li>
+<li>Provide historic data for review</li>
+<li>Be accessible from the public internet</li>
+<li>Optional: Web Cam Support</li>
+</ol>
+<h2 id="shopping">Shopping</h2>
+<p>First think I needed to work out was the microcontroller platform I wanted to use. I looked at a number of options (arduino, feather, pi), but given that I wanted to have support for a web cam in the future, I thought it made most sense to go with a Raspberry Pi based platform. I also happened to have an extra Pi 3 B laying around.</p>
+<p>Knowing that I was going with a Pi then opened up the question of what sensors I needed. I initially wasn&rsquo;t thinking enough about the fact that on the Pi I&rsquo;d likely be using Python, so I wasn&rsquo;t really thinking much in terms of sensors with existing Python libraries. This was a bit of a mistake.</p>
+<blockquote>
+<p><em>LESSON:</em> If you plan to use python&hellip;maybe think about looking for sensors that have a python library available&hellip;.duh.</p>
+</blockquote>
+<p>So, in my ignorance, I went with the <a href="https://www.adafruit.com/product/5064">SHT30</a> from Adafruit. This is a nicely packaged version of the Sensiron SHT-30 digital sensor. It uses I2C for communication, which is another plus, but I didn&rsquo;t find a library&hellip;although I do think there is one out there..I just couldn&rsquo;t find it.</p>
+<p>I did buy a camera, and have tested it, but I&rsquo;ll post separately about that. I wanted an IR camera, and I found this one that has a nice housing with added IR lights.</p>
+<p><a href="https://www.amazon.com/gp/product/B07BK1QZ2L/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;th=1">MakerFocus Raspberry Pi 4B Camera IR Camera Module</a></p>
+<p><img src="/lizardo/picam.png" alt="picam"></p>
+<p>For connecting the sensors to the pi I wanted something that was clean. I ended up going with a <a href="https://www.adafruit.com/product/2711">Raspberry Pi EZ-Connect hat</a>. I really like this hat, but I did run into a few minor issues that I&rsquo;ll discuss when I get to the I2C topic. In short, if I did it again, I may have looked for an I2C multiplexer hat instead of something more generic (ex. <a href="https://www.pishop.us/product/i2c-multiplexer-8-way-phat-for-raspberry-pi/">i2c 8 way hat</a>).</p>
+<p>Since I didn&rsquo;t have a multiplexer in the pi ez-connect, I also picked up a <a href="https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview">tca9548a I2C multiplexer</a>. More on that below.</p>
+<p>Finally, the enclosure. I happened to have an old enclosure lying around that fit a raspberry pi, for another project I had teed up that I never got to. I dont have the link to that, but you can find many suitable enclosures online. Just make sure you buy one tall enough to house whatever hat you put on the pi, as well as any wiring or other components you include.</p>
+<h2 id="inter-integrated-circuit-bus-i2c-challenges">Inter-integrated Circuit Bus (I2C) Challenges</h2>
+<p>Many of the sensors and components you find out there will leverage I2C for communication. You can read all the details on I2C <a href="https://en.wikipedia.org/wiki/I%C2%B2C">here</a>, but in short&hellip;all of your sensors are connected with four wires/pins:</p>
+<ul>
+<li>Vin (power)</li>
+<li>GND (ground)</li>
+<li>SCL (clock)</li>
+<li>SDA (data)</li>
+</ul>
+<p>Your micro controller likely provides at least one I2C bus. Raspberry Pi, depending on the model, actually has several. You can also connect multiple sensors to a single I2C bus, because all sensors have a unique address. For example, the address that is hard wired into the SHT30 sensor is 0x44.</p>
+<p>This is great, except for one problem. You can&rsquo;t have two sensors with a common address on the same I2C bus. Most sensors will have a jumper you can adjust, or other setting you can apply to change the address. Unfortunately, while you can change the address of the SHT30 sensor, in the housing provided by Adafruit, you don&rsquo;t have that access.</p>
+<p>So, how do you solve this? First I went down the path of enabling the second I2C bus on my Pi 3 B, but I had a TON of time finding good documentation, and apparently there may be pull up resistors needed, etc, etc. I pretty quickly bailed on this once I saw the option to use an I2C multiplexer. This was nice because it solved my current problem, and also opened up the option to easily add more sensors down the road, without worrying about the Raspberry Pi I2C bus setup.</p>
+<p>The TCA9548A multiplexer (shown below) connects to your pi on the I2C port at address 0x70 and allows you to connect up to 8 I2C devices which are programatically selectable. So once connected, you can tell it which channel you want to talk to, and then just call it as if it isnt there, routing you directly to the target I2C device.</p>
+<p><img src="/lizardo/tca94548a.jpeg" alt="tca9458a"></p>
+<h2 id="the-build">The build</h2>
+<p>Ok, now we have all of our parts, lets assemble!</p>
+<p>Sorry, I know the diagram isnt very polished, but I had trouble finding all the components I needed in Fritzing, so I just threw this together quick in PowerPoint. The wiring it pretty easy.</p>
+<ol>
+<li>Connect the grounds from all of your devices (2 SHT30s and the TCA9548) to the ground connectors on the EZ-Connect hat</li>
+<li>Connect the SDA (white wire) from G2 on the hat to the SDA pin on the TCA9548</li>
+<li>Connect the SCL (yellow wire) from G3 on the hat to the SCL pin on the TCA9548</li>
+<li>Connect the SD0 and SC0 pins on the TCA9548 to the yellow (SCL) and white (SDA) wires on your first SHT30 sensor</li>
+<li>Connect the SD1 and SC1 pins on the TCA9548 to the yellow (SCL) and white (SDA) wires on your second SHT30 sensor</li>
+<li>Finally, connect the power lines from both sensors and your TCA9548 to the 5V header connectors on the EZ-Connect hat</li>
+</ol>
+<p><img src="/lizardo/wiring.png" alt="wiring"></p>
+<p>Fire up your pi and enable your I2C ports and check for the multiplexer:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Run raspi-config</span>
+sudo raspi-config
+
+<span style="color:#75715e"># Select &#39;3 Interface Options&#39;</span>
+<span style="color:#75715e"># Select &#39;I5 I2C Enable/disable automatic loading of I2C kernel module&#39;</span>
+<span style="color:#75715e"># Select yes when asked &#39;Would you like the ARM I2C interface to be enabled?&#39;</span>
+<span style="color:#75715e"># Reboot your pi</span>
+
+<span style="color:#75715e"># Once restarted, run i2cdetect to make sure your multiplexer is being found</span>
+pi@lizardo:~ $ sudo i2cdetect -y <span style="color:#ae81ff">1</span>
+     <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: -- -- -- -- <span style="color:#ae81ff">44</span> -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: <span style="color:#ae81ff">70</span> -- -- -- -- -- -- --
+</code></pre></div><blockquote>
+<p><strong>NOTE:</strong> The TCA9548 multiplexer is address 0x70 and the SHT30 is address 0x44. You can see both above, although you will only see the SHT30 after you&rsquo;ve run the code below which sets the multiplexer channel.</p>
+</blockquote>
+<h2 id="the-code">The code</h2>
+<p>We want our code to run regularly, read the data, and make it available to vizualize. I came across this <a href="https://opensource.com/article/21/7/home-temperature-raspberry-pi-prometheus">great blog post</a> from <a href="https://twitter.com/ChrisInDurham">Chris Collins</a> that shows pretty much exactly what I wanted to do, but it needed to be updated to use the SHT30 sensor and my multiplexer. The nice thing about this is that it uses the Linux Journal and SystemD to keep this running as a service, but it also uses Prometheus to store the data which can then be vizualized in a tool like Grafana.</p>
+<p>Fortunately I already had Prometheus and Grafana running on an Azure Kubernetes Service cluster that I have connected to my home network over S2S VPN, so I was able to reuse that. You could, of course, set up your own local instance of prometheus in a container, or run a local Kubernetes cluster and install it there.</p>
+<p>After some trial and error, my final code looked like this (available <a href="lizardodaemon.py">here</a>):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+<span style="color:#f92672">from</span> Adafruit_GPIO <span style="color:#f92672">import</span> I2C
+<span style="color:#f92672">import</span> logging
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> smbus
+<span style="color:#f92672">from</span> prometheus_client <span style="color:#f92672">import</span> Gauge, start_http_server
+<span style="color:#f92672">from</span> systemd.journal <span style="color:#f92672">import</span> JournalHandler
+
+<span style="color:#75715e"># Setup logging to the Systemd Journal</span>
+log <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(<span style="color:#e6db74">&#39;sht30_sensor&#39;</span>)
+log<span style="color:#f92672">.</span>addHandler(JournalHandler())
+log<span style="color:#f92672">.</span>setLevel(logging<span style="color:#f92672">.</span>INFO)
+
+<span style="color:#75715e"># The time in seconds between sensor reads</span>
+READ_INTERVAL <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0</span>
+
+<span style="color:#75715e"># Create Prometheus gauges for humidity and temperature in</span>
+<span style="color:#75715e"># Celsius and Fahrenheit</span>
+<span style="color:#75715e"># Sensor 1 - Multiplexer Channel 0</span>
+gh <span style="color:#f92672">=</span> Gauge(<span style="color:#e6db74">&#39;sht30_humidity_percent&#39;</span>,<span style="color:#e6db74">&#39;Humidity percentage measured by the SHT30 Sensors&#39;</span>, [<span style="color:#e6db74">&#39;scale&#39;</span>])
+gt <span style="color:#f92672">=</span> Gauge(<span style="color:#e6db74">&#39;sht30_temperature&#39;</span>,<span style="color:#e6db74">&#39;Temperature measured by the SHT30 Sensors&#39;</span>, [<span style="color:#e6db74">&#39;scale&#39;</span>])
+
+<span style="color:#75715e"># Initialize the labels for the temperature scale</span>
+gh<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#39;sensor0_humidity&#39;</span>)
+gt<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#39;sensor0_fahrenheit&#39;</span>)
+gh<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#39;sensor1_humidity&#39;</span>)
+gt<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#39;sensor1_fahrenheit&#39;</span>)
+
+tca <span style="color:#f92672">=</span> I2C<span style="color:#f92672">.</span>get_i2c_device(address<span style="color:#f92672">=</span><span style="color:#ae81ff">0x70</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tca_select</span>(channel):
+    <span style="color:#e6db74">&#34;&#34;&#34;Select an individual channel.&#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">if</span> channel <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span>:
+        <span style="color:#66d9ef">return</span>
+    tca<span style="color:#f92672">.</span>writeRaw8(<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> channel)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read_sensors</span>(channel):
+    <span style="color:#66d9ef">try</span>:
+        <span style="color:#75715e"># Initialize the SHT30 sensor</span>
+        <span style="color:#75715e"># Select channel 0</span>
+        tca_select(channel)
+        <span style="color:#75715e"># Get I2C bus</span>
+        bus <span style="color:#f92672">=</span> smbus<span style="color:#f92672">.</span>SMBus(<span style="color:#ae81ff">1</span>)
+        <span style="color:#75715e"># SHT30 address, 0x44(68)</span>
+        <span style="color:#75715e"># Send measurement command, 0x2C(44)</span>
+        <span style="color:#75715e"># 0x06(06)        High repeatability measurement</span>
+        bus<span style="color:#f92672">.</span>write_i2c_block_data(<span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x2C</span>, [<span style="color:#ae81ff">0x06</span>])
+        <span style="color:#75715e"># SHT30 address, 0x44(68)</span>
+        <span style="color:#75715e"># Read data back from 0x00(00), 6 bytes</span>
+        <span style="color:#75715e"># cTemp MSB, cTemp LSB, cTemp CRC, Humididty MSB, Humidity LSB, Humidity CRC</span>
+        data <span style="color:#f92672">=</span> bus<span style="color:#f92672">.</span>read_i2c_block_data(<span style="color:#ae81ff">0x44</span>, <span style="color:#ae81ff">0x00</span>, <span style="color:#ae81ff">6</span>)
+        <span style="color:#75715e"># Convert the data</span>
+        cTemp <span style="color:#f92672">=</span> ((((data[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">256.0</span>) <span style="color:#f92672">+</span> data[<span style="color:#ae81ff">1</span>]) <span style="color:#f92672">*</span> <span style="color:#ae81ff">175</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">65535.0</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">45</span>
+        fTemp <span style="color:#f92672">=</span> cTemp <span style="color:#f92672">*</span> <span style="color:#ae81ff">1.8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">32</span>
+        humidity <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> (data[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">256</span> <span style="color:#f92672">+</span> data[<span style="color:#ae81ff">4</span>]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">65535.0</span>
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">RuntimeError</span> <span style="color:#66d9ef">as</span> e:
+        <span style="color:#75715e"># GPIO access may require sudo permissions</span>
+        <span style="color:#75715e"># Other RuntimeError exceptions may occur, but</span>
+        <span style="color:#75715e"># are common.  Just try again.</span>
+        log<span style="color:#f92672">.</span>error(<span style="color:#e6db74">&#34;RuntimeError: {}&#34;</span><span style="color:#f92672">.</span>format(e))
+
+    <span style="color:#66d9ef">if</span> humidity <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> cTemp <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None <span style="color:#f92672">and</span> fTemp <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        gh<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#34;sensor{0}_humidity&#34;</span><span style="color:#f92672">.</span>format(channel))<span style="color:#f92672">.</span>set(humidity)
+        gt<span style="color:#f92672">.</span>labels(<span style="color:#e6db74">&#34;sensor{0}_fahrenheit&#34;</span><span style="color:#f92672">.</span>format(channel))<span style="color:#f92672">.</span>set(fTemp)
+
+        log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;Sensor {0} - Temp:{1:0.1f}*F, Humidity: {2:0.1f}%&#34;</span><span style="color:#f92672">.</span>format(channel, fTemp, humidity))
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    <span style="color:#75715e"># Expose metrics</span>
+    metrics_port <span style="color:#f92672">=</span> <span style="color:#ae81ff">8000</span>
+    start_http_server(metrics_port)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Serving sensor metrics on :{}&#34;</span><span style="color:#f92672">.</span>format(metrics_port))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;Serving sensor metrics on :{}&#34;</span><span style="color:#f92672">.</span>format(metrics_port))
+
+    <span style="color:#66d9ef">while</span> True:
+        read_sensors(<span style="color:#ae81ff">0</span>)
+        read_sensors(<span style="color:#ae81ff">1</span>)
+
+</code></pre></div><p>In short, the code above does the following:</p>
+<ol>
+<li>Imports all the needed libraries for I2C wire communication, Journal and Prometheus</li>
+<li>Creates the Journal logger</li>
+<li>Creates the Prometheus metrics and labels (Note: I chose to use labels to identify each sensor rather than having separate metrics, but that was a personal choice. Separate metrics would also work)</li>
+<li>Provides a method to switch the I2C channel as needed</li>
+<li>Provides a method that selects the channel and then reads the data from the SHT30, serving that up in both the journal logs as well as to the prometheus http endpoint which will later be scraped</li>
+<li>I call the &lsquo;read_sensors&rsquo; twice. Once for SD0/SC0 and once for SD1/SC1</li>
+</ol>
+<p>Continuing along with the doc Chris wrote, we create the systemd service definition, which looks like this:</p>
+<pre><code>[Unit]
+Description=SHT30 Sensor Metrics Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=python3 /opt/lizardo-metrics/lizardodaemon.py
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>I left both of these files in my source directory and created symbolic links to the service definition, as shown below. Obviously you should implement as you see fit, but this works for me.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># From my source directory</span>
+sudo ln -s <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/lizardo-metrics.service /etc/systemd/system/lizardo-metrics.service
+sudo ln -s <span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/lizardodaemon.py /opt/lizardo-metrics
+</code></pre></div><p>Finally we can start our service and see what we have:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Enable the service</span>
+sudo systemctl enable lizardo-metrics.service
+
+<span style="color:#75715e"># Start the service</span>
+sudo systemctl start lizardo-metrics.service
+
+<span style="color:#75715e"># Check the service status</span>
+sudo systemctl status lizardo-metrics.service
+</code></pre></div><p>Your status output should look something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pi@lizardo:~ $ sudo systemctl status lizardo-metrics.service
+● lizardo-metrics.service - SHT30 Sensor Metrics Service
+     Loaded: loaded <span style="color:#f92672">(</span>/home/pi/github.com/lizardo/lizardo-metrics.service; enabled; vendor preset: enabled<span style="color:#f92672">)</span>
+     Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Fri 2022-01-21 21:04:35 GMT; <span style="color:#ae81ff">2</span> days ago
+   Main PID: <span style="color:#ae81ff">469</span> <span style="color:#f92672">(</span>python3<span style="color:#f92672">)</span>
+      Tasks: <span style="color:#ae81ff">2</span> <span style="color:#f92672">(</span>limit: 1935<span style="color:#f92672">)</span>
+        CPU: 7h 32min 30.074s
+     CGroup: /system.slice/lizardo-metrics.service
+             └─469 python3 /opt/lizardo-metrics/lizardodaemon.py
+
+Jan <span style="color:#ae81ff">24</span> 20:08:11 lizardo /opt/lizardo-metrics/lizardodaemon.py<span style="color:#f92672">[</span>469<span style="color:#f92672">]</span>: Sensor <span style="color:#ae81ff">1</span> - Temp:95.4*F, Humidity: 20.8%
+Jan <span style="color:#ae81ff">24</span> 20:08:11 lizardo /opt/lizardo-metrics/lizardodaemon.py<span style="color:#f92672">[</span>469<span style="color:#f92672">]</span>: Sensor <span style="color:#ae81ff">0</span> - Temp:85.1*F, Humidity: 26.0%
+Jan <span style="color:#ae81ff">24</span> 20:08:11 lizardo /opt/lizardo-metrics/lizardodaemon.py<span style="color:#f92672">[</span>469<span style="color:#f92672">]</span>: Sensor <span style="color:#ae81ff">1</span> - Temp:95.4*F, Humidity: 20.8%
+</code></pre></div><p>With the service running, you should also be able to access the prometheus http endpoint being hosted by the service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pi@lizardo:~ $ curl localhost:8000
+
+...
+
+sht30_humidity_percent<span style="color:#f92672">{</span>scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sensor0_humidity&#34;</span><span style="color:#f92672">}</span> 25.97390707255665
+sht30_humidity_percent<span style="color:#f92672">{</span>scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sensor1_humidity&#34;</span><span style="color:#f92672">}</span> 20.711070420386054
+<span style="color:#75715e"># HELP sht30_temperature Temperature measured by the SHT30 Sensors</span>
+<span style="color:#75715e"># TYPE sht30_temperature gauge</span>
+sht30_temperature<span style="color:#f92672">{</span>scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sensor0_fahrenheit&#34;</span><span style="color:#f92672">}</span> 85.11352712291142
+sht30_temperature<span style="color:#f92672">{</span>scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sensor1_fahrenheit&#34;</span><span style="color:#f92672">}</span> 95.32753490501258
+</code></pre></div><h2 id="scraping-with-prometheus">Scraping with Prometheus</h2>
+<p>Great! We have our data being read from the sensors and it&rsquo;s available for Prometheus to scrape. Like I mentioned above, I&rsquo;m already running an <a href="https://azure.microsoft.com/en-us/services/kubernetes-service/#overview">AKS</a> cluster with <a href="https://github.com/prometheus-operator/kube-prometheus">Kube-Prometheus</a>, so I wanted to use that.</p>
+<p>This part took me a little time to work out, but it makes sense now that I&rsquo;ve dug in a bit. Hopefully I can help you make this easier. The prometheus operator in kube-promethes will scrape any service you are running in your Kubernetes cluster. You just need to tell it where it is via a <a href="https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/getting-started.md">Service Monitor</a> configuration. But&hellip;..I don&rsquo;t have a Kubernetes Service!!!! I have a raspberry pi that is hosting an endpoint accessible from my cluster.</p>
+<p>The good news is that Kubernetes has you covered. In the end, a Service is just an abstraction on top of &lsquo;Endpoints&rsquo;. An endpoint is an IP address that Kubernetes will route traffic to when you try to call a Service. Usually Kubernetes will create and manage the endpoints for you when you expose something from your cluster, but you can also manually configure the endpoint and service. So you can create an endpoint definition that points OUTSIDE of your cluster, and then expose that to resource INSIDE your cluster via a Service. Once you have a Service the prometheus operator can see it and scrape it.</p>
+<p>Lets look at the three files that make this work.</p>
+<blockquote>
+<p><strong>IMPORTANT:</strong> I learned the hard way that the resource names matter. I recommend you name all three the same, or the prometheus operator may not find your endpoint.</p>
+</blockquote>
+<h3 id="the-endpoint">The Endpoint</h3>
+<p>Here we create an endpoint with a single IP address that points to our raspberry pi IP, and exposes port 8000, which is the port hosting our prometheus http service.</p>
+<p><a href="lizardo-prom-endpoint.yaml">lizardo-prom-endpoint.yaml</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Endpoints</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lizardo-metrics</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">k8s-app</span>: <span style="color:#ae81ff">lizardo</span>
+<span style="color:#f92672">subsets</span>:
+  - <span style="color:#f92672">addresses</span>:
+      - <span style="color:#f92672">ip</span>: <span style="color:#ae81ff">192.168.1.104</span>
+    <span style="color:#f92672">ports</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">metrics</span>
+        <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8000</span>
+        <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+</code></pre></div><h3 id="the-service">The Service</h3>
+<p>Here we connect the Kubernetes Service to the Endpoint, using the ExternalName type and the pi IP as the externalName.</p>
+<p><a href="lizardo-prom-svc.yaml">lizardo-prom-svc.yaml</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Service</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lizardo-metrics</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+  <span style="color:#f92672">labels</span>:
+      <span style="color:#f92672">k8s-app</span>: <span style="color:#ae81ff">lizardo</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">ExternalName</span>
+  <span style="color:#f92672">externalName</span>: <span style="color:#ae81ff">192.168.1.104</span>
+  <span style="color:#f92672">ports</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">metrics</span>
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8000</span>
+    <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+    <span style="color:#f92672">targetPort</span>: <span style="color:#ae81ff">8000</span>
+</code></pre></div><h3 id="the-service-monitor">The Service Monitor</h3>
+<p>Finally, we set up the service monitor and tell it the namespace (monitoring) and service label (k8s-app: lizardo) that it should look at to scrape.</p>
+<p><a href="lizardo-prom-svcmon.yaml">lizardo-prom-svcmon.yaml</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">monitoring.coreos.com/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ServiceMonitor</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lizardo-metrics</span>
+  <span style="color:#f92672">namespace</span>: <span style="color:#ae81ff">monitoring</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">k8s-app</span>: <span style="color:#ae81ff">lizardo</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">k8s-app</span>: <span style="color:#ae81ff">lizardo</span>
+  <span style="color:#f92672">namespaceSelector</span>:
+    <span style="color:#f92672">matchNames</span>:
+      - <span style="color:#ae81ff">monitoring</span>
+  <span style="color:#f92672">endpoints</span>:
+  - <span style="color:#f92672">port</span>: <span style="color:#ae81ff">metrics</span>
+    <span style="color:#f92672">interval</span>: <span style="color:#ae81ff">10s</span>
+    <span style="color:#f92672">honorLabels</span>: <span style="color:#66d9ef">true</span>
+</code></pre></div><p>We can now jump out to the Prometheus UI and validate that the endpoint is being scraped. I don&rsquo;t expose the prometheus service externally, so I&rsquo;ll use a port forward:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward svc/prometheus-k8s -n monitoring 9090:9090
+Forwarding from 127.0.0.1:9090 -&gt; <span style="color:#ae81ff">9090</span>
+Forwarding from <span style="color:#f92672">[</span>::1<span style="color:#f92672">]</span>:9090 -&gt; <span style="color:#ae81ff">9090</span>
+</code></pre></div><p><img src="/lizardo//prom.png" alt="prometheus"></p>
+<h2 id="grafana">Grafana</h2>
+<p>Now, finally, for the fun part. Lets open up Grafana and see what we can see! I do have grafana externally accessible, so no need to port-forward, but you obviously can if needed.</p>
+<p>I wanted two charts. Tempurature and Humidity. Since we&rsquo;re tracking the &lsquo;basking&rsquo; side separately from the &lsquo;ambient&rsquo; side, I thought I&rsquo;d put both in the same chart, so we can see the comparison between temp and humidity in the two sides of the tank more clearly.</p>
+<p>Here are the steps:</p>
+<ol>
+<li>Click on the &ldquo;+&rdquo; on the left part of the Grafana screen and &lsquo;Create Dashboard&rsquo;</li>
+<li>Click &lsquo;Add New Panel&rsquo;</li>
+<li>In the query pane, select &lsquo;prometheus&rsquo; as your data source</li>
+<li>In the &lsquo;metrics&rsquo; box, start to type &lsquo;sht&rsquo; and you should see it come back with your two data sets (sht30_humidity_percent and sht30_temperature)</li>
+<li>Choose one and then mess around with the visualization until you have it looking the way you like</li>
+</ol>
+<p>When I was playing with the visualizations I did a few things. First, I opened up the overrides and I set an override for each metric to customize the &lsquo;Display Name&rsquo; property. I also set &lsquo;threshold&rsquo; values, which helps me visualize when the tempurature or humidity are getting out of a preferred range (I&rsquo;ll alert on this later).</p>
+<!-- raw HTML omitted -->
+<p><img src="/lizardo/graph.png" alt="graph"></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I hope this helps someone out there get up and running a bit faster. In the end, the few take aways to make this easier on yourself would be:</p>
+<ol>
+<li>Figure out your target programing language, and see if you can find sensors that already have examples and SDKs available for that language</li>
+<li>Don&rsquo;t forget that I2C sensors are statically address, so you if you&rsquo;re using many of the same sensor, you will likely need to find a way to change the address (some sensors have jumper options) or use an I2C multiplexer</li>
+<li>When creatings endpoints and services for the prometheus operator service monitor to scrape, the resource names need to match between the endpoint and the service definition</li>
+<li>The SHT30 sensors wires are pretty short, so make sure you get some good wire to allow you to lengthen that connection. I recommend some 4 wire ribbon to keep things looking clean.</li>
+</ol>
+<p>In the future I&rsquo;ll be updating this to include the web cam, and will possibly enable some alerting. If I get around to that, I&rsquo;ll post that as well.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
