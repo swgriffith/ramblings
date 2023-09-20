@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: testapp
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: testapp
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: testapp
+  name: testapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: testapp
+  template:
+    metadata:
+      labels:
+        run: testapp
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: run
+                operator: In
+                values:
+                - testapp
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - image: nginx
+        name: nginx
+      nodeSelector:
+        topology.kubernetes.io/zone: eastus-1
